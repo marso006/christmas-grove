@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "marshmallow",
+  "ingredients": [
+    {
+      "item": "gingerbread_grove:marshmallow_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "gingerbread_grove:marshmallow"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "gingerbread_grove:block/wreath",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "gingerbread_grove:block/wreath"
+    },
+    "facing=south": {
+      "model": "gingerbread_grove:block/wreath",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "gingerbread_grove:block/wreath",
+      "y": 270
+    }
+  }
+}

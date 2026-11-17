@@ -5,6 +5,7 @@ import com.mental.gingerbreadgrove.platform.Services;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.function.Supplier;
@@ -15,8 +16,16 @@ public final class ModCreativeTabs {
             BuiltInRegistries.CREATIVE_MODE_TAB, "main",
             () -> Services.PLATFORM.creativeTabBuilder()
                     .title(Component.translatable("itemGroup." + Constants.MOD_ID))
-                    .icon(() -> new ItemStack(ModBlocks.FROSTED_GINGERBREAD.get()))
-                    .displayItems((params, output) -> ModItems.all().forEach(item -> output.accept(item.get())))
+                    .icon(() -> new ItemStack(ModBlocks.RED_GIFT_BOX.get()))
+                    .displayItems((params, output) -> {
+                        Item globe = ModItems.SNOW_GLOBE.get();
+                        output.accept(globe); // the way in goes first
+                        for (Supplier<? extends Item> item : ModItems.all()) {
+                            if (item.get() != globe) {
+                                output.accept(item.get());
+                            }
+                        }
+                    })
                     .build());
 
     private ModCreativeTabs() {

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "gingerbread_grove:block/festive_fir_sapling"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "gingerbread_grove:block/peppermint_stone",
+    "side": "gingerbread_grove:block/peppermint_stone",
+    "top": "gingerbread_grove:block/peppermint_stone"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button_inventory",
+  "textures": {
+    "texture": "gingerbread_grove:block/festive_fir_planks"
+  }
+}

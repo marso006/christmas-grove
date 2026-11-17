@@ -2,14 +2,44 @@ package com.mental.gingerbreadgrove.platform;
 
 import com.mental.gingerbreadgrove.platform.services.IPlatformHelper;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLLoader;
+import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.level.BlockEvent;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Supplier;
 
 public class NeoForgePlatformHelper implements IPlatformHelper {
 
     @Override
     public CreativeModeTab.Builder creativeTabBuilder() {
         return CreativeModeTab.builder();
+    }
+
+    @Override
+    public void registerStrippables(Map<Supplier<? extends Block>, Supplier<? extends Block>> strippables) {
+        // Blocks are not created yet (DeferredRegister), so resolve the map lazily on first use.
+        Map<Block, Block> resolved = new HashMap<>();
+        NeoForge.EVENT_BUS.addListener((BlockEvent.BlockToolModificationEvent event) -> {
+            if (event.getItemAbility() != ItemAbilities.AXE_STRIP) {
+                return;
+            }
+            if (resolved.isEmpty()) {
+                strippables.forEach((log, stripped) -> resolved.put(log.get(), stripped.get()));
+            }
+            BlockState state = event.getState();
+            Block stripped = resolved.get(state.getBlock());
+            if (stripped != null) {
+                event.setFinalState(stripped.defaultBlockState()
+                        .setValue(RotatedPillarBlock.AXIS, state.getValue(RotatedPillarBlock.AXIS)));
+            }
+        });
     }
 
     @Override

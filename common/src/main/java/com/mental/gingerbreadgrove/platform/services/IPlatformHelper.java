@@ -1,11 +1,21 @@
 package com.mental.gingerbreadgrove.platform.services;
 
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.level.block.Block;
+
+import java.util.Map;
+import java.util.function.Supplier;
 
 public interface IPlatformHelper {
 
     /** @return a creative tab builder that the current loader positions correctly among modded tabs. */
     CreativeModeTab.Builder creativeTabBuilder();
+
+    /**
+     * Makes axes strip each log/wood key into its value. Called once after registration; the
+     * suppliers may only be resolved after blocks are registered.
+     */
+    void registerStrippables(Map<Supplier<? extends Block>, Supplier<? extends Block>> strippables);
 
     /** @return the name of the current loader, e.g. "Fabric" or "NeoForge". */
     String getPlatformName();

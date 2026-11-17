@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "gingerbread_grove:block/candy_cane_log_top",
+    "side": "gingerbread_grove:block/candy_cane_log"
+  }
+}

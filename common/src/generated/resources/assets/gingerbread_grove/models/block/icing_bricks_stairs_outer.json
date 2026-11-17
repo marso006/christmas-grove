@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "gingerbread_grove:block/icing_bricks",
+    "side": "gingerbread_grove:block/icing_bricks",
+    "top": "gingerbread_grove:block/icing_bricks"
+  }
+}

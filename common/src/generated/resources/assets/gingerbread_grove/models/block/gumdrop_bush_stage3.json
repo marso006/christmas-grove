@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "gingerbread_grove:block/gumdrop_bush_stage3"
+  }
+}

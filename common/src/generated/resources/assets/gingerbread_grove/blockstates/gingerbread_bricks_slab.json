@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "gingerbread_grove:block/gingerbread_bricks_slab"
+    },
+    "type=double": {
+      "model": "gingerbread_grove:block/gingerbread_bricks"
+    },
+    "type=top": {
+      "model": "gingerbread_grove:block/gingerbread_bricks_slab_top"
+    }
+  }
+}

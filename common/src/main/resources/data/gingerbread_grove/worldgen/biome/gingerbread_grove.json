@@ -34,10 +34,20 @@
     [],
     [],
     [],
+    [
+      "gingerbread_grove:ore_sugar_crystal",
+      "gingerbread_grove:ore_cinnamon"
+    ],
     [],
     [],
-    [],
-    [],
+    [
+      "gingerbread_grove:candy_cane_trees",
+      "gingerbread_grove:festive_fir_trees",
+      "gingerbread_grove:gumdrop_bushes",
+      "gingerbread_grove:sweet_flowers",
+      "gingerbread_grove:sugar_grass",
+      "gingerbread_grove:gift_boxes"
+    ],
     []
   ],
   "spawners": {

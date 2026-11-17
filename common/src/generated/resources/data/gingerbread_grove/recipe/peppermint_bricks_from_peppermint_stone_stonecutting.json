@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "gingerbread_grove:peppermint_stone"
+  },
+  "result": {
+    "count": 1,
+    "id": "gingerbread_grove:peppermint_bricks"
+  }
+}

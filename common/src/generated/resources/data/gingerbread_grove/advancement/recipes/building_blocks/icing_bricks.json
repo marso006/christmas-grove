@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_frosting": {
+      "conditions": {
+        "items": [
+          {
+            "items": "gingerbread_grove:frosting"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "gingerbread_grove:icing_bricks"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_frosting"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "gingerbread_grove:icing_bricks"
+    ]
+  }
+}

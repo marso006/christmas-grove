@@ -35,3 +35,8 @@ neoForge {
         }
     }
 }
+
+// Forward the console to the dev server so commands (and tools/smoke-test.sh) can drive it.
+tasks.matching { it.name == 'runServer' }.configureEach {
+    standardInput = System.in
+}

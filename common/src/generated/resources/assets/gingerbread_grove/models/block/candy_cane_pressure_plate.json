@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/pressure_plate_up",
+  "textures": {
+    "texture": "gingerbread_grove:block/candy_cane_planks"
+  }
+}

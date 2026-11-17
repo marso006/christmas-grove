@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.5,
+  "group": "cinnamon_stick",
+  "ingredient": {
+    "item": "gingerbread_grove:cinnamon_ore"
+  },
+  "result": {
+    "id": "gingerbread_grove:cinnamon_stick"
+  }
+}

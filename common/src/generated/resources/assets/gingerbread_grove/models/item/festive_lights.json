@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "gingerbread_grove:block/festive_lights"
+  }
+}

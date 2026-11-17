@@ -14,6 +14,9 @@
         "main": [
             "com.mental.gingerbreadgrove.GingerbreadGroveFabric"
         ],
+        "client": [
+            "com.mental.gingerbreadgrove.GingerbreadGroveFabricClient"
+        ],
         "fabric-datagen": [
             "com.mental.gingerbreadgrove.datagen.GingerbreadGroveDataGen"
         ]

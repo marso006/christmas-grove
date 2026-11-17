@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "gingerbread_grove:block/festive_fir_slab"
+    },
+    "type=double": {
+      "model": "gingerbread_grove:block/festive_fir_planks"
+    },
+    "type=top": {
+      "model": "gingerbread_grove:block/festive_fir_slab_top"
+    }
+  }
+}

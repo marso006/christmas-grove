@@ -1,5 +1,26 @@
 {
   "values": [
-    "gingerbread_grove:peppermint_stone"
+    "gingerbread_grove:peppermint_stone",
+    "gingerbread_grove:peppermint_stone_stairs",
+    "gingerbread_grove:peppermint_stone_slab",
+    "gingerbread_grove:peppermint_stone_wall",
+    "gingerbread_grove:peppermint_bricks",
+    "gingerbread_grove:peppermint_bricks_stairs",
+    "gingerbread_grove:peppermint_bricks_slab",
+    "gingerbread_grove:peppermint_bricks_wall",
+    "gingerbread_grove:icing_bricks",
+    "gingerbread_grove:icing_bricks_stairs",
+    "gingerbread_grove:icing_bricks_slab",
+    "gingerbread_grove:icing_bricks_wall",
+    "gingerbread_grove:gingerbread_bricks",
+    "gingerbread_grove:gingerbread_bricks_stairs",
+    "gingerbread_grove:gingerbread_bricks_slab",
+    "gingerbread_grove:gingerbread_bricks_wall",
+    "gingerbread_grove:cookie_tiles",
+    "gingerbread_grove:cookie_tiles_stairs",
+    "gingerbread_grove:cookie_tiles_slab",
+    "gingerbread_grove:sugar_crystal_ore",
+    "gingerbread_grove:cinnamon_ore",
+    "gingerbread_grove:sugar_crystal_block"
   ]
 }

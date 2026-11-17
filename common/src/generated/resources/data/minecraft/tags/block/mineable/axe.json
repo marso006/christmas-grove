@@ -1,0 +1,24 @@
+{
+  "values": [
+    "#gingerbread_grove:candy_cane_logs",
+    "gingerbread_grove:candy_cane_planks",
+    "gingerbread_grove:candy_cane_stairs",
+    "gingerbread_grove:candy_cane_slab",
+    "gingerbread_grove:candy_cane_fence",
+    "gingerbread_grove:candy_cane_fence_gate",
+    "gingerbread_grove:candy_cane_door",
+    "gingerbread_grove:candy_cane_trapdoor",
+    "gingerbread_grove:candy_cane_button",
+    "gingerbread_grove:candy_cane_pressure_plate",
+    "#gingerbread_grove:festive_fir_logs",
+    "gingerbread_grove:festive_fir_planks",
+    "gingerbread_grove:festive_fir_stairs",
+    "gingerbread_grove:festive_fir_slab",
+    "gingerbread_grove:festive_fir_fence",
+    "gingerbread_grove:festive_fir_fence_gate",
+    "gingerbread_grove:festive_fir_door",
+    "gingerbread_grove:festive_fir_trapdoor",
+    "gingerbread_grove:festive_fir_button",
+    "gingerbread_grove:festive_fir_pressure_plate"
+  ]
+}

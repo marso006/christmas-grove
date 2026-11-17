@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_gumdrops": {
+      "conditions": {
+        "items": [
+          {
+            "items": "gingerbread_grove:gumdrops"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "gingerbread_grove:fruitcake_slice"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_gumdrops"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "gingerbread_grove:fruitcake_slice"
+    ]
+  }
+}

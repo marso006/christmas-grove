@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "gingerbread_grove:sugar_crystal_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "gingerbread_grove:sugar_crystal"
+  }
+}

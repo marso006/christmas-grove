@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "gingerbread_grove:block/stripped_festive_fir_wood",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "gingerbread_grove:block/stripped_festive_fir_wood"
+    },
+    "axis=z": {
+      "model": "gingerbread_grove:block/stripped_festive_fir_wood",
+      "x": 90
+    }
+  }
+}

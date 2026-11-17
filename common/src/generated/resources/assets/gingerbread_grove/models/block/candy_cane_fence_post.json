@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_post",
+  "textures": {
+    "texture": "gingerbread_grove:block/candy_cane_planks"
+  }
+}
