@@ -33,6 +33,15 @@ loom {
             ideConfigGenerated(true)
             runDir('runs/client')
         }
+        // Dev-only: launches a client that photographs the showcase scenes and quits (see ShowcaseDirector).
+        showcase {
+            client()
+            setConfigName('Fabric Showcase')
+            ideConfigGenerated(false)
+            runDir('runs/showcase')
+            vmArg('-Dchristmasgrove.showcase=true')
+            programArgs('--quickPlaySingleplayer', 'showcase', '--width', '1920', '--height', '1080')
+        }
         server {
             server()
             setConfigName('Fabric Server')

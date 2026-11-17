@@ -21,7 +21,9 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         // Ground: shovel, and plantable (saplings and flowers check #dirt)
         getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_SHOVEL).add(ModBlocks.FROSTING.get(), ModBlocks.FROSTED_GINGERBREAD.get(),
                 ModBlocks.GINGERBREAD.get(), ModBlocks.SUGAR_SAND.get(), ModBlocks.MARSHMALLOW_BLOCK.get());
-        getOrCreateTagBuilder(BlockTags.DIRT).add(ModBlocks.FROSTED_GINGERBREAD.get(), ModBlocks.GINGERBREAD.get());
+        // Frosting counts too, so trees and flowers also grow on iced high ground.
+        getOrCreateTagBuilder(BlockTags.DIRT).add(ModBlocks.FROSTED_GINGERBREAD.get(), ModBlocks.GINGERBREAD.get(),
+                ModBlocks.FROSTING.get());
         getOrCreateTagBuilder(BlockTags.SAND).add(ModBlocks.SUGAR_SAND.get());
         getOrCreateTagBuilder(BlockTags.SNOW).add(ModBlocks.FROSTING.get());
 

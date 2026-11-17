@@ -36,7 +36,7 @@ final class ModBiomes {
         HolderGetter<ConfiguredWorldCarver<?>> carvers = context.lookup(Registries.CONFIGURED_CARVER);
 
         context.register(ModDimensions.GROVE_BIOME, biome(0.7F, 0.4F,
-                colours(0xF8E6C8, 0xF9E1EA, 0x6B3E26, 0x3D2214), 0.012F,
+                colours(0x9EC3F0, 0xEAF0FA, 0x6B3E26, 0x3D2214), 0.012F,
                 features(placed, carvers)
                         .vegetal(ModPlacedFeatures.CANDY_CANE_TREES, ModPlacedFeatures.SPARSE_FESTIVE_FIR_TREES,
                                 ModPlacedFeatures.GUMDROP_BUSHES, ModPlacedFeatures.SWEET_FLOWERS,
@@ -47,7 +47,7 @@ final class ModBiomes {
                         .landMonsters()));
 
         context.register(ModDimensions.FESTIVE_FIR_FOREST, biome(0.3F, 0.8F,
-                colours(0xD8E4F4, 0xE8F0FA, 0x6B3E26, 0x3D2214), 0.02F,
+                colours(0x86AEE6, 0xDCE6F6, 0x6B3E26, 0x3D2214), 0.02F,
                 features(placed, carvers)
                         .vegetal(ModPlacedFeatures.DENSE_FESTIVE_FIR_TREES, ModPlacedFeatures.SWEET_FLOWERS,
                                 ModPlacedFeatures.SUGAR_GRASS, ModPlacedFeatures.GIFT_BOXES_COMMON)
@@ -57,7 +57,7 @@ final class ModBiomes {
                         .landMonsters()));
 
         context.register(ModDimensions.FROSTED_FLATS, biome(0.3F, 0.2F,
-                colours(0xFDF3E7, 0xFFFFFF, 0x6B3E26, 0x3D2214), 0.025F,
+                colours(0xB4D2F4, 0xF2F6FC, 0x6B3E26, 0x3D2214), 0.025F,
                 features(placed, carvers)
                         .local(ModPlacedFeatures.FROSTING_PATCHES)
                         .surfaceStructures(ModPlacedFeatures.GIANT_CANDY_CANES)
@@ -69,7 +69,7 @@ final class ModBiomes {
                         .spawn(MobCategory.MONSTER, ModEntities.EVIL_SNOWMAN.get(), 40, 1, 3)));
 
         context.register(ModDimensions.PEPPERMINT_PEAKS, biome(0.4F, 0.3F,
-                colours(0xEADCF2, 0xF3E9F7, 0x6B3E26, 0x3D2214), 0.015F,
+                colours(0xB7A9EE, 0xEDE6FA, 0x6B3E26, 0x3D2214), 0.015F,
                 features(placed, carvers)
                         .ores(ModPlacedFeatures.ORE_CINNAMON_EXTRA)
                         .vegetal(ModPlacedFeatures.SPARSE_FESTIVE_FIR_TREES, ModPlacedFeatures.SUGAR_GRASS)
@@ -77,7 +77,7 @@ final class ModBiomes {
                         .landMonsters()));
 
         context.register(ModDimensions.COCOA_SEA, biome(0.8F, 0.5F,
-                colours(0xF5D9C4, 0xE9CDB8, 0x5A3420, 0x2E1A10), 0.006F,
+                colours(0xF2B88C, 0xF0D2B8, 0x5A3420, 0x2E1A10), 0.006F,
                 features(placed, carvers)
                         .surfaceStructures(ModPlacedFeatures.MARSHMALLOW_ISLANDS)));
     }

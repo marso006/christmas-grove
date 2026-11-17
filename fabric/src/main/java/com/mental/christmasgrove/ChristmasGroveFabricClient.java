@@ -4,6 +4,7 @@ import com.mental.christmasgrove.client.ModEntityRenderers;
 import com.mental.christmasgrove.client.SantaHatModel;
 import com.mental.christmasgrove.registry.ModItems;
 import com.mental.christmasgrove.registry.ModBlocks;
+import com.mental.christmasgrove.showcase.ShowcaseDirector;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
@@ -20,6 +21,7 @@ public class ChristmasGroveFabricClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        ShowcaseDirector.installIfEnabled(); // dev-only screenshot automation, off unless -Dchristmasgrove.showcase=true
         ModBlocks.cutoutBlocks().forEach(block -> BlockRenderLayerMap.INSTANCE.putBlock(block.get(), RenderType.cutout()));
         ModBlocks.translucentBlocks().forEach(block -> BlockRenderLayerMap.INSTANCE.putBlock(block.get(), RenderType.translucent()));
 

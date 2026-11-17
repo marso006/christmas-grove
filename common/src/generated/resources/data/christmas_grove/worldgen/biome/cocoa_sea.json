@@ -4,7 +4,7 @@
   },
   "downfall": 0.5,
   "effects": {
-    "fog_color": 15322552,
+    "fog_color": 15782584,
     "foliage_color": 15237774,
     "grass_color": 15259083,
     "mood_sound": {
@@ -19,7 +19,7 @@
       },
       "probability": 0.006
     },
-    "sky_color": 16112068,
+    "sky_color": 15906956,
     "water_color": 5911584,
     "water_fog_color": 3021328
   },

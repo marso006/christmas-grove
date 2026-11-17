@@ -23,7 +23,8 @@ in `docs/showcase/` to the project's Images tab and swap in those URLs.
 | Source | https://github.com/marso006/christmas-grove (make the repo public first, or leave blank) |
 | Issues | https://github.com/marso006/christmas-grove/issues |
 | Icon | `docs/showcase/icon.png` (400x400) |
-| Gallery | `banner.png`, `feature_blocks.png`, `feature_items.png`, plus your screenshots (see SHOTLIST.md) |
+| Gallery | `screenshots/*.png` (13 captioned in-game shots), `screenshots/collage.png`, `banner.png`, `feature_blocks.png`, `feature_items.png` |
+| Video thumbnail | `screenshots/thumbnail.png` (1280x720) |
 
 ## Files
 
@@ -68,6 +69,8 @@ the Christmas Grove; use it again to go home. No portal to build, no lighter to 
 - **Peppermint Pups** are tamed with candy canes and stay loyal forever
 - **Gingerbread Men** run away from you. Catch one!
 
+![Santa's sleigh](https://raw.githubusercontent.com/marso006/christmas-grove/main/docs/showcase/screenshots/10_sleigh.png)
+
 ### 😈 Naughty or nice?
 
 Santa keeps a list, and so does the mod. Hurting friendly creatures (or trying to hit Santa) puts
@@ -75,6 +78,8 @@ you on the naughty list; trading, adopting pups, giving presents and protecting 
 nice. Nice players get extra presents. Naughty players get coal, and if they keep it up, **Krampus**
 comes for them: a boss with chains that drag you in and an army of evil snowmen. Defeat him to
 wipe your record clean, or ring a **Krampus Bell** if you want the fight.
+
+![Santa's Workshop](https://raw.githubusercontent.com/marso006/christmas-grove/main/docs/showcase/screenshots/07_santas_workshop_inside.png)
 
 ![Blocks](https://raw.githubusercontent.com/marso006/christmas-grove/main/docs/showcase/feature_blocks.png)
 

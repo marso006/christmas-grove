@@ -1,5 +1,22 @@
 # Screenshots and trailer
 
+## Automated screenshots (no clicking needed)
+
+`./gradlew :fabric:runShowcase` opens a dev client at 1920x1080, flies a spectator camera through
+13 staged scenes (landscapes, the village, Santa's Workshop, the cast, the sleigh, parachute
+presents, Krampus, the Santa Suit, the block gallery), saves raw screenshots to
+`fabric/runs/showcase/screenshots/`, and closes itself. The scenes are in
+`fabric/src/main/java/com/mental/christmasgrove/showcase/ShowcaseDirector.java`.
+Before a run, copy a world into `fabric/runs/showcase/saves/showcase/` (a dev server world works).
+
+Then `py tools/showcase/edit_screenshots.py` grades the shots, adds pixel-font captions, picks the
+best sleigh frame, and writes `docs/showcase/screenshots/` (plus `collage.png` and `thumbnail.png`).
+
+Landscape shots depend on the world seed: if one comes out weak, run again with another world, or
+add its name to SKIP in the edit script.
+
+## Manual screenshots
+
 How to capture the gallery images and a short trailer quickly, using the showcase datapack.
 
 ## Setup (5 minutes)
