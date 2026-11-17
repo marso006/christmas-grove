@@ -1,4 +1,4 @@
-# Gingerbread Grove
+# Christmas Grove
 
 A candy-and-cookie dimension for Minecraft. Craft a Snow Globe, use it, and arrive in a frosted
 gingerbread forest with candy-cane trees, festive mobs, and gingerbread houses to raid.

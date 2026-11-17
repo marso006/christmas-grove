@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_fence_gate",
+  "textures": {
+    "texture": "christmas_grove:block/festive_fir_planks"
+  }
+}

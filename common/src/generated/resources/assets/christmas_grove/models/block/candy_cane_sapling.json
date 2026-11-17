@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "christmas_grove:block/candy_cane_sapling"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "christmas_grove:block/candy_cane_slab"
+    },
+    "type=double": {
+      "model": "christmas_grove:block/candy_cane_planks"
+    },
+    "type=top": {
+      "model": "christmas_grove:block/candy_cane_slab_top"
+    }
+  }
+}

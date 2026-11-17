@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/orientable",
-  "textures": {
-    "front": "gingerbread_grove:block/advent_calendar_front",
-    "side": "gingerbread_grove:block/advent_calendar_side",
-    "top": "gingerbread_grove:block/advent_calendar_top"
-  }
-}

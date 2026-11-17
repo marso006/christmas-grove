@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "christmas_grove:block/festive_fir_pressure_plate"
+    },
+    "powered=true": {
+      "model": "christmas_grove:block/festive_fir_pressure_plate_down"
+    }
+  }
+}

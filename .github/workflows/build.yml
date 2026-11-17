@@ -27,7 +27,7 @@ jobs:
       - name: Upload jars
         uses: actions/upload-artifact@v4
         with:
-          name: gingerbread-grove-jars
+          name: christmas-grove-jars
           path: |
             fabric/build/libs/*.jar
             neoforge/build/libs/*.jar

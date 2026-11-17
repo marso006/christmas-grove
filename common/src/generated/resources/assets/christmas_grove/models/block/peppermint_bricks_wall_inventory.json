@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "christmas_grove:block/peppermint_bricks"
+  }
+}

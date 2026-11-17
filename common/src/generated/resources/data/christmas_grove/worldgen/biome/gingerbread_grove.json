@@ -1,0 +1,99 @@
+{
+  "carvers": {
+    "air": "minecraft:cave"
+  },
+  "downfall": 0.4,
+  "effects": {
+    "fog_color": 16376298,
+    "foliage_color": 15237774,
+    "grass_color": 15259083,
+    "mood_sound": {
+      "block_search_extent": 8,
+      "offset": 2.0,
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000
+    },
+    "particle": {
+      "options": {
+        "type": "minecraft:white_ash"
+      },
+      "probability": 0.012
+    },
+    "sky_color": 16312008,
+    "water_color": 7028262,
+    "water_fog_color": 4006420
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "christmas_grove:ore_sugar_crystal",
+      "christmas_grove:ore_cinnamon"
+    ],
+    [],
+    [],
+    [
+      "christmas_grove:candy_cane_trees",
+      "christmas_grove:sparse_festive_fir_trees",
+      "christmas_grove:gumdrop_bushes",
+      "christmas_grove:sweet_flowers",
+      "christmas_grove:sugar_grass",
+      "christmas_grove:gift_boxes"
+    ]
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [
+      {
+        "type": "christmas_grove:gingerbread_man",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 12
+      },
+      {
+        "type": "christmas_grove:peppermint_pup",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "christmas_grove:elf",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 2
+      }
+    ],
+    "misc": [],
+    "monster": [
+      {
+        "type": "christmas_grove:gumdrop_blob",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 60
+      },
+      {
+        "type": "christmas_grove:cookie_soldier",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 45
+      },
+      {
+        "type": "christmas_grove:evil_snowman",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 35
+      }
+    ],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 0.7
+}

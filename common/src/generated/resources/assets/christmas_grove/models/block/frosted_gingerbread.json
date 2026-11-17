@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "christmas_grove:block/gingerbread",
+    "side": "christmas_grove:block/frosted_gingerbread_side",
+    "top": "christmas_grove:block/frosting"
+  }
+}

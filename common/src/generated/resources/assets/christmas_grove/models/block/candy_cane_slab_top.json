@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "christmas_grove:block/candy_cane_planks",
+    "side": "christmas_grove:block/candy_cane_planks",
+    "top": "christmas_grove:block/candy_cane_planks"
+  }
+}

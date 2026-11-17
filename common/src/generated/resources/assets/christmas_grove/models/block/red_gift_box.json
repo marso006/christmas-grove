@@ -1,0 +1,7 @@
+{
+  "parent": "christmas_grove:block/gift_box_template",
+  "textures": {
+    "side": "christmas_grove:block/red_gift_box_side",
+    "top": "christmas_grove:block/red_gift_box_top"
+  }
+}

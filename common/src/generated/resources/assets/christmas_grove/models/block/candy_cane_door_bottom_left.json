@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_left",
+  "textures": {
+    "bottom": "christmas_grove:block/candy_cane_door_bottom",
+    "top": "christmas_grove:block/candy_cane_door_top"
+  }
+}

@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/leaves",
-  "textures": {
-    "all": "gingerbread_grove:block/festive_fir_leaves"
-  }
-}

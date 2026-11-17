@@ -3,8 +3,8 @@ plugins {
 }
 
 base {
-    // Produces e.g. gingerbread-grove-fabric-1.21.1-0.1.0.jar
-    archivesName = "gingerbread-grove-${project.name}-${minecraft_version}"
+    // Produces e.g. christmas-grove-fabric-1.21.1-0.1.0.jar
+    archivesName = "christmas-grove-${project.name}-${minecraft_version}"
 }
 
 java {

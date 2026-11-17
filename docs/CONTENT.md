@@ -1,4 +1,4 @@
-# Gingerbread Grove: content list
+# Christmas Grove: content list
 
 The expanded, Christmas-heavy scope (Nov 17, 2026). Phases are built in order, and each phase is
 built, smoke-tested on both loaders, and committed before the next starts. ✅ = done.

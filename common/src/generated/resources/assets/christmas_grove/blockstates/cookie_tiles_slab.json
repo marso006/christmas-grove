@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "christmas_grove:block/cookie_tiles_slab"
+    },
+    "type=double": {
+      "model": "christmas_grove:block/cookie_tiles"
+    },
+    "type=top": {
+      "model": "christmas_grove:block/cookie_tiles_slab_top"
+    }
+  }
+}

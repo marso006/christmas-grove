@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_icing_bricks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "christmas_grove:icing_bricks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "christmas_grove:icing_bricks_wall"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_icing_bricks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "christmas_grove:icing_bricks_wall"
+    ]
+  }
+}

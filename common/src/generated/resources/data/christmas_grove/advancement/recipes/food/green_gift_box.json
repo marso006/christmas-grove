@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_green_dye": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:green_dye"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "christmas_grove:green_gift_box"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_green_dye"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "christmas_grove:green_gift_box"
+    ]
+  }
+}

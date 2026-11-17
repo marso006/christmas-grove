@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "christmas_grove:block/festive_fir_slab"
+    },
+    "type=double": {
+      "model": "christmas_grove:block/festive_fir_planks"
+    },
+    "type=top": {
+      "model": "christmas_grove:block/festive_fir_slab_top"
+    }
+  }
+}

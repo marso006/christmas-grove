@@ -1,4 +1,4 @@
-"""Generates 16x16 base textures for Gingerbread Grove from a fixed palette.
+"""Generates 16x16 base textures for Christmas Grove from a fixed palette.
 
 Deterministic: the same seed always gives the same pixels, so re-running only changes
 textures whose recipe changed. Hand-polished textures can be protected by adding their
@@ -23,8 +23,8 @@ from typing import Callable
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[2]
-ASSETS = ROOT / "common/src/main/resources/assets/gingerbread_grove"
-GENERATED = ROOT / "common/src/generated/resources/assets/gingerbread_grove"
+ASSETS = ROOT / "common/src/main/resources/assets/christmas_grove"
+GENERATED = ROOT / "common/src/generated/resources/assets/christmas_grove"
 BLOCK_DIR = ASSETS / "textures/block"
 ITEM_DIR = ASSETS / "textures/item"
 PREVIEW = ROOT / "tools/textures/preview.png"
@@ -1297,13 +1297,13 @@ def write_armor() -> None:
 # ---- Missing-texture check -----------------------------------------------------------------
 
 def referenced_textures() -> set[str]:
-    """Every gingerbread_grove texture that a block or item model refers to."""
+    """Every christmas_grove texture that a block or item model refers to."""
     found: set[str] = set()
     for base in (ASSETS, GENERATED):
         for model in (base / "models").rglob("*.json"):
             data = json.loads(model.read_text(encoding="utf-8"))
             for value in data.get("textures", {}).values():
-                if isinstance(value, str) and value.startswith("gingerbread_grove:"):
+                if isinstance(value, str) and value.startswith("christmas_grove:"):
                     found.add(value.split(":", 1)[1])
     return found
 

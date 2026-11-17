@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "christmas_grove:icing_bricks"
+  },
+  "result": {
+    "count": 2,
+    "id": "christmas_grove:icing_bricks_slab"
+  }
+}

@@ -1,9 +1,9 @@
 {
   "values": [
-    "gingerbread_grove:peppermint_stone_slab",
-    "gingerbread_grove:peppermint_bricks_slab",
-    "gingerbread_grove:icing_bricks_slab",
-    "gingerbread_grove:gingerbread_bricks_slab",
-    "gingerbread_grove:cookie_tiles_slab"
+    "christmas_grove:peppermint_stone_slab",
+    "christmas_grove:peppermint_bricks_slab",
+    "christmas_grove:icing_bricks_slab",
+    "christmas_grove:gingerbread_bricks_slab",
+    "christmas_grove:cookie_tiles_slab"
   ]
 }

@@ -13,13 +13,13 @@
     "environment": "*",
     "entrypoints": {
         "main": [
-            "com.mental.gingerbreadgrove.GingerbreadGroveFabric"
+            "com.mental.christmasgrove.ChristmasGroveFabric"
         ],
         "client": [
-            "com.mental.gingerbreadgrove.GingerbreadGroveFabricClient"
+            "com.mental.christmasgrove.ChristmasGroveFabricClient"
         ],
         "fabric-datagen": [
-            "com.mental.gingerbreadgrove.datagen.GingerbreadGroveDataGen"
+            "com.mental.christmasgrove.datagen.ChristmasGroveDataGen"
         ]
     },
     "depends": {

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "christmas_grove:block/stripped_candy_cane_log_top",
+    "side": "christmas_grove:block/stripped_candy_cane_log"
+  }
+}

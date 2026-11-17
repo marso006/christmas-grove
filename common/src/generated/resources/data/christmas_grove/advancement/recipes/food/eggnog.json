@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cinnamon_stick": {
+      "conditions": {
+        "items": [
+          {
+            "items": "christmas_grove:cinnamon_stick"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "christmas_grove:eggnog"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_cinnamon_stick"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "christmas_grove:eggnog"
+    ]
+  }
+}

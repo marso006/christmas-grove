@@ -1,9 +1,9 @@
 {
   "values": [
-    "gingerbread_grove:frosting",
-    "gingerbread_grove:frosted_gingerbread",
-    "gingerbread_grove:gingerbread",
-    "gingerbread_grove:sugar_sand",
-    "gingerbread_grove:marshmallow_block"
+    "christmas_grove:frosting",
+    "christmas_grove:frosted_gingerbread",
+    "christmas_grove:gingerbread",
+    "christmas_grove:sugar_sand",
+    "christmas_grove:marshmallow_block"
   ]
 }

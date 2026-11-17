@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "christmas_grove:festive_fir_logs"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "id": "christmas_grove:festive_fir_planks"
+  }
+}

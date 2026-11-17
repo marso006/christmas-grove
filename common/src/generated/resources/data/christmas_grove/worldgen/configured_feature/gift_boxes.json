@@ -1,0 +1,64 @@
+{
+  "type": "minecraft:random_patch",
+  "config": {
+    "feature": {
+      "feature": {
+        "type": "minecraft:simple_block",
+        "config": {
+          "to_place": {
+            "type": "minecraft:weighted_state_provider",
+            "entries": [
+              {
+                "data": {
+                  "Name": "christmas_grove:red_gift_box"
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "christmas_grove:green_gift_box"
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "christmas_grove:blue_gift_box"
+                },
+                "weight": 1
+              }
+            ]
+          }
+        }
+      },
+      "placement": [
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:all_of",
+            "predicates": [
+              {
+                "type": "minecraft:matching_blocks",
+                "blocks": "minecraft:air"
+              },
+              {
+                "type": "minecraft:matching_blocks",
+                "blocks": [
+                  "christmas_grove:frosted_gingerbread",
+                  "christmas_grove:frosting"
+                ],
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "tries": 6,
+    "xz_spread": 5,
+    "y_spread": 2
+  }
+}

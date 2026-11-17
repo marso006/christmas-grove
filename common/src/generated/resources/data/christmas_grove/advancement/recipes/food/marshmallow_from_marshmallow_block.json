@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_marshmallow_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": "christmas_grove:marshmallow_block"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "christmas_grove:marshmallow_from_marshmallow_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_marshmallow_block"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "christmas_grove:marshmallow_from_marshmallow_block"
+    ]
+  }
+}

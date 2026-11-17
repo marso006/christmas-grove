@@ -1,9 +1,9 @@
 {
   "values": [
-    "gingerbread_grove:gumdrop_leaves",
-    "gingerbread_grove:festive_fir_leaves",
-    "gingerbread_grove:red_lit_festive_fir_leaves",
-    "gingerbread_grove:gold_lit_festive_fir_leaves",
-    "gingerbread_grove:blue_lit_festive_fir_leaves"
+    "christmas_grove:gumdrop_leaves",
+    "christmas_grove:festive_fir_leaves",
+    "christmas_grove:red_lit_festive_fir_leaves",
+    "christmas_grove:gold_lit_festive_fir_leaves",
+    "christmas_grove:blue_lit_festive_fir_leaves"
   ]
 }

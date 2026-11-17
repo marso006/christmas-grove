@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "gingerbread_grove:item/krampus_horn"
-  }
-}

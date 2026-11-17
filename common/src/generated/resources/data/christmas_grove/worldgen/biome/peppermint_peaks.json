@@ -1,0 +1,84 @@
+{
+  "carvers": {
+    "air": "minecraft:cave"
+  },
+  "downfall": 0.3,
+  "effects": {
+    "fog_color": 15985143,
+    "foliage_color": 15237774,
+    "grass_color": 15259083,
+    "mood_sound": {
+      "block_search_extent": 8,
+      "offset": 2.0,
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000
+    },
+    "particle": {
+      "options": {
+        "type": "minecraft:white_ash"
+      },
+      "probability": 0.015
+    },
+    "sky_color": 15391986,
+    "water_color": 7028262,
+    "water_fog_color": 4006420
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "christmas_grove:ore_sugar_crystal",
+      "christmas_grove:ore_cinnamon",
+      "christmas_grove:ore_cinnamon_extra"
+    ],
+    [],
+    [],
+    [
+      "christmas_grove:sparse_festive_fir_trees",
+      "christmas_grove:sugar_grass"
+    ]
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [
+      {
+        "type": "christmas_grove:reindeer",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 4
+      }
+    ],
+    "misc": [],
+    "monster": [
+      {
+        "type": "christmas_grove:gumdrop_blob",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 60
+      },
+      {
+        "type": "christmas_grove:cookie_soldier",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 45
+      },
+      {
+        "type": "christmas_grove:evil_snowman",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 35
+      }
+    ],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 0.4
+}

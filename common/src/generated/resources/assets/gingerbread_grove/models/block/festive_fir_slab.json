@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "gingerbread_grove:block/festive_fir_planks",
-    "side": "gingerbread_grove:block/festive_fir_planks",
-    "top": "gingerbread_grove:block/festive_fir_planks"
-  }
-}

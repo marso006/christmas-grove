@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/door_top_right",
-  "textures": {
-    "bottom": "gingerbread_grove:block/festive_fir_door_bottom",
-    "top": "gingerbread_grove:block/festive_fir_door_top"
-  }
-}

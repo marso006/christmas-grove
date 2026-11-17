@@ -1,4 +1,4 @@
-"""Generates Gingerbread Grove's structures: the .nbt templates plus the worldgen JSON (structure,
+"""Generates Christmas Grove's structures: the .nbt templates plus the worldgen JSON (structure,
 template pool, structure set) and biome tags that place them.
 
 Each design is code below, block by block, so it is reproducible and reviewable. After generating,
@@ -17,8 +17,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import nbt  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
-DATA = ROOT / "common/src/main/resources/data/gingerbread_grove"
-NS = "gingerbread_grove"
+DATA = ROOT / "common/src/main/resources/data/christmas_grove"
+NS = "christmas_grove"
 DATA_VERSION = 3955  # Minecraft 1.21.1
 
 G = lambda name: f"{NS}:{name}"

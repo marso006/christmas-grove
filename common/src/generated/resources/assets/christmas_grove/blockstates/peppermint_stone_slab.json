@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "christmas_grove:block/peppermint_stone_slab"
+    },
+    "type=double": {
+      "model": "christmas_grove:block/peppermint_stone"
+    },
+    "type=top": {
+      "model": "christmas_grove:block/peppermint_stone_slab_top"
+    }
+  }
+}

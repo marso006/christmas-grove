@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "christmas_grove:block/wreath",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "christmas_grove:block/wreath"
+    },
+    "facing=south": {
+      "model": "christmas_grove:block/wreath",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "christmas_grove:block/wreath",
+      "y": 270
+    }
+  }
+}

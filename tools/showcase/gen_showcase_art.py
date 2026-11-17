@@ -5,7 +5,7 @@ Outputs (docs/showcase/):
   banner.png           1600x400 page header with the title in a pixel font
   feature_blocks.png   a gallery of the mod's blocks
   feature_items.png    a gallery of food, tools and festive items
-Also writes the in-game mod icon (128x128) to common/src/main/resources/gingerbread_grove.png.
+Also writes the in-game mod icon (128x128) to common/src/main/resources/christmas_grove.png.
 
 Usage: py tools/showcase/gen_showcase_art.py
 """
@@ -17,7 +17,7 @@ from pathlib import Path
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[2]
-TEX = ROOT / "common/src/main/resources/assets/gingerbread_grove/textures"
+TEX = ROOT / "common/src/main/resources/assets/christmas_grove/textures"
 OUT = ROOT / "docs/showcase"
 
 NIGHT_TOP, NIGHT_BOTTOM = (18, 26, 64), (70, 52, 110)
@@ -157,7 +157,7 @@ def banner() -> Image.Image:
     for x, name in ((12, "item/snow_globe"), (290, "item/candy_cane"), (36, "item/gingerbread_cookie"),
                     (268, "block/red_gift_box_side")):
         paste(img, tex(name), x, h - 38)
-    title = "GINGERBREAD GROVE"
+    title = "CHRISTMAS GROVE"
     draw_text(img, title, (w - text_width(title, 2)) // 2, 12, 2, CREAM, shadow=(120, 20, 30))
     sub = "A FESTIVE CANDY DIMENSION"
     draw_text(img, sub, (w - text_width(sub, 1)) // 2, 34, 1, GOLD, shadow=(40, 20, 50))
@@ -199,7 +199,7 @@ def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     ic = icon()
     ic.save(OUT / "icon.png")
-    ic.resize((128, 128), Image.NEAREST).save(ROOT / "common/src/main/resources/gingerbread_grove.png")
+    ic.resize((128, 128), Image.NEAREST).save(ROOT / "common/src/main/resources/christmas_grove.png")
     banner().save(OUT / "banner.png")
     gallery("BLOCKS OF THE GROVE", [f"block/{b}" for b in BLOCKS], "blocks").save(OUT / "feature_blocks.png")
     gallery("TREATS, TOOLS & FESTIVE GEAR", [f"item/{i}" for i in ITEMS], "items", cols=14).save(OUT / "feature_items.png")

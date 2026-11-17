@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_candy_glass": {
+      "conditions": {
+        "items": [
+          {
+            "items": "christmas_grove:candy_glass"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "christmas_grove:candy_glass_pane"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_candy_glass"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "christmas_grove:candy_glass_pane"
+    ]
+  }
+}

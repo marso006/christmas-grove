@@ -2,11 +2,11 @@
 
 ## 0.1.0 (first public beta) - Minecraft 1.21.1, Fabric and NeoForge
 
-The first release of Gingerbread Grove.
+The first release of Christmas Grove.
 
 ### Added
 
-- **The Gingerbread Grove dimension**, reached with the Snow Globe. It has five biomes: Gingerbread
+- **The Christmas Grove dimension**, reached with the Snow Globe. It has five biomes: Gingerbread
   Grove, Festive Fir Forest, Frosted Flats, Peppermint Peaks and Cocoa Sea
 - **75 blocks**: Candy Cane and Festive Fir wood sets; peppermint, icing, gingerbread and cookie
   building sets; candy glass, sugar sand, bouncy marshmallow; festive lights, wreaths, Christmas

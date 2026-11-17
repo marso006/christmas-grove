@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "christmas_grove:gingerbread_bricks"
+  },
+  "result": {
+    "count": 1,
+    "id": "christmas_grove:gingerbread_bricks_stairs"
+  }
+}

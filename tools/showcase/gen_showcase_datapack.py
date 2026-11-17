@@ -1,7 +1,7 @@
-"""Generates the Gingerbread Grove showcase datapack: one-command scenes for screenshots and trailers.
+"""Generates the Christmas Grove showcase datapack: one-command scenes for screenshots and trailers.
 
-Copy docs/showcase/gingerbread_showcase/ into a creative world's datapacks folder (or use the zip),
-run /reload, then /function gg_showcase:help. Not shipped in the mod jar.
+Copy docs/showcase/christmas_showcase/ into a creative world's datapacks folder (or use the zip),
+run /reload, then /function cg_showcase:help. Not shipped in the mod jar.
 
 Usage: py tools/showcase/gen_showcase_datapack.py
 """
@@ -12,10 +12,10 @@ import shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "docs/showcase/gingerbread_showcase"
-BLOCKSTATES = ROOT / "common/src/generated/resources/assets/gingerbread_grove/blockstates"
-G = "gingerbread_grove"
-TAG = 'Tags:["gg_showcase"],PersistenceRequired:1b'
+OUT = ROOT / "docs/showcase/christmas_showcase"
+BLOCKSTATES = ROOT / "common/src/generated/resources/assets/christmas_grove/blockstates"
+G = "christmas_grove"
+TAG = 'Tags:["cg_showcase"],PersistenceRequired:1b'
 
 FUNCTIONS: dict[str, list[str]] = {}
 
@@ -25,7 +25,7 @@ def fn(name: str, *lines: str) -> None:
 
 
 fn("help",
-   'tellraw @s ["",{"text":"Gingerbread Grove showcase","color":"gold","bold":true}]',
+   'tellraw @s ["",{"text":"Christmas Grove showcase","color":"gold","bold":true}]',
    'tellraw @s {"text":"Stand on flat ground. Every scene builds relative to you, facing south.","color":"gray"}',
    'tellraw @s ["",{"text":" setup","color":"yellow"},{"text":"  freeze time/weather/spawning, give the showcase kit"}]',
    'tellraw @s ["",{"text":" day | dusk | night","color":"yellow"},{"text":"  set the light for the shot"}]',
@@ -57,11 +57,11 @@ MOBS = [
     ("reindeer", ',Tame:1b,SaddleItem:{id:"minecraft:saddle",count:1}'), ("cookie_soldier", ""),
     ("gumdrop_blob", ",Size:1"), ("evil_snowman", ""), ("krampus", ""),
 ]
-lineup = ["kill @e[tag=gg_showcase]"]
+lineup = ["kill @e[tag=cg_showcase]"]
 for i, (mob, extra) in enumerate(MOBS):
     x = (i - len(MOBS) // 2) * 3
     lineup.append(f"summon {G}:{mob} ~{x} ~ ~6 {{NoAI:1b,Rotation:[180f,0f],{TAG}{extra}}}")
-lineup.append('tellraw @s {"text":"Mob lineup placed 6 blocks south of you. /function gg_showcase:cleanup removes it.","color":"green"}')
+lineup.append('tellraw @s {"text":"Mob lineup placed 6 blocks south of you. /function cg_showcase:cleanup removes it.","color":"green"}')
 fn("mob_lineup", *lineup)
 
 fn("village",
@@ -89,14 +89,14 @@ for i, (dx, dz) in enumerate([(-4, 6), (0, 9), (4, 6), (-7, 12), (7, 12), (-2, 1
 fn("present_rain", *rain)
 
 fn("krampus_arena",
-   "kill @e[tag=gg_showcase]", "time set 18000",
+   "kill @e[tag=cg_showcase]", "time set 18000",
    f"summon {G}:krampus ~ ~ ~10 {{NoAI:1b,Rotation:[180f,0f],{TAG}}}",
    f"summon {G}:evil_snowman ~-4 ~ ~8 {{NoAI:1b,Rotation:[160f,0f],{TAG}}}",
    f"summon {G}:evil_snowman ~4 ~ ~8 {{NoAI:1b,Rotation:[200f,0f],{TAG}}}",
    f"summon {G}:cookie_soldier ~-7 ~ ~11 {{NoAI:1b,Rotation:[150f,0f],{TAG}}}",
    f"summon {G}:cookie_soldier ~7 ~ ~11 {{NoAI:1b,Rotation:[210f,0f],{TAG}}}")
 
-fn("cleanup", "kill @e[tag=gg_showcase]", f"kill @e[type={G}:present_drop]", f"kill @e[type={G}:santa_sleigh]")
+fn("cleanup", "kill @e[tag=cg_showcase]", f"kill @e[type={G}:present_drop]", f"kill @e[type={G}:santa_sleigh]")
 
 
 def block_gallery() -> list[str]:
@@ -126,12 +126,12 @@ def main() -> None:
     if OUT.exists():
         shutil.rmtree(OUT)
     fn("block_gallery", *block_gallery())
-    (OUT / "data/gg_showcase/function").mkdir(parents=True)
+    (OUT / "data/cg_showcase/function").mkdir(parents=True)
     (OUT / "pack.mcmeta").write_text(json.dumps({"pack": {
-        "pack_format": 48, "description": "Gingerbread Grove showcase scenes (screenshots and trailers)"}}, indent=2) + "\n")
+        "pack_format": 48, "description": "Christmas Grove showcase scenes (screenshots and trailers)"}}, indent=2) + "\n")
     for name, lines in FUNCTIONS.items():
-        (OUT / f"data/gg_showcase/function/{name}.mcfunction").write_text("\n".join(lines) + "\n", newline="\n")
-    zip_base = ROOT / "docs/showcase/gingerbread_showcase_datapack"
+        (OUT / f"data/cg_showcase/function/{name}.mcfunction").write_text("\n".join(lines) + "\n", newline="\n")
+    zip_base = ROOT / "docs/showcase/christmas_showcase_datapack"
     shutil.make_archive(str(zip_base), "zip", OUT)
     print(f"{len(FUNCTIONS)} functions -> {OUT} (+ {zip_base.name}.zip)")
 

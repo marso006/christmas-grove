@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "minecraft:black_wool"
+    },
+    "W": {
+      "item": "minecraft:white_wool"
+    }
+  },
+  "pattern": [
+    "W W",
+    "B B"
+  ],
+  "result": {
+    "count": 1,
+    "id": "christmas_grove:santa_boots"
+  }
+}

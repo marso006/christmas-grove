@@ -1,4 +1,4 @@
-"""Generates the entity (mob) textures for Gingerbread Grove.
+"""Generates the entity (mob) textures for Christmas Grove.
 
 Humanoid skins are painted face by face onto the standard 64x64 box layout. Mobs that reuse vanilla
 geometry (reindeer = horse, pup = wolf, gumdrop blob = slime, evil snowman = snow golem) are painted
@@ -17,7 +17,7 @@ from typing import Callable, Optional
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "common/src/main/resources/assets/gingerbread_grove/textures/entity"
+OUT = ROOT / "common/src/main/resources/assets/christmas_grove/textures/entity"
 UV = ROOT / "tools/textures/uv"
 PREVIEW = ROOT / "tools/textures/preview_entities.png"
 

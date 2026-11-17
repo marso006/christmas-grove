@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:cookie"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "S": {
+      "item": "minecraft:snow_block"
+    },
+    "W": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "GGG",
+    "GCG",
+    "WSW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "christmas_grove:snow_globe"
+  }
+}

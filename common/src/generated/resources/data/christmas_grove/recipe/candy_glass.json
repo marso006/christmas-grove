@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "blocks",
+  "cookingtime": 200,
+  "experience": 0.1,
+  "ingredient": {
+    "item": "christmas_grove:sugar_sand"
+  },
+  "result": {
+    "id": "christmas_grove:candy_glass"
+  }
+}

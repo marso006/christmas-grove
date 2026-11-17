@@ -9,8 +9,8 @@ in `docs/showcase/` to the project's Images tab and swap in those URLs.
 
 | Field | Value |
 | --- | --- |
-| Name | Gingerbread Grove |
-| Slug | `gingerbread-grove` (free on Modrinth as of Nov 17; check CurseForge when you create it) |
+| Name | Christmas Grove |
+| Slug | `christmas-grove` (free on Modrinth as of Nov 17; check CurseForge when you create it) |
 | Summary (CurseForge, max 250) | Shake a Snow Globe and visit a candy-and-cookie Christmas dimension: five festive biomes, Santa's Workshop, a sleigh that drops presents, reindeer, elves, Krampus and more. |
 | Summary (Modrinth, max 256) | Same as above |
 | Main category | World Gen → Dimensions |
@@ -20,8 +20,8 @@ in `docs/showcase/` to the project's Images tab and swap in those URLs.
 | Game versions | 1.21.1 (26.3 to follow) |
 | Environment | Client and server (required on both) |
 | License | Custom: MIT for code, All Rights Reserved for assets (see LICENSE) |
-| Source | https://github.com/marso006/gingerbread-grove (make the repo public first, or leave blank) |
-| Issues | https://github.com/marso006/gingerbread-grove/issues |
+| Source | https://github.com/marso006/christmas-grove (make the repo public first, or leave blank) |
+| Issues | https://github.com/marso006/christmas-grove/issues |
 | Icon | `docs/showcase/icon.png` (400x400) |
 | Gallery | `banner.png`, `feature_blocks.png`, `feature_items.png`, plus your screenshots (see SHOTLIST.md) |
 
@@ -29,8 +29,8 @@ in `docs/showcase/` to the project's Images tab and swap in those URLs.
 
 Upload one jar per loader, and mark each with its loader and game version:
 
-- `gingerbread-grove-fabric-1.21.1-<version>.jar`: Fabric, 1.21.1, depends on **Fabric API** (add it as a required dependency on both sites)
-- `gingerbread-grove-neoforge-1.21.1-<version>.jar`: NeoForge, 1.21.1
+- `christmas-grove-fabric-1.21.1-<version>.jar`: Fabric, 1.21.1, depends on **Fabric API** (add it as a required dependency on both sites)
+- `christmas-grove-neoforge-1.21.1-<version>.jar`: NeoForge, 1.21.1
 
 Release type: **Beta** for the first public build, **Release** once it has had a few days of player feedback.
 Paste the matching section of `CHANGELOG.md` as the file changelog.
@@ -39,9 +39,9 @@ Paste the matching section of `CHANGELOG.md` as the file changelog.
 
 ## Description (paste from here down)
 
-![Gingerbread Grove](https://raw.githubusercontent.com/marso006/gingerbread-grove/main/docs/showcase/banner.png)
+![Christmas Grove](https://raw.githubusercontent.com/marso006/christmas-grove/main/docs/showcase/banner.png)
 
-**Shake a Snow Globe and step into a world made of candy.** Gingerbread Grove adds a whole Christmas
+**Shake a Snow Globe and step into a world made of candy.** Christmas Grove adds a whole Christmas
 dimension to Minecraft: frosted gingerbread hills, candy-cane forests, glowing Christmas trees, a
 hot-chocolate sea, and a cast of festive creatures, from runaway Gingerbread Men to Santa himself.
 And if you have been naughty... Krampus.
@@ -49,7 +49,7 @@ And if you have been naughty... Krampus.
 ### ❄️ Getting there
 
 Craft a **Snow Globe** (glass dome, a cookie inside, a snowy wooden base) and use it. You arrive in
-the Gingerbread Grove; use it again to go home. No portal to build, no lighter to lose.
+the Christmas Grove; use it again to go home. No portal to build, no lighter to lose.
 
 ### 🎄 Five festive biomes
 
@@ -76,7 +76,7 @@ nice. Nice players get extra presents. Naughty players get coal, and if they kee
 comes for them: a boss with chains that drag you in and an army of evil snowmen. Defeat him to
 wipe your record clean, or ring a **Krampus Bell** if you want the fight.
 
-![Blocks](https://raw.githubusercontent.com/marso006/gingerbread-grove/main/docs/showcase/feature_blocks.png)
+![Blocks](https://raw.githubusercontent.com/marso006/christmas-grove/main/docs/showcase/feature_blocks.png)
 
 ### 🏠 Places to explore
 
@@ -91,7 +91,7 @@ Gift Boxes are containers: put up to nine items inside, carry the wrapped box to
 let them unwrap it. Presents you find in the world are surprises with random loot. Hang an **Advent
 Calendar** on your wall, which opens one little door per real-world day from December 1st to 25th.
 
-![Items](https://raw.githubusercontent.com/marso006/gingerbread-grove/main/docs/showcase/feature_items.png)
+![Items](https://raw.githubusercontent.com/marso006/christmas-grove/main/docs/showcase/feature_items.png)
 
 ### 🍪 Treats, tools and festive gear
 

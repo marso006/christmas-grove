@@ -1,7 +1,0 @@
-{
-  "parent": "gingerbread_grove:block/gift_box_template",
-  "textures": {
-    "side": "gingerbread_grove:block/red_gift_box_side",
-    "top": "gingerbread_grove:block/red_gift_box_top"
-  }
-}

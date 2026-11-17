@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "gingerbread_grove:block/cookie_tiles",
-    "side": "gingerbread_grove:block/cookie_tiles",
-    "top": "gingerbread_grove:block/cookie_tiles"
-  }
-}

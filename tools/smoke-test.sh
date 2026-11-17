@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Boots a dedicated dev server for one loader, generates chunks in the Gingerbread Grove, runs a few
+# Boots a dedicated dev server for one loader, generates chunks in the Christmas Grove, runs a few
 # checks, stops the server, and prints any errors. Catches broken worldgen JSON, missing registry
 # entries and client-only classes leaking into the server.
 #
@@ -13,11 +13,11 @@ log="build/smoke-$loader.log"
 mkdir -p build
 : > "$log"
 
-g="execute in gingerbread_grove:gingerbread_grove run"
+g="execute in christmas_grove:christmas_grove run"
 commands=(
   "$g forceload add -64 -64 64 64"
   "@wait 45"
-  "$g locate biome gingerbread_grove:gingerbread_grove"
+  "$g locate biome christmas_grove:gingerbread_grove"
   "$@"
 )
 

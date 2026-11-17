@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_holly": {
+      "conditions": {
+        "items": [
+          {
+            "items": "christmas_grove:holly"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "christmas_grove:wreath"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_holly"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "christmas_grove:wreath"
+    ]
+  }
+}
