@@ -21,8 +21,19 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Build all jars
+      - name: Build all jars (this branch's main Minecraft version)
         run: ./gradlew build --console=plain
+
+      - name: Build extra Minecraft versions from versions/*.properties
+        shell: bash
+        run: |
+          for f in versions/*.properties; do
+            [ -e "$f" ] || continue
+            mc=$(basename "$f" .properties)
+            echo "::group::Minecraft $mc"
+            tools/build-target.sh "$mc" build
+            echo "::endgroup::"
+          done
 
       - name: Upload jars
         uses: actions/upload-artifact@v4

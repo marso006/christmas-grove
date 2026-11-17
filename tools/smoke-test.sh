@@ -4,6 +4,8 @@
 # entries and client-only classes leaking into the server.
 #
 # Usage: tools/smoke-test.sh fabric|neoforge [extra server commands...]
+#        MC_TARGET=1.21 tools/smoke-test.sh fabric   (test another version from versions/*.properties;
+#                                                     uses a fresh world, deleting the old dev one)
 # Requires runs/server/eula.txt with eula=true in the loader folder.
 set -u
 loader="${1:?usage: smoke-test.sh fabric|neoforge [commands...]}"
@@ -12,6 +14,13 @@ cd "$(dirname "$0")/.."
 log="build/smoke-$loader.log"
 mkdir -p build
 : > "$log"
+
+if [ -n "${MC_TARGET:-}" ]; then
+  rm -rf "$loader/runs/server/world"   # worlds can't be opened by an older Minecraft version
+  runner=(tools/build-target.sh "$MC_TARGET" ":$loader:runServer")
+else
+  runner=(./gradlew ":$loader:runServer" --console=plain)
+fi
 
 g="execute in christmas_grove:christmas_grove run"
 commands=(
@@ -28,7 +37,7 @@ commands=(
   done
   echo stop
   sleep 40
-) | timeout 900 ./gradlew ":$loader:runServer" --console=plain > "$log" 2>&1
+) | timeout 900 "${runner[@]}" > "$log" 2>&1
 status=$?
 
 echo "== $loader server exit: $status   (full log: $log)"
