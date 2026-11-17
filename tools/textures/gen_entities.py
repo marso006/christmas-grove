@@ -415,7 +415,49 @@ def krampus_eyes() -> Image.Image:
     return img
 
 
+def santa_sleigh() -> Image.Image:
+    """128x128 texture for SleighModels.sleigh(): red lacquered body with gold trim and curlicues,
+    gold runners, a brown sack of presents."""
+    rng = random.Random("sleigh")
+    img = Image.new("RGBA", (128, 128), (0, 0, 0, 0))
+    gold = lambda: jitter(rng, GOLD, 0.06)
+    red = lambda: jitter(rng, (180, 20, 32), 0.05)
+
+    def body(x, y, face, w, h):
+        if face == "top":
+            return jitter(rng, (120, 14, 24), 0.05)               # velvet floor
+        if y in (0, h - 1) or (face in ("right", "left") and x in (0, w - 1)):
+            return gold()                                         # gold trim
+        if face in ("right", "left") and (x + 2 * y) % 9 == 0 and 1 <= y <= h - 2:
+            return gold()                                         # painted swirls
+        return red()
+
+    box(img, 0, 0, 1, 1, 24, lambda *a: gold())                  # runners
+    box(img, 52, 0, 1, 5, 1, lambda *a: gold())                  # curls
+    box(img, 60, 0, 1, 3, 1, lambda *a: jitter(rng, (150, 110, 40)))  # struts
+    box(img, 0, 26, 12, 7, 18, body)
+    box(img, 0, 52, 12, 6, 3, body)                               # seat back
+    box(img, 32, 52, 12, 6, 2, body)                              # curled front
+    box(img, 64, 0, 8, 8, 6, lambda x, y, f, w, h: jitter(rng, (120, 80, 46), 0.08))   # sack
+    box(img, 64, 16, 3, 3, 3, lambda x, y, f, w, h: GOLD if x == 1 or y == 1 else (200, 36, 44))
+    box(img, 80, 16, 3, 2, 3, lambda x, y, f, w, h: (250, 250, 250) if x == 1 else (40, 140, 70))
+    box(img, 0, 64, 1, 1, 50, lambda *a: jitter(rng, (110, 60, 30)))   # leather reins
+    box(img, 0, 118, 24, 1, 1, lambda *a: gold())                # harness bar
+    return img
+
+
+def present_parachute() -> Image.Image:
+    """64x32: a red-and-white candy-striped canopy and white strings."""
+    img = Image.new("RGBA", (64, 32), (0, 0, 0, 0))
+    stripe = lambda x, y, face, w, h: RED if (x + (y if face in ("top", "bottom") else 0)) % 4 < 2 else WHITE
+    box(img, 0, 0, 14, 3, 14, stripe)
+    box(img, 0, 17, 1, 14, 1, lambda *a: OFFWHITE)
+    return img
+
+
 TEXTURES: dict[str, Callable[[], Image.Image]] = {
+    "santa_sleigh": santa_sleigh,
+    "present_parachute": present_parachute,
     "krampus": krampus,
     "krampus_eyes": krampus_eyes,
     "gingerbread_man": gingerbread_man,

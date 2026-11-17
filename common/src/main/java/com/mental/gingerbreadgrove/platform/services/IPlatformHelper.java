@@ -3,7 +3,10 @@ package com.mental.gingerbreadgrove.platform.services;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 
+import net.minecraft.server.level.ServerLevel;
+
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public interface IPlatformHelper {
@@ -16,6 +19,9 @@ public interface IPlatformHelper {
      * suppliers may only be resolved after blocks are registered.
      */
     void registerStrippables(Map<Supplier<? extends Block>, Supplier<? extends Block>> strippables);
+
+    /** Runs the callback at the end of every server level tick (each dimension separately). */
+    void onServerLevelTick(Consumer<ServerLevel> callback);
 
     /** @return the name of the current loader, e.g. "Fabric" or "NeoForge". */
     String getPlatformName();

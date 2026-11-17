@@ -5,6 +5,8 @@ import com.mental.gingerbreadgrove.client.renderer.EvilSnowmanRenderer;
 import com.mental.gingerbreadgrove.client.renderer.GumdropBlobRenderer;
 import com.mental.gingerbreadgrove.client.renderer.KrampusRenderer;
 import com.mental.gingerbreadgrove.client.renderer.PeppermintPupRenderer;
+import com.mental.gingerbreadgrove.client.renderer.PresentDropRenderer;
+import com.mental.gingerbreadgrove.client.renderer.SantaSleighRenderer;
 import com.mental.gingerbreadgrove.client.renderer.ReindeerRenderer;
 import com.mental.gingerbreadgrove.client.renderer.SantaClausRenderer;
 import com.mental.gingerbreadgrove.client.renderer.SimpleHumanoidRenderer;
@@ -41,6 +43,8 @@ public final class ModEntityRenderers {
         sink.accept(ModModelLayers.REINDEER, ModModelLayers::reindeer);
         sink.accept(ModModelLayers.SANTA_HAT, SantaHatModel::createLayer);
         sink.accept(ModModelLayers.KRAMPUS, ModModelLayers::krampus);
+        sink.accept(ModModelLayers.SANTA_SLEIGH, SleighModels::sleigh);
+        sink.accept(ModModelLayers.PRESENT_PARACHUTE, SleighModels::parachute);
     }
 
     public static void registerRenderers(RendererSink sink) {
@@ -57,5 +61,7 @@ public final class ModEntityRenderers {
         sink.register(ModEntities.EVIL_SNOWMAN.get(), EvilSnowmanRenderer::new);
         sink.register(ModEntities.FROST_SNOWBALL.get(), ThrownItemRenderer::new);
         sink.register(ModEntities.KRAMPUS.get(), KrampusRenderer::new);
+        sink.register(ModEntities.SANTA_SLEIGH.get(), SantaSleighRenderer::new);
+        sink.register(ModEntities.PRESENT_DROP.get(), PresentDropRenderer::new);
     }
 }

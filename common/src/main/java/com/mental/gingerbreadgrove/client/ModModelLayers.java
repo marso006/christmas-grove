@@ -25,6 +25,8 @@ public final class ModModelLayers {
     public static final ModelLayerLocation REINDEER = layer("reindeer");
     public static final ModelLayerLocation SANTA_HAT = layer("santa_hat");
     public static final ModelLayerLocation KRAMPUS = layer("krampus");
+    public static final ModelLayerLocation SANTA_SLEIGH = layer("santa_sleigh");
+    public static final ModelLayerLocation PRESENT_PARACHUTE = layer("present_parachute");
 
     private ModModelLayers() {
     }

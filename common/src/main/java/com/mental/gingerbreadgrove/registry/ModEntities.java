@@ -8,8 +8,10 @@ import com.mental.gingerbreadgrove.entity.GingerbreadMan;
 import com.mental.gingerbreadgrove.entity.GumdropBlob;
 import com.mental.gingerbreadgrove.entity.Krampus;
 import com.mental.gingerbreadgrove.entity.PeppermintPup;
+import com.mental.gingerbreadgrove.entity.PresentDrop;
 import com.mental.gingerbreadgrove.entity.Reindeer;
 import com.mental.gingerbreadgrove.entity.SantaClaus;
+import com.mental.gingerbreadgrove.entity.SantaSleigh;
 import com.mental.gingerbreadgrove.platform.Services;
 import com.mental.gingerbreadgrove.platform.services.IEntityHelper;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -50,6 +52,14 @@ public final class ModEntities {
     public static final Supplier<EntityType<Krampus>> KRAMPUS = register("krampus",
             EntityType.Builder.of(Krampus::new, MobCategory.MONSTER).sized(0.9F, 2.9F).eyeHeight(2.5F)
                     .clientTrackingRange(10).fireImmune());
+
+    // ---- Santa's sleigh and its parachuting presents ---------------------------------------
+    public static final Supplier<EntityType<SantaSleigh>> SANTA_SLEIGH = register("santa_sleigh",
+            EntityType.Builder.<SantaSleigh>of(SantaSleigh::new, MobCategory.MISC).sized(1.6F, 1.6F)
+                    .clientTrackingRange(20).updateInterval(1).fireImmune());
+    public static final Supplier<EntityType<PresentDrop>> PRESENT_DROP = register("present_drop",
+            EntityType.Builder.<PresentDrop>of(PresentDrop::new, MobCategory.MISC).sized(0.75F, 0.75F)
+                    .clientTrackingRange(10).updateInterval(2));
 
     // ---- Projectiles ---------------------------------------------------------------------------
     public static final Supplier<EntityType<FrostSnowball>> FROST_SNOWBALL = register("frost_snowball",

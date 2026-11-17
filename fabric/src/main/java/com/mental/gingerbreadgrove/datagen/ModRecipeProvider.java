@@ -45,6 +45,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         shapeless(output, ModBlocks.GREEN_GIFT_BOX.get(), 1, Items.PAPER, Items.PAPER, Items.STRING, Items.GREEN_DYE);
         shapeless(output, ModBlocks.BLUE_GIFT_BOX.get(), 1, Items.PAPER, Items.PAPER, Items.STRING, Items.BLUE_DYE);
         shapeless(output, ModItems.NICE_LIST.get(), 1, Items.PAPER, Items.PAPER, Items.FEATHER, Items.INK_SAC);
+        shapeless(output, ModItems.LETTER_TO_SANTA.get(), 1, Items.PAPER, Items.FEATHER, Items.INK_SAC, ModItems.CANDY_CANE.get());
         shapeless(output, ModItems.KRAMPUS_BELL.get(), 1, Items.BELL, Items.CHAIN, Items.COAL);
         ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, ModItems.SLEIGH_BELLS.get())
                 .pattern("NLN").pattern("G G")

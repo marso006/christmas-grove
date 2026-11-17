@@ -76,6 +76,7 @@ public class Elf extends AbstractVillager {
                 GiftBoxBlock.surprise(new ItemStack(ModBlocks.RED_GIFT_BOX.get())), 12, 3, 0.05F));
         offers.add(sell(ModItems.SUGAR_CRYSTAL.get(), 6, ModItems.SLEIGH_BELLS.get(), 1));
         offers.add(sell(Items.PAPER, 4, ModItems.NICE_LIST.get(), 1));
+        offers.add(sell(ModItems.SUGAR_CRYSTAL.get(), 3, ModItems.LETTER_TO_SANTA.get(), 1));
         offers.add(sell(ModItems.SUGAR_CRYSTAL.get(), 2, ModBlocks.FESTIVE_FIR.sapling().get(), 2));
         offers.add(sell(ModItems.SUGAR_CRYSTAL.get(), 2, ModBlocks.CANDY_CANE.sapling().get(), 2));
         offers.add(sell(Items.EMERALD, 1, ModItems.HOT_COCOA.get(), 1));

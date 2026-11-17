@@ -11,7 +11,11 @@ import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.level.BlockEvent;
 
+import net.minecraft.server.level.ServerLevel;
+import net.neoforged.neoforge.event.tick.LevelTickEvent;
+
 import java.util.HashMap;
+import java.util.function.Consumer;
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -38,6 +42,15 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
             if (stripped != null) {
                 event.setFinalState(stripped.defaultBlockState()
                         .setValue(RotatedPillarBlock.AXIS, state.getValue(RotatedPillarBlock.AXIS)));
+            }
+        });
+    }
+
+    @Override
+    public void onServerLevelTick(Consumer<ServerLevel> callback) {
+        NeoForge.EVENT_BUS.addListener((LevelTickEvent.Post event) -> {
+            if (event.getLevel() instanceof ServerLevel level) {
+                callback.accept(level);
             }
         });
     }

@@ -2,6 +2,7 @@ package com.mental.gingerbreadgrove.registry;
 
 import com.mental.gingerbreadgrove.item.DrinkItem;
 import com.mental.gingerbreadgrove.item.KrampusBellItem;
+import com.mental.gingerbreadgrove.item.LetterToSantaItem;
 import com.mental.gingerbreadgrove.item.NiceListItem;
 import com.mental.gingerbreadgrove.item.SnowGlobeItem;
 import com.mental.gingerbreadgrove.platform.Services;
@@ -58,6 +59,9 @@ public final class ModItems {
     public static final Supplier<KrampusBellItem> KRAMPUS_BELL = flat(registerRaw("krampus_bell",
             () -> new KrampusBellItem(new Item.Properties().stacksTo(1).rarity(Rarity.RARE))));
     public static final Supplier<Item> KRAMPUS_HORN = simple("krampus_horn", new Item.Properties().rarity(Rarity.EPIC));
+    /** Send it and Santa's sleigh flies over, dropping presents. */
+    public static final Supplier<LetterToSantaItem> LETTER_TO_SANTA = flat(registerRaw("letter_to_santa",
+            () -> new LetterToSantaItem(new Item.Properties().stacksTo(16).rarity(Rarity.UNCOMMON))));
     /** Put them on a tamed reindeer and it glides when ridden. */
     public static final Supplier<Item> SLEIGH_BELLS = simple("sleigh_bells", new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON));
 

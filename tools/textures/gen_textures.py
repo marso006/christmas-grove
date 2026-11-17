@@ -813,6 +813,19 @@ SPRITES: dict[str, list[str]] = {
         "......oooo",
         ".......kk",
     ],
+    "item/letter_to_santa": [
+        "", "", "",
+        "..nnnnnnnnnnnn",
+        "..nNnnnnnnnnNn",
+        "..nnNnnnnnnNnn",
+        "..nnnNnnnnNnnn",
+        "..nnnnNnnNnnnn",
+        "..nnnnnrrnnnnn",
+        "..nnnnnrrnnnnn",
+        "..nnnnnnnnnnnn",
+        "..nnnnnnnnnnnn",
+        "..NNNNNNNNNNNN",
+    ],
     # ---- Santa Suit
     "item/santa_hat": [
         "",

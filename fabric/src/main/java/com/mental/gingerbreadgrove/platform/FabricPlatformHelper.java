@@ -7,7 +7,11 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.minecraft.server.level.ServerLevel;
+
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class FabricPlatformHelper implements IPlatformHelper {
@@ -21,6 +25,11 @@ public class FabricPlatformHelper implements IPlatformHelper {
     public void registerStrippables(Map<Supplier<? extends Block>, Supplier<? extends Block>> strippables) {
         // Fabric registers blocks immediately, so they can be resolved right away.
         strippables.forEach((log, stripped) -> StrippableBlockRegistry.register(log.get(), stripped.get()));
+    }
+
+    @Override
+    public void onServerLevelTick(Consumer<ServerLevel> callback) {
+        ServerTickEvents.END_WORLD_TICK.register(callback::accept);
     }
 
     @Override

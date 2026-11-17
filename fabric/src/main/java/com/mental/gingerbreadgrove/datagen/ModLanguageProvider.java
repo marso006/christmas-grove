@@ -63,6 +63,12 @@ public class ModLanguageProvider extends FabricLanguageProvider {
         builder.add(ModEntities.EVIL_SNOWMAN.get(), "Evil Snowman");
         builder.add(ModEntities.FROST_SNOWBALL.get(), "Frost Snowball");
         builder.add(ModEntities.KRAMPUS.get(), "Krampus");
+        builder.add(ModEntities.SANTA_SLEIGH.get(), "Santa's Sleigh");
+        builder.add(ModEntities.PRESENT_DROP.get(), "Falling Present");
+        builder.add("entity.gingerbread_grove.santa_sleigh.incoming", "Jingle bells! Look up, Santa's sleigh is flying overhead!");
+        builder.add("entity.gingerbread_grove.santa_sleigh.letter", "Santa read your letter! Look to the sky...");
+        builder.add("item.gingerbread_grove.letter_to_santa.tooltip", "Use it and Santa's sleigh flies over you, dropping presents");
+        builder.add("item.gingerbread_grove.letter_to_santa.naughty", "Santa reads your letter and frowns. Naughty children get no visit! (Be nice first.)");
         builder.add("entity.gingerbread_grove.krampus.arrives", "Chains rattle in the dark... You have been very naughty. Krampus has come for you!");
         builder.add("entity.gingerbread_grove.krampus.bell", "The bell tolls, and Krampus answers.");
         builder.add("entity.gingerbread_grove.krampus.defeated", "Krampus is defeated! Santa wipes your name off the naughty list.");

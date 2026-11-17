@@ -1,5 +1,6 @@
 package com.mental.gingerbreadgrove;
 
+import com.mental.gingerbreadgrove.event.SantaSleighEvents;
 import com.mental.gingerbreadgrove.platform.Services;
 import com.mental.gingerbreadgrove.registry.ModArmorMaterials;
 import com.mental.gingerbreadgrove.registry.ModBlockEntities;
@@ -41,5 +42,6 @@ public final class GingerbreadGrove {
             strippables.put(wood.wood(), wood.strippedWood());
         }
         Services.PLATFORM.registerStrippables(strippables);
+        Services.PLATFORM.onServerLevelTick(SantaSleighEvents::tick); // Santa flies over now and then
     }
 }
