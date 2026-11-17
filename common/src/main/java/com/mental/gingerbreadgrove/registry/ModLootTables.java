@@ -9,6 +9,10 @@ import net.minecraft.world.level.storage.loot.LootTable;
 public final class ModLootTables {
 
     public static final ResourceKey<LootTable> GIFT_BOX = key("gameplay/gift_box");
+    public static final ResourceKey<LootTable> GINGERBREAD_HOUSE = key("chests/gingerbread_house");
+    public static final ResourceKey<LootTable> SANTAS_WORKSHOP = key("chests/santas_workshop");
+    public static final ResourceKey<LootTable> CANDY_CANE_OUTPOST = key("chests/candy_cane_outpost");
+    public static final ResourceKey<LootTable> SNOWMAN_CAMP = key("chests/snowman_camp");
 
     private ModLootTables() {
     }
