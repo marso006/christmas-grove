@@ -48,7 +48,7 @@ Candy Cane Sword.
 
 Plus giant candy canes as landmarks, gumdrop boulders, and sugar-crystal ore underground.
 
-## Phase 4: Mobs ✅ (except Krampus and the reindeer glide, which move to Phase 5)
+## Phase 4: Mobs ✅
 
 | Mob | Role |
 | --- | --- |
@@ -62,7 +62,7 @@ Plus giant candy canes as landmarks, gumdrop boulders, and sugar-crystal ore und
 | Evil Snowman | Hostile, throws slowing snowballs |
 | Krampus | Boss at the Candy Cane Outpost; hunts players who are "naughty" |
 
-## Phase 5: Structures and systems
+## Phase 5: Structures and systems ✅ (Elf Village, present piles and the cocoa cauldron still to do)
 
 - Structures: Gingerbread House, Candy Cane Outpost, **Santa's Workshop**, Elf Village, present piles
 - **Naughty or Nice**: hurting passive festive mobs makes you naughty, and trading or helping

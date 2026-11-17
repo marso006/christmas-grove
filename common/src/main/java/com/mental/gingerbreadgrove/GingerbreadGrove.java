@@ -2,6 +2,7 @@ package com.mental.gingerbreadgrove;
 
 import com.mental.gingerbreadgrove.platform.Services;
 import com.mental.gingerbreadgrove.registry.ModArmorMaterials;
+import com.mental.gingerbreadgrove.registry.ModBlockEntities;
 import com.mental.gingerbreadgrove.registry.ModBlocks;
 import com.mental.gingerbreadgrove.registry.ModCreativeTabs;
 import com.mental.gingerbreadgrove.registry.ModEntities;
@@ -27,6 +28,7 @@ public final class GingerbreadGrove {
                 Services.PLATFORM.getPlatformName(), Services.PLATFORM.getEnvironmentName());
         // Blocks before items: ModItems registers the block items of everything in ModBlocks.
         ModBlocks.init();
+        ModBlockEntities.init();
         ModArmorMaterials.init();
         ModEntities.init(); // before items: spawn eggs refer to entity types
         ModItems.init();

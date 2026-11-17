@@ -1,5 +1,8 @@
 package com.mental.gingerbreadgrove.entity;
 
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.server.level.ServerPlayer;
+import com.mental.gingerbreadgrove.naughty.NaughtyNice;
 import com.mental.gingerbreadgrove.registry.ModEntities;
 import com.mental.gingerbreadgrove.registry.ModItems;
 import net.minecraft.server.level.ServerLevel;
@@ -41,6 +44,9 @@ public class PeppermintPup extends Wolf {
                     setTarget(null);
                     setOrderedToSit(true);
                     level().broadcastEntityEvent(this, (byte) 7); // hearts
+                    if (player instanceof ServerPlayer serverPlayer) {
+                        NaughtyNice.change(serverPlayer, 2, "tamed_pup");
+                    }
                 } else {
                     level().broadcastEntityEvent(this, (byte) 6); // smoke
                 }
@@ -59,5 +65,13 @@ public class PeppermintPup extends Wolf {
             pup.setTame(true, true);
         }
         return pup;
+    }
+
+    @Override
+    public void die(DamageSource source) {
+        super.die(source);
+        if (source.getEntity() instanceof ServerPlayer player) {
+            NaughtyNice.change(player, -5, "pup");
+        }
     }
 }

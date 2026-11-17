@@ -1,5 +1,7 @@
 package com.mental.gingerbreadgrove.entity;
 
+import net.minecraft.server.level.ServerPlayer;
+import com.mental.gingerbreadgrove.naughty.NaughtyNice;
 import com.mental.gingerbreadgrove.registry.ModItems;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
@@ -96,5 +98,13 @@ public class GingerbreadMan extends PathfinderMob {
     @Override
     public float getVoicePitch() {
         return 1.6F;
+    }
+
+    @Override
+    public void die(DamageSource source) {
+        super.die(source);
+        if (source.getEntity() instanceof ServerPlayer player) {
+            NaughtyNice.change(player, -3, "gingerbread_man");
+        }
     }
 }

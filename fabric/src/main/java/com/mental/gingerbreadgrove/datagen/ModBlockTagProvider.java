@@ -81,6 +81,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(BlockTags.REPLACEABLE_BY_TREES).add(ModBlocks.SUGAR_GRASS.get());
         getOrCreateTagBuilder(BlockTags.REPLACEABLE).add(ModBlocks.SUGAR_GRASS.get());
 
+        getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE).add(ModBlocks.ADVENT_CALENDAR.get());
+
         // Glass
         getOrCreateTagBuilder(BlockTags.IMPERMEABLE).add(ModBlocks.CANDY_GLASS.get());
     }

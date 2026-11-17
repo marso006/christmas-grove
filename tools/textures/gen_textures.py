@@ -749,6 +749,70 @@ SPRITES: dict[str, list[str]] = {
         "..rw",
         ".rw",
     ],
+    # ---- Phase 5 items
+    "item/nice_list": [
+        "",
+        "...nnnnnnnnn",
+        "..NnnnnnnnnnN",
+        "..NnxxxnxxnnN",
+        "...nnnnnnnnn",
+        "...nxxnxxxxn",
+        "...nnnnnnnnn",
+        "...nxxxxnxxn",
+        "...nnnnnnnnn",
+        "...nxxnxxxgn",
+        "...nnnnnnnnn",
+        "..NnnnnnnnnnN",
+        "..NNNNNNNNNNN",
+        "...rr",
+        "....r",
+    ],
+    "item/krampus_bell": [
+        "",
+        ".......ss",
+        "......s..s",
+        ".......kk",
+        "......kKKk",
+        ".....kKKKKk",
+        ".....kKKKKk",
+        ".....kKKKKk",
+        "....kKKKKKKk",
+        "....kKKKKKKk",
+        "...kkkkkkkkkk",
+        "......rRr",
+        ".......r",
+    ],
+    "item/krampus_horn": [
+        "",
+        "...........ee",
+        "..........eeE",
+        ".........eeE",
+        "........eeE",
+        ".......eeE",
+        "......eeE",
+        ".....eeEE",
+        "....eeEE",
+        "...eEEE",
+        "..EEEE",
+        "..EEE",
+        "..kk",
+    ],
+    "item/sleigh_bells": [
+        "",
+        "..tttttttttttt",
+        "..t..........t",
+        "..t.oO...oO..t",
+        "..toOOo.oOOo.t",
+        "...oOOo.oOOo",
+        "...oooo.oooo",
+        "....kk...kk",
+        "",
+        ".......oO",
+        "......oOOo",
+        "......oOOo",
+        "......oooo",
+        ".......kk",
+    ],
     # ---- Santa Suit
     "item/santa_hat": [
         "",
@@ -955,7 +1019,51 @@ def sugar_crystal_block() -> Image.Image:
     return speckle(img, "sugar_crystal_block", (255, 255, 255), 8)
 
 
+def advent_front() -> Image.Image:
+    """24 little numbered doors in a 6x4 grid on a red board, with a gold star door for Christmas."""
+    img = planks("advent_front", [(190, 30, 40), (178, 24, 34), (204, 40, 50)])
+    rng = random.Random("advent")
+    doors = [(196, 40, 50), (40, 140, 70), (240, 200, 70), (240, 240, 240)]
+    for row in range(4):
+        for col in range(4):
+            x0, y0 = 1 + col * 4 - (1 if col else 0), 1 + row * 4 - (1 if row else 0)
+            colour = doors[(row * 4 + col) % 4] if (row, col) != (3, 3) else GOLD
+            for y in range(y0, y0 + 3):
+                for x in range(x0, x0 + 3):
+                    img.putpixel((x, y), rgba(shade(colour, rng.choice([0.95, 1.0, 1.05]))))
+            img.putpixel((x0 + 2, y0 + 1), rgba(GOLD_DARK))   # door knob
+    return img
+
+
+def cookie_jar_side() -> Image.Image:
+    img, rng = blank(), random.Random("cookie_jar")
+    for y in range(6, 16):
+        for x in range(4, 12):
+            edge = x in (4, 11) or y == 15
+            img.putpixel((x, y), (190, 220, 235, 255) if edge else (220, 238, 246, 255))
+    for cx, cy in ((6, 13), (9, 12), (7, 10), (9, 14)):     # cookies inside
+        for dx, dy in ((0, 0), (1, 0), (0, 1), (1, 1)):
+            img.putpixel((cx + dx, cy + dy), rgba(COOKIE[rng.randrange(3)]))
+        img.putpixel((cx, cy), rgba((90, 52, 30)))
+    for x in (5, 6):
+        img.putpixel((x, 7), (255, 255, 255, 255))           # glint
+    return img
+
+
+def cookie_jar_top() -> Image.Image:
+    img = blank()
+    for y in range(16):
+        for x in range(16):
+            img.putpixel((x, y), rgba(shade(FIR_PLANK[0], 1.0 if (x + y) % 3 else 0.9)))
+    return img
+
+
 BLOCKS: dict[str, Callable[[], Image.Image]] = {
+    "advent_calendar_front": advent_front,
+    "advent_calendar_side": lambda: planks("advent_side", [(190, 30, 40), (178, 24, 34), (204, 40, 50)]),
+    "advent_calendar_top": lambda: planks("advent_top", FIR_PLANK),
+    "cookie_jar": cookie_jar_side,
+    "cookie_jar_top": cookie_jar_top,
     "frosting": frosting,
     "gingerbread": gingerbread,
     "frosted_gingerbread_side": frosted_gingerbread_side,

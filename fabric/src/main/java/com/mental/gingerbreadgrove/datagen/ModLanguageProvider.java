@@ -62,6 +62,45 @@ public class ModLanguageProvider extends FabricLanguageProvider {
         builder.add(ModEntities.GUMDROP_BLOB.get(), "Gumdrop Blob");
         builder.add(ModEntities.EVIL_SNOWMAN.get(), "Evil Snowman");
         builder.add(ModEntities.FROST_SNOWBALL.get(), "Frost Snowball");
+        builder.add(ModEntities.KRAMPUS.get(), "Krampus");
+        builder.add("entity.gingerbread_grove.krampus.arrives", "Chains rattle in the dark... You have been very naughty. Krampus has come for you!");
+        builder.add("entity.gingerbread_grove.krampus.bell", "The bell tolls, and Krampus answers.");
+        builder.add("entity.gingerbread_grove.krampus.defeated", "Krampus is defeated! Santa wipes your name off the naughty list.");
+        builder.add("entity.gingerbread_grove.krampus.peaceful", "Krampus does not visit on Peaceful difficulty.");
+        builder.add("entity.gingerbread_grove.santa_claus.naughty", "Ho... hmm. You have been naughty, %s. A lump of coal for you!");
+        builder.add("entity.gingerbread_grove.santa_claus.nice", "Ho ho ho! You have been very nice, %s! Extra presents for you!");
+
+        builder.add("naughty_nice.gingerbread_grove.naughty", "Naughty! (%s)");
+        builder.add("naughty_nice.gingerbread_grove.nice", "Nice! (%s)");
+        builder.add("naughty_nice.gingerbread_grove.reason.gingerbread_man", "you hurt a Gingerbread Man");
+        builder.add("naughty_nice.gingerbread_grove.reason.reindeer", "you hurt a Reindeer");
+        builder.add("naughty_nice.gingerbread_grove.reason.pup", "you hurt a Peppermint Pup");
+        builder.add("naughty_nice.gingerbread_grove.reason.elf", "you hurt an Elf");
+        builder.add("naughty_nice.gingerbread_grove.reason.hit_santa", "you hit Santa!");
+        builder.add("naughty_nice.gingerbread_grove.reason.trade", "you traded with an Elf");
+        builder.add("naughty_nice.gingerbread_grove.reason.tamed_pup", "you adopted a Peppermint Pup");
+        builder.add("naughty_nice.gingerbread_grove.reason.defeated_monster", "you protected the Grove");
+        builder.add("naughty_nice.gingerbread_grove.reason.gift_given", "someone unwrapped your present");
+
+        builder.add("item.gingerbread_grove.nice_list.tooltip", "Read it to see whether you are naughty or nice");
+        builder.add("item.gingerbread_grove.nice_list.nice", "You are on the NICE list! (score %s)");
+        builder.add("item.gingerbread_grove.nice_list.neutral", "You are neither naughty nor nice. Yet. (score %s)");
+        builder.add("item.gingerbread_grove.nice_list.naughty", "You are on the NAUGHTY list! (score %s)");
+        builder.add("item.gingerbread_grove.krampus_bell.tooltip", "Ring it to summon Krampus. Are you ready?");
+
+        builder.add("container.gingerbread_grove.gift_box", "Gift Box");
+        builder.add("container.gingerbread_grove.cookie_jar", "Cookie Jar");
+        builder.add("block.gingerbread_grove.gift_box.sealed", "This present is sealed. Use it to unwrap it!");
+        builder.add("block.gingerbread_grove.gift_box.not_yours", "This present was wrapped by %s.");
+        builder.add("block.gingerbread_grove.gift_box.from", "A present from %s!");
+        builder.add("block.gingerbread_grove.gift_box.empty", "It is empty. Sneak and use it to wrap something inside.");
+        builder.add("block.gingerbread_grove.gift_box.tooltip.surprise", "A mysterious present. What could be inside?");
+        builder.add("block.gingerbread_grove.gift_box.tooltip.wrapped", "Wrapped by %s");
+        builder.add("block.gingerbread_grove.gift_box.tooltip.empty", "Empty. Place it, then sneak + use to wrap a present.");
+        builder.add("block.gingerbread_grove.advent_calendar.sealed", "The little doors are sealed until December 1st.");
+        builder.add("block.gingerbread_grove.advent_calendar.finished", "Merry Christmas! The calendar is finished for this year.");
+        builder.add("block.gingerbread_grove.advent_calendar.tomorrow", "You already opened door %s. Come back tomorrow!");
+        builder.add("block.gingerbread_grove.advent_calendar.opened", "You open door %s of the Advent Calendar!");
         builder.add("entity.gingerbread_grove.gingerbread_man.caught", "You caught the Gingerbread Man! It crumbles into cookies.");
         builder.add("entity.gingerbread_grove.santa_claus.gift", "Ho ho ho! Here is a present for you, %s!");
         builder.add("entity.gingerbread_grove.santa_claus.christmas", "Ho ho ho! Merry Christmas, %s! Two presents today!");

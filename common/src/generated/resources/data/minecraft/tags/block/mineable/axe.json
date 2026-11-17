@@ -19,6 +19,7 @@
     "gingerbread_grove:festive_fir_door",
     "gingerbread_grove:festive_fir_trapdoor",
     "gingerbread_grove:festive_fir_button",
-    "gingerbread_grove:festive_fir_pressure_plate"
+    "gingerbread_grove:festive_fir_pressure_plate",
+    "gingerbread_grove:advent_calendar"
   ]
 }

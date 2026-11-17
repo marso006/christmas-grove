@@ -47,6 +47,11 @@ public class ModEntityLootProvider extends SimpleFabricLootTableProvider {
         output.accept(key(ModEntities.EVIL_SNOWMAN.get()), LootTable.lootTable()
                 .withPool(pool(Items.SNOWBALL, 2, 6))
                 .withPool(pool(Items.COAL, 0, 1)));
+        output.accept(key(ModEntities.KRAMPUS.get()), LootTable.lootTable()
+                .withPool(pool(ModItems.KRAMPUS_HORN.get(), 1, 2))
+                .withPool(pool(ModItems.SUGAR_CRYSTAL.get(), 8, 16))
+                .withPool(pool(Items.DIAMOND, 1, 3))
+                .withPool(pool(ModItems.GINGERBREAD_HEART.get(), 1, 1)));
         // Elves, Santa and pups drop nothing; empty tables keep the game from warning about missing ones.
         output.accept(key(ModEntities.ELF.get()), LootTable.lootTable());
         output.accept(key(ModEntities.SANTA_CLAUS.get()), LootTable.lootTable());

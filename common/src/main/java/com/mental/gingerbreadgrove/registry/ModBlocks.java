@@ -1,5 +1,7 @@
 package com.mental.gingerbreadgrove.registry;
 
+import com.mental.gingerbreadgrove.block.AdventCalendarBlock;
+import com.mental.gingerbreadgrove.block.CookieJarBlock;
 import com.mental.gingerbreadgrove.block.FestiveWallDecorBlock;
 import com.mental.gingerbreadgrove.block.GiftBoxBlock;
 import com.mental.gingerbreadgrove.block.GumdropBushBlock;
@@ -163,6 +165,13 @@ public final class ModBlocks {
     public static final Supplier<Block> RED_GIFT_BOX = cutout(register("red_gift_box", () -> giftBox(MapColor.COLOR_RED)));
     public static final Supplier<Block> GREEN_GIFT_BOX = cutout(register("green_gift_box", () -> giftBox(MapColor.COLOR_GREEN)));
     public static final Supplier<Block> BLUE_GIFT_BOX = cutout(register("blue_gift_box", () -> giftBox(MapColor.COLOR_BLUE)));
+
+    /** Nine slots of storage in a glass jar. */
+    public static final Supplier<Block> COOKIE_JAR = cutout(register("cookie_jar", () -> new CookieJarBlock(
+            Properties.of().mapColor(MapColor.NONE).strength(0.5F).sound(SoundType.GLASS).noOcclusion())));
+    /** One gift per real-world day from December 1st to 25th. */
+    public static final Supplier<Block> ADVENT_CALENDAR = register("advent_calendar", () -> new AdventCalendarBlock(
+            Properties.of().mapColor(MapColor.COLOR_RED).strength(1.0F).sound(SoundType.WOOD)));
 
     private ModBlocks() {
     }

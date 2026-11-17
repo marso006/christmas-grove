@@ -1,6 +1,8 @@
 package com.mental.gingerbreadgrove.registry;
 
 import com.mental.gingerbreadgrove.item.DrinkItem;
+import com.mental.gingerbreadgrove.item.KrampusBellItem;
+import com.mental.gingerbreadgrove.item.NiceListItem;
 import com.mental.gingerbreadgrove.item.SnowGlobeItem;
 import com.mental.gingerbreadgrove.platform.Services;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -51,6 +53,13 @@ public final class ModItems {
     public static final Supplier<Item> SUGAR_CRYSTAL = simple("sugar_crystal", new Item.Properties());
     public static final Supplier<Item> CINNAMON_STICK = simple("cinnamon_stick", new Item.Properties());
     public static final Supplier<Item> MUG = simple("mug", new Item.Properties().stacksTo(16));
+    public static final Supplier<NiceListItem> NICE_LIST = flat(registerRaw("nice_list",
+            () -> new NiceListItem(new Item.Properties().stacksTo(1))));
+    public static final Supplier<KrampusBellItem> KRAMPUS_BELL = flat(registerRaw("krampus_bell",
+            () -> new KrampusBellItem(new Item.Properties().stacksTo(1).rarity(Rarity.RARE))));
+    public static final Supplier<Item> KRAMPUS_HORN = simple("krampus_horn", new Item.Properties().rarity(Rarity.EPIC));
+    /** Put them on a tamed reindeer and it glides when ridden. */
+    public static final Supplier<Item> SLEIGH_BELLS = simple("sleigh_bells", new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON));
 
     // ---- Food -----------------------------------------------------------------------------------
 
@@ -110,6 +119,7 @@ public final class ModItems {
     public static final Supplier<Item> COOKIE_SOLDIER_SPAWN_EGG = spawnEgg("cookie_soldier", ModEntities.COOKIE_SOLDIER, 0x9A2A2A, 0xE0B070);
     public static final Supplier<Item> GUMDROP_BLOB_SPAWN_EGG = spawnEgg("gumdrop_blob", ModEntities.GUMDROP_BLOB, 0xEC4078, 0x5AC85A);
     public static final Supplier<Item> EVIL_SNOWMAN_SPAWN_EGG = spawnEgg("evil_snowman", ModEntities.EVIL_SNOWMAN, 0xF4F4F4, 0x222222);
+    public static final Supplier<Item> KRAMPUS_SPAWN_EGG = spawnEgg("krampus", ModEntities.KRAMPUS, 0x2A1A12, 0xB01020);
 
     private ModItems() {
     }

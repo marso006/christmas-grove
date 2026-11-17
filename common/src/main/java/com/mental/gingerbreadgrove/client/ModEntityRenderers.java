@@ -3,6 +3,7 @@ package com.mental.gingerbreadgrove.client;
 import com.mental.gingerbreadgrove.Constants;
 import com.mental.gingerbreadgrove.client.renderer.EvilSnowmanRenderer;
 import com.mental.gingerbreadgrove.client.renderer.GumdropBlobRenderer;
+import com.mental.gingerbreadgrove.client.renderer.KrampusRenderer;
 import com.mental.gingerbreadgrove.client.renderer.PeppermintPupRenderer;
 import com.mental.gingerbreadgrove.client.renderer.ReindeerRenderer;
 import com.mental.gingerbreadgrove.client.renderer.SantaClausRenderer;
@@ -39,6 +40,7 @@ public final class ModEntityRenderers {
         sink.accept(ModModelLayers.COOKIE_SOLDIER, ModModelLayers::cookieSoldier);
         sink.accept(ModModelLayers.REINDEER, ModModelLayers::reindeer);
         sink.accept(ModModelLayers.SANTA_HAT, SantaHatModel::createLayer);
+        sink.accept(ModModelLayers.KRAMPUS, ModModelLayers::krampus);
     }
 
     public static void registerRenderers(RendererSink sink) {
@@ -54,5 +56,6 @@ public final class ModEntityRenderers {
         sink.register(ModEntities.GUMDROP_BLOB.get(), GumdropBlobRenderer::new);
         sink.register(ModEntities.EVIL_SNOWMAN.get(), EvilSnowmanRenderer::new);
         sink.register(ModEntities.FROST_SNOWBALL.get(), ThrownItemRenderer::new);
+        sink.register(ModEntities.KRAMPUS.get(), KrampusRenderer::new);
     }
 }

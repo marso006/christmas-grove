@@ -1,5 +1,7 @@
 package com.mental.gingerbreadgrove.entity;
 
+import net.minecraft.server.level.ServerPlayer;
+import com.mental.gingerbreadgrove.naughty.NaughtyNice;
 import com.mental.gingerbreadgrove.registry.ModItems;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -91,5 +93,13 @@ public class CookieSoldier extends Monster {
     @Override
     protected void playStepSound(net.minecraft.core.BlockPos pos, BlockState state) {
         playSound(SoundEvents.WOOD_STEP, 0.4F, 0.8F);
+    }
+
+    @Override
+    public void die(DamageSource source) {
+        super.die(source);
+        if (source.getEntity() instanceof ServerPlayer player) {
+            NaughtyNice.change(player, 1, "defeated_monster");
+        }
     }
 }

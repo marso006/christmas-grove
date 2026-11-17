@@ -8,6 +8,10 @@
           "type": "minecraft:item",
           "functions": [
             {
+              "function": "minecraft:set_custom_data",
+              "tag": "{GingerbreadSurprise:1b}"
+            },
+            {
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
@@ -24,6 +28,10 @@
           "type": "minecraft:item",
           "functions": [
             {
+              "function": "minecraft:set_custom_data",
+              "tag": "{GingerbreadSurprise:1b}"
+            },
+            {
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
@@ -39,6 +47,10 @@
         {
           "type": "minecraft:item",
           "functions": [
+            {
+              "function": "minecraft:set_custom_data",
+              "tag": "{GingerbreadSurprise:1b}"
+            },
             {
               "add": false,
               "count": {

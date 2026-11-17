@@ -5,6 +5,12 @@ import com.mental.gingerbreadgrove.registry.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.block.Block;
 
 import java.util.HashSet;
@@ -45,6 +51,13 @@ public class ModBlockLootProvider extends FabricBlockLootTableProvider {
         special(ModBlocks.GUMDROP_BUSH, b -> add(b, createSingleItemTable(ModItems.GUMDROPS.get())));
         special(ModBlocks.SUGAR_CRYSTAL_ORE, b -> add(b, createOreDrop(b, ModItems.SUGAR_CRYSTAL.get())));
         special(ModBlocks.CINNAMON_ORE, b -> add(b, createOreDrop(b, ModItems.CINNAMON_STICK.get())));
+        for (Supplier<Block> box : java.util.List.of(ModBlocks.RED_GIFT_BOX, ModBlocks.GREEN_GIFT_BOX, ModBlocks.BLUE_GIFT_BOX)) {
+            special(box, b -> add(b, LootTable.lootTable().withPool(applyExplosionCondition(b, LootPool.lootPool()
+                    .setRolls(ConstantValue.exactly(1))
+                    .add(LootItem.lootTableItem(b).apply(CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY)
+                            .include(DataComponents.CONTAINER)
+                            .include(DataComponents.CUSTOM_DATA)))))));
+        }
 
         for (Supplier<? extends Block> block : ModBlocks.all()) {
             if (!handled.contains(block.get())) {

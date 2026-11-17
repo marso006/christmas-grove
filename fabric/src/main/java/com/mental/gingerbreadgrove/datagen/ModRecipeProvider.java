@@ -36,6 +36,31 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         food(output);
         decor(output);
         gear(output);
+        festive(output);
+    }
+
+    private void festive(RecipeOutput output) {
+        // Empty gift boxes for wrapping your own presents
+        shapeless(output, ModBlocks.RED_GIFT_BOX.get(), 1, Items.PAPER, Items.PAPER, Items.STRING, Items.RED_DYE);
+        shapeless(output, ModBlocks.GREEN_GIFT_BOX.get(), 1, Items.PAPER, Items.PAPER, Items.STRING, Items.GREEN_DYE);
+        shapeless(output, ModBlocks.BLUE_GIFT_BOX.get(), 1, Items.PAPER, Items.PAPER, Items.STRING, Items.BLUE_DYE);
+        shapeless(output, ModItems.NICE_LIST.get(), 1, Items.PAPER, Items.PAPER, Items.FEATHER, Items.INK_SAC);
+        shapeless(output, ModItems.KRAMPUS_BELL.get(), 1, Items.BELL, Items.CHAIN, Items.COAL);
+        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, ModItems.SLEIGH_BELLS.get())
+                .pattern("NLN").pattern("G G")
+                .define('N', Items.GOLD_NUGGET).define('L', Items.LEATHER).define('G', Items.GOLD_INGOT)
+                .unlockedBy(getHasName(Items.GOLD_INGOT), has(Items.GOLD_INGOT))
+                .save(output);
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.COOKIE_JAR.get())
+                .pattern(" S ").pattern("GCG").pattern("GGG")
+                .define('S', ItemTags.WOODEN_SLABS).define('G', Items.GLASS).define('C', ModItems.GINGERBREAD_COOKIE.get())
+                .unlockedBy(getHasName(ModItems.GINGERBREAD_COOKIE.get()), has(ModItems.GINGERBREAD_COOKIE.get()))
+                .save(output);
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.ADVENT_CALENDAR.get())
+                .pattern("PPP").pattern("PCP").pattern("PPP")
+                .define('P', ModBlocks.FESTIVE_FIR.planks().get()).define('C', ModItems.CANDY_CANE.get())
+                .unlockedBy(getHasName(ModItems.CANDY_CANE.get()), has(ModItems.CANDY_CANE.get()))
+                .save(output);
     }
 
     private void gear(RecipeOutput output) {

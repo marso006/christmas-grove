@@ -369,7 +369,55 @@ def evil_snowman() -> Image.Image:
     return from_mask("snow_golem", (64, 64), paint)
 
 
+def krampus() -> Image.Image:
+    rng = random.Random("krampus")
+    fur = lambda: jitter(rng, rng.choice([(46, 30, 22), (38, 24, 18), (56, 36, 26)]), 0.08)
+    horn = lambda: jitter(rng, (226, 214, 190), 0.05)
+
+    def head(x, y, face, w, h):
+        if face == "front":
+            if y == 3 and x in (1, 2, 5, 6):
+                return (30, 10, 10)                       # deep eye sockets (the glow is a separate layer)
+            if y >= 5 and 2 <= x <= 5:
+                return (24, 14, 12) if y == 5 else fur()  # snarling mouth
+            if y in (1, 2) and x in (0, 7):
+                return (60, 40, 30)
+        return fur()
+
+    def body(x, y, face, w, h):
+        if face == "front" and (x == y % 8 or x == (y + 4) % 8):
+            return (130, 130, 140) if (x + y) % 2 else (90, 90, 100)   # chains across the chest
+        return fur()
+
+    def arm(x, y, face, w, h):
+        if face == "bottom" or y >= h - 2:
+            return (20, 14, 12)                           # claws
+        if y == h - 4:
+            return (110, 110, 120)                        # shackle
+        return fur()
+
+    def leg(x, y, face, w, h):
+        if face == "bottom" or y >= h - 2:
+            return (24, 18, 16)                           # hooves
+        return fur()
+
+    tongue = lambda x, y, face, w, h: (200, 60, 70)
+    tail = lambda x, y, face, w, h: (20, 14, 12) if (face == "front" or x < 1) else fur()
+    hornp = lambda x, y, face, w, h: horn()
+    return humanoid({"head": head, "body": body, "arm": arm, "leg": leg},
+                    [(0, 32, 2, 4, 2, hornp), (8, 32, 1, 3, 1, hornp), (16, 32, 1, 1, 7, tail), (32, 32, 1, 4, 1, tongue)])
+
+
+def krampus_eyes() -> Image.Image:
+    img = Image.new("RGBA", (64, 64), (0, 0, 0, 0))
+    for x in (9, 10, 13, 14):                             # head front is (8,8); eyes on row 3
+        img.putpixel((x, 11), (255, 40, 30, 255))
+    return img
+
+
 TEXTURES: dict[str, Callable[[], Image.Image]] = {
+    "krampus": krampus,
+    "krampus_eyes": krampus_eyes,
     "gingerbread_man": gingerbread_man,
     "elf": elf,
     "santa_claus": santa_claus,

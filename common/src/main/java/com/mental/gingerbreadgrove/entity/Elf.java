@@ -1,5 +1,8 @@
 package com.mental.gingerbreadgrove.entity;
 
+import net.minecraft.server.level.ServerPlayer;
+import com.mental.gingerbreadgrove.naughty.NaughtyNice;
+import com.mental.gingerbreadgrove.block.GiftBoxBlock;
 import com.mental.gingerbreadgrove.registry.ModBlocks;
 import com.mental.gingerbreadgrove.registry.ModItems;
 import net.minecraft.sounds.SoundEvent;
@@ -69,7 +72,10 @@ public class Elf extends AbstractVillager {
         offers.add(sell(ModItems.SUGAR_CRYSTAL.get(), 1, ModBlocks.FESTIVE_LIGHTS.get(), 8));
         offers.add(sell(ModItems.SUGAR_CRYSTAL.get(), 2, ModBlocks.WREATH.get(), 2));
         offers.add(sell(ModItems.SUGAR_CRYSTAL.get(), 3, ModBlocks.CHRISTMAS_STAR.get(), 1));
-        offers.add(sell(ModItems.SUGAR_CRYSTAL.get(), 4, ModBlocks.RED_GIFT_BOX.get(), 1));
+        offers.add(new MerchantOffer(new ItemCost(ModItems.SUGAR_CRYSTAL.get(), 4),
+                GiftBoxBlock.surprise(new ItemStack(ModBlocks.RED_GIFT_BOX.get())), 12, 3, 0.05F));
+        offers.add(sell(ModItems.SUGAR_CRYSTAL.get(), 6, ModItems.SLEIGH_BELLS.get(), 1));
+        offers.add(sell(Items.PAPER, 4, ModItems.NICE_LIST.get(), 1));
         offers.add(sell(ModItems.SUGAR_CRYSTAL.get(), 2, ModBlocks.FESTIVE_FIR.sapling().get(), 2));
         offers.add(sell(ModItems.SUGAR_CRYSTAL.get(), 2, ModBlocks.CANDY_CANE.sapling().get(), 2));
         offers.add(sell(Items.EMERALD, 1, ModItems.HOT_COCOA.get(), 1));
@@ -149,5 +155,21 @@ public class Elf extends AbstractVillager {
     @Override
     public float getVoicePitch() {
         return 1.5F; // a small, cheerful voice
+    }
+
+    @Override
+    public void die(DamageSource source) {
+        super.die(source);
+        if (source.getEntity() instanceof ServerPlayer player) {
+            NaughtyNice.change(player, -6, "elf");
+        }
+    }
+
+    @Override
+    public void notifyTrade(MerchantOffer offer) {
+        super.notifyTrade(offer);
+        if (getTradingPlayer() instanceof ServerPlayer player) {
+            NaughtyNice.change(player, 1, "trade");
+        }
     }
 }

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "gingerbread_grove:candy_cane"
+    },
+    "P": {
+      "item": "gingerbread_grove:festive_fir_planks"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "PCP",
+    "PPP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "gingerbread_grove:advent_calendar"
+  }
+}

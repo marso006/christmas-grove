@@ -1,5 +1,7 @@
 package com.mental.gingerbreadgrove.entity;
 
+import net.minecraft.server.level.ServerPlayer;
+import com.mental.gingerbreadgrove.naughty.NaughtyNice;
 import com.mental.gingerbreadgrove.registry.ModEntities;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -72,5 +74,13 @@ public class EvilSnowman extends Monster implements RangedAttackMob {
     @Override
     protected SoundEvent getDeathSound() {
         return SoundEvents.SNOW_GOLEM_DEATH;
+    }
+
+    @Override
+    public void die(DamageSource source) {
+        super.die(source);
+        if (source.getEntity() instanceof ServerPlayer player) {
+            NaughtyNice.change(player, 1, "defeated_monster");
+        }
     }
 }

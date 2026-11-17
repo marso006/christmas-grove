@@ -6,6 +6,7 @@ import com.mental.gingerbreadgrove.entity.EvilSnowman;
 import com.mental.gingerbreadgrove.entity.FrostSnowball;
 import com.mental.gingerbreadgrove.entity.GingerbreadMan;
 import com.mental.gingerbreadgrove.entity.GumdropBlob;
+import com.mental.gingerbreadgrove.entity.Krampus;
 import com.mental.gingerbreadgrove.entity.PeppermintPup;
 import com.mental.gingerbreadgrove.entity.Reindeer;
 import com.mental.gingerbreadgrove.entity.SantaClaus;
@@ -46,6 +47,10 @@ public final class ModEntities {
     public static final Supplier<EntityType<EvilSnowman>> EVIL_SNOWMAN = register("evil_snowman",
             EntityType.Builder.of(EvilSnowman::new, MobCategory.MONSTER).sized(0.7F, 1.9F).eyeHeight(1.7F).clientTrackingRange(8));
 
+    public static final Supplier<EntityType<Krampus>> KRAMPUS = register("krampus",
+            EntityType.Builder.of(Krampus::new, MobCategory.MONSTER).sized(0.9F, 2.9F).eyeHeight(2.5F)
+                    .clientTrackingRange(10).fireImmune());
+
     // ---- Projectiles ---------------------------------------------------------------------------
     public static final Supplier<EntityType<FrostSnowball>> FROST_SNOWBALL = register("frost_snowball",
             EntityType.Builder.<FrostSnowball>of(FrostSnowball::new, MobCategory.MISC).sized(0.25F, 0.25F)
@@ -69,6 +74,7 @@ public final class ModEntities {
         helper.registerAttributes(COOKIE_SOLDIER, CookieSoldier::createAttributes);
         helper.registerAttributes(GUMDROP_BLOB, Monster::createMonsterAttributes);
         helper.registerAttributes(EVIL_SNOWMAN, EvilSnowman::createAttributes);
+        helper.registerAttributes(KRAMPUS, Krampus::createAttributes);
 
         Heightmap.Types ground = Heightmap.Types.MOTION_BLOCKING_NO_LEAVES;
         helper.registerSpawnPlacement(GINGERBREAD_MAN, SpawnPlacementTypes.ON_GROUND, ground, Mob::checkMobSpawnRules);

@@ -24,6 +24,7 @@ public final class ModModelLayers {
     public static final ModelLayerLocation COOKIE_SOLDIER = layer("cookie_soldier");
     public static final ModelLayerLocation REINDEER = layer("reindeer");
     public static final ModelLayerLocation SANTA_HAT = layer("santa_hat");
+    public static final ModelLayerLocation KRAMPUS = layer("krampus");
 
     private ModModelLayers() {
     }
@@ -70,6 +71,29 @@ public final class ModModelLayers {
         MeshDefinition mesh = humanoid();
         mesh.getRoot().getChild("head").addOrReplaceChild("shako", CubeListBuilder.create().texOffs(0, 32)
                 .addBox(-4.5F, -14.0F, -4.5F, 9.0F, 6.0F, 9.0F), PartPose.ZERO);
+        return LayerDefinition.create(mesh, 64, 64);
+    }
+
+    /** Curling goat horns, a long tongue and a tail. */
+    public static LayerDefinition krampus() {
+        MeshDefinition mesh = humanoid();
+        PartDefinition head = mesh.getRoot().getChild("head");
+        for (int side : new int[]{-1, 1}) {
+            String name = side > 0 ? "left" : "right";
+            PartDefinition horn = head.addOrReplaceChild(name + "_horn", CubeListBuilder.create().texOffs(0, 32)
+                    .addBox(-1.0F, -4.0F, -1.0F, 2.0F, 4.0F, 2.0F),
+                    PartPose.offsetAndRotation(3.0F * side, -7.5F, -0.5F, -0.2F, 0.0F, 0.45F * side));
+            PartDefinition mid = horn.addOrReplaceChild(name + "_horn_mid", CubeListBuilder.create().texOffs(0, 32)
+                    .addBox(-1.0F, -3.0F, -1.0F, 2.0F, 3.0F, 2.0F, new CubeDeformation(-0.2F)),
+                    PartPose.offsetAndRotation(0.0F, -3.6F, 0.0F, -0.5F, 0.0F, 0.35F * side));
+            mid.addOrReplaceChild(name + "_horn_tip", CubeListBuilder.create().texOffs(8, 32)
+                    .addBox(-0.5F, -3.0F, -0.5F, 1.0F, 3.0F, 1.0F),
+                    PartPose.offsetAndRotation(0.0F, -2.7F, 0.0F, -0.7F, 0.0F, 0.2F * side));
+        }
+        head.addOrReplaceChild("tongue", CubeListBuilder.create().texOffs(32, 32)
+                .addBox(-0.5F, -1.5F, -4.3F, 1.0F, 4.0F, 1.0F), PartPose.ZERO);
+        mesh.getRoot().getChild("body").addOrReplaceChild("tail", CubeListBuilder.create().texOffs(16, 32)
+                .addBox(-0.5F, 0.0F, 0.0F, 1.0F, 1.0F, 7.0F), PartPose.offsetAndRotation(0.0F, 10.0F, 2.0F, -0.6F, 0.0F, 0.0F));
         return LayerDefinition.create(mesh, 64, 64);
     }
 

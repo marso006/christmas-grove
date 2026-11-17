@@ -1,11 +1,15 @@
 package com.mental.gingerbreadgrove.datagen;
 
+import com.mental.gingerbreadgrove.block.GiftBoxBlock;
+import com.mental.gingerbreadgrove.block.entity.GiftBoxBlockEntity;
 import com.mental.gingerbreadgrove.registry.ModBlocks;
 import com.mental.gingerbreadgrove.registry.ModItems;
 import com.mental.gingerbreadgrove.registry.ModLootTables;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.loot.functions.SetCustomDataFunction;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
@@ -103,7 +107,8 @@ public class ModChestLootProvider extends SimpleFabricLootTableProvider {
                         .add(item(ModItems.CANDY_CANE_SWORD.get(), 3, 1, 1))
                         .add(item(ModItems.SUGAR_CRYSTAL_PICKAXE.get(), 3, 1, 1))
                         .add(item(ModItems.SUGAR_CRYSTAL_AXE.get(), 2, 1, 1))
-                        .add(item(Items.GOLDEN_APPLE, 4, 1, 2))));
+                        .add(item(Items.GOLDEN_APPLE, 4, 1, 2))
+                        .add(item(ModItems.KRAMPUS_BELL.get(), 1, 1, 1))));
 
         // What the snowmen have hoarded.
         output.accept(ModLootTables.SNOWMAN_CAMP, LootTable.lootTable()
@@ -120,6 +125,11 @@ public class ModChestLootProvider extends SimpleFabricLootTableProvider {
 
     private static LootPoolEntryContainer.Builder<?> item(ItemLike item, int weight, int min, int max) {
         var entry = LootItem.lootTableItem(item).setWeight(weight);
+        if (item.asItem() instanceof net.minecraft.world.item.BlockItem block && block.getBlock() instanceof GiftBoxBlock) {
+            CompoundTag surprise = new CompoundTag();
+            surprise.putBoolean(GiftBoxBlockEntity.SURPRISE_TAG, true);
+            entry.apply(SetCustomDataFunction.setCustomData(surprise)); // found presents roll random loot
+        }
         if (min != 1 || max != 1) {
             entry.apply(SetItemCountFunction.setCount(UniformGenerator.between(min, max)));
         }

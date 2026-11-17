@@ -1,5 +1,10 @@
 package com.mental.gingerbreadgrove.entity;
 
+import net.minecraft.world.item.Items;
+import com.mental.gingerbreadgrove.registry.ModItems;
+import com.mental.gingerbreadgrove.block.GiftBoxBlock;
+import net.minecraft.server.level.ServerPlayer;
+import com.mental.gingerbreadgrove.naughty.NaughtyNice;
 import com.mental.gingerbreadgrove.registry.ModBlocks;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -85,13 +90,26 @@ public class SantaClaus extends PathfinderMob {
         }
 
         lastGiftDay.put(player.getUUID(), today);
-        int presents = isChristmas() ? 2 : 1;
-        for (int i = 0; i < presents; i++) {
-            giveOrDrop(player, new ItemStack(randomGiftBox()));
+        NaughtyNice.Standing standing = player instanceof ServerPlayer sp
+                ? NaughtyNice.standing(NaughtyNice.score(sp)) : NaughtyNice.Standing.NEUTRAL;
+        if (standing == NaughtyNice.Standing.NAUGHTY) {
+            // Naughty children get coal.
+            giveOrDrop(player, new ItemStack(Items.COAL));
+            player.displayClientMessage(Component.translatable("entity.gingerbread_grove.santa_claus.naughty",
+                    player.getDisplayName()), false);
+            playSound(SoundEvents.VILLAGER_NO, 1.2F, 0.55F);
+            return InteractionResult.CONSUME;
         }
-        player.displayClientMessage(Component.translatable(isChristmas()
-                ? "entity.gingerbread_grove.santa_claus.christmas"
-                : "entity.gingerbread_grove.santa_claus.gift", player.getDisplayName()), false);
+        int presents = (isChristmas() ? 2 : 1) + (standing == NaughtyNice.Standing.NICE ? 1 : 0);
+        for (int i = 0; i < presents; i++) {
+            giveOrDrop(player, GiftBoxBlock.surprise(new ItemStack(randomGiftBox())));
+        }
+        if (standing == NaughtyNice.Standing.NICE) {
+            giveOrDrop(player, new ItemStack(ModItems.SUGAR_CRYSTAL.get(), 1 + random.nextInt(3)));
+        }
+        String message = standing == NaughtyNice.Standing.NICE ? "nice" : isChristmas() ? "christmas" : "gift";
+        player.displayClientMessage(Component.translatable("entity.gingerbread_grove.santa_claus." + message,
+                player.getDisplayName()), false);
         playSound(SoundEvents.VILLAGER_CELEBRATE, 1.2F, 0.55F);
         server.sendParticles(ParticleTypes.HAPPY_VILLAGER, getX(), getY() + 1.8, getZ(), 15, 0.5, 0.5, 0.5, 0.0);
         return InteractionResult.CONSUME;
@@ -114,6 +132,16 @@ public class SantaClaus extends PathfinderMob {
     private static boolean isChristmas() {
         LocalDate now = LocalDate.now();
         return now.getMonth() == Month.DECEMBER && now.getDayOfMonth() >= 24 && now.getDayOfMonth() <= 26;
+    }
+
+    @Override
+    public boolean hurt(DamageSource source, float amount) {
+        if (source.getEntity() instanceof ServerPlayer player && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
+            NaughtyNice.change(player, -5, "hit_santa");
+            playSound(SoundEvents.VILLAGER_HURT, 1.0F, 0.5F);
+            return false;
+        }
+        return super.hurt(source, amount);
     }
 
     @Override

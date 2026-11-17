@@ -145,6 +145,10 @@
           ],
           "name": "minecraft:golden_apple",
           "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gingerbread_grove:krampus_bell"
         }
       ],
       "rolls": 1.0

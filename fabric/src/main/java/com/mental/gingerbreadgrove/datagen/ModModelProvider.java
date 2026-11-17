@@ -82,6 +82,8 @@ public class ModModelProvider extends FabricModelProvider {
             blocks.createNonTemplateHorizontalBlock(decor.get());
             blocks.createSimpleFlatItemModel(decor.get());
         }
+        blocks.createNonTemplateModelBlock(ModBlocks.COOKIE_JAR.get());      // hand-written jar model
+        blocks.createHorizontallyRotatedBlock(ModBlocks.ADVENT_CALENDAR.get(), TexturedModel.ORIENTABLE_ONLY_TOP);
         for (Supplier<Block> box : java.util.List.of(ModBlocks.RED_GIFT_BOX, ModBlocks.GREEN_GIFT_BOX, ModBlocks.BLUE_GIFT_BOX)) {
             Block block = box.get();
             ResourceLocation model = GIFT_BOX.create(block, new TextureMapping()
