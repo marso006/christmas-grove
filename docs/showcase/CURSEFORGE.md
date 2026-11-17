@@ -20,7 +20,7 @@ in `docs/showcase/` to the project's Images tab and swap in those URLs.
 | Game versions | 1.21.1 (26.3 to follow) |
 | Environment | Client and server (required on both) |
 | License | Custom: MIT for code, All Rights Reserved for assets (see LICENSE) |
-| Source | https://github.com/marso006/christmas-grove (make the repo public first, or leave blank) |
+| Source | https://github.com/marso006/christmas-grove |
 | Issues | https://github.com/marso006/christmas-grove/issues |
 | Icon | `docs/showcase/icon.png` (400x400) |
 | Gallery | `screenshots/*.png` (13 captioned in-game shots), `screenshots/collage.png`, `banner.png`, `feature_blocks.png`, `feature_items.png` |
@@ -48,6 +48,5 @@ The full page description is in two formats with the same content:
 It includes 17 images: the banner, 12 captioned screenshots, the item and block galleries, and two
 recipe sheets. Regenerate the HTML after editing the Markdown with `py tools/showcase/md_to_html.py`.
 
-**Image hosting:** the image links point at this GitHub repository, so they only load once the repo
-is public. To keep it private, upload the images to the CurseForge project's Images tab instead and
-replace the links with CurseForge's image URLs.
+**Image hosting:** the images load straight from this public GitHub repository (checked: all 17 links
+return 200). Keep the files in `docs/showcase/` where they are, or the page images break.
