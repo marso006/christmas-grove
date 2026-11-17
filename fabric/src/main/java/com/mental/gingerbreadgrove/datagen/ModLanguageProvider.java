@@ -2,6 +2,7 @@ package com.mental.gingerbreadgrove.datagen;
 
 import com.mental.gingerbreadgrove.Constants;
 import com.mental.gingerbreadgrove.registry.ModBlocks;
+import com.mental.gingerbreadgrove.registry.ModEntities;
 import com.mental.gingerbreadgrove.registry.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
@@ -48,6 +49,23 @@ public class ModLanguageProvider extends FabricLanguageProvider {
         for (Supplier<? extends Item> supplier : ModItems.handheldItems()) {
             builder.add(supplier.get(), name(BuiltInRegistries.ITEM.getKey(supplier.get()).getPath()));
         }
+
+        for (Supplier<? extends Item> egg : ModItems.spawnEggs()) {
+            builder.add(egg.get(), name(BuiltInRegistries.ITEM.getKey(egg.get()).getPath()));
+        }
+        builder.add(ModEntities.GINGERBREAD_MAN.get(), "Gingerbread Man");
+        builder.add(ModEntities.REINDEER.get(), "Reindeer");
+        builder.add(ModEntities.PEPPERMINT_PUP.get(), "Peppermint Pup");
+        builder.add(ModEntities.ELF.get(), "Elf");
+        builder.add(ModEntities.SANTA_CLAUS.get(), "Santa Claus");
+        builder.add(ModEntities.COOKIE_SOLDIER.get(), "Cookie Soldier");
+        builder.add(ModEntities.GUMDROP_BLOB.get(), "Gumdrop Blob");
+        builder.add(ModEntities.EVIL_SNOWMAN.get(), "Evil Snowman");
+        builder.add(ModEntities.FROST_SNOWBALL.get(), "Frost Snowball");
+        builder.add("entity.gingerbread_grove.gingerbread_man.caught", "You caught the Gingerbread Man! It crumbles into cookies.");
+        builder.add("entity.gingerbread_grove.santa_claus.gift", "Ho ho ho! Here is a present for you, %s!");
+        builder.add("entity.gingerbread_grove.santa_claus.christmas", "Ho ho ho! Merry Christmas, %s! Two presents today!");
+        builder.add("entity.gingerbread_grove.santa_claus.tomorrow", "Ho ho! Patience, %s. Come back tomorrow for another present.");
 
         builder.add("item.gingerbread_grove.snow_globe.missing", "The globe is cloudy: the Gingerbread Grove dimension failed to load.");
     }

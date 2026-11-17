@@ -1,6 +1,7 @@
 package com.mental.gingerbreadgrove.platform;
 
 import com.mental.gingerbreadgrove.Constants;
+import com.mental.gingerbreadgrove.platform.services.IEntityHelper;
 import com.mental.gingerbreadgrove.platform.services.IPlatformHelper;
 import com.mental.gingerbreadgrove.platform.services.IRegistryHelper;
 
@@ -14,6 +15,7 @@ public final class Services {
 
     public static final IPlatformHelper PLATFORM = load(IPlatformHelper.class);
     public static final IRegistryHelper REGISTRY = load(IRegistryHelper.class);
+    public static final IEntityHelper ENTITIES = load(IEntityHelper.class);
 
     private Services() {
     }

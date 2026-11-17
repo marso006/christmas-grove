@@ -18,6 +18,7 @@ public class GingerbreadGroveDataGen implements DataGeneratorEntrypoint {
         pack.addProvider(ModLanguageProvider::new);
         pack.addProvider(ModBlockLootProvider::new);
         pack.addProvider(ModChestLootProvider::new);
+        pack.addProvider(ModEntityLootProvider::new);
         ModBlockTagProvider blockTags = pack.addProvider(ModBlockTagProvider::new);
         pack.addProvider((output, registries) -> new ModItemTagProvider(output, registries, blockTags));
         pack.addProvider(ModRecipeProvider::new);

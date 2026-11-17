@@ -4,6 +4,8 @@ import com.mental.gingerbreadgrove.item.DrinkItem;
 import com.mental.gingerbreadgrove.item.SnowGlobeItem;
 import com.mental.gingerbreadgrove.platform.Services;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.BlockItem;
@@ -28,6 +30,8 @@ public final class ModItems {
     private static final List<Supplier<? extends Item>> ALL = new ArrayList<>();
     /** Plain items that use the standard flat "generated" item model (block items excluded). */
     private static final List<Supplier<? extends Item>> FLAT = new ArrayList<>();
+    /** Spawn eggs, which use the vanilla spawn egg model. */
+    private static final List<Supplier<? extends Item>> SPAWN_EGGS = new ArrayList<>();
     /** Tools and weapons, which use the "handheld" item model (held diagonally). */
     private static final List<Supplier<? extends Item>> HANDHELD = new ArrayList<>();
 
@@ -94,7 +98,25 @@ public final class ModItems {
     public static final Supplier<ArmorItem> SANTA_TROUSERS = santaSuit("santa_trousers", ArmorItem.Type.LEGGINGS);
     public static final Supplier<ArmorItem> SANTA_BOOTS = santaSuit("santa_boots", ArmorItem.Type.BOOTS);
 
+    // ---- Spawn eggs ----------------------------------------------------------------------------
+
+    public static final Supplier<Item> GINGERBREAD_MAN_SPAWN_EGG = spawnEgg("gingerbread_man", ModEntities.GINGERBREAD_MAN, 0xB0682F, 0xFFFFFF);
+    public static final Supplier<Item> REINDEER_SPAWN_EGG = spawnEgg("reindeer", ModEntities.REINDEER, 0x7A5230, 0xE8D8C0);
+    public static final Supplier<Item> PEPPERMINT_PUP_SPAWN_EGG = spawnEgg("peppermint_pup", ModEntities.PEPPERMINT_PUP, 0xFFFFFF, 0xD62834);
+    public static final Supplier<Item> ELF_SPAWN_EGG = spawnEgg("elf", ModEntities.ELF, 0x2E8B3A, 0xD62834);
+    public static final Supplier<Item> SANTA_CLAUS_SPAWN_EGG = spawnEgg("santa_claus", ModEntities.SANTA_CLAUS, 0xC81E2A, 0xFFFFFF);
+    public static final Supplier<Item> COOKIE_SOLDIER_SPAWN_EGG = spawnEgg("cookie_soldier", ModEntities.COOKIE_SOLDIER, 0x9A2A2A, 0xE0B070);
+    public static final Supplier<Item> GUMDROP_BLOB_SPAWN_EGG = spawnEgg("gumdrop_blob", ModEntities.GUMDROP_BLOB, 0xEC4078, 0x5AC85A);
+    public static final Supplier<Item> EVIL_SNOWMAN_SPAWN_EGG = spawnEgg("evil_snowman", ModEntities.EVIL_SNOWMAN, 0xF4F4F4, 0x222222);
+
     private ModItems() {
+    }
+
+    private static Supplier<Item> spawnEgg(String entity, Supplier<? extends EntityType<? extends Mob>> type, int background, int highlight) {
+        Supplier<Item> egg = registerRaw(entity + "_spawn_egg",
+                () -> Services.ENTITIES.createSpawnEgg(type, background, highlight, new Item.Properties()));
+        SPAWN_EGGS.add(egg);
+        return egg;
     }
 
     private static Supplier<ArmorItem> santaSuit(String name, ArmorItem.Type type) {
@@ -129,6 +151,10 @@ public final class ModItems {
     /** Items that get a plain flat item model from {@code textures/item/<name>.png}. */
     public static List<Supplier<? extends Item>> flatItems() {
         return Collections.unmodifiableList(FLAT);
+    }
+
+    public static List<Supplier<? extends Item>> spawnEggs() {
+        return Collections.unmodifiableList(SPAWN_EGGS);
     }
 
     /** Tools and weapons that get the handheld item model from {@code textures/item/<name>.png}. */

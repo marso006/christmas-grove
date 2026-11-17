@@ -48,9 +48,47 @@
   "spawners": {
     "ambient": [],
     "axolotls": [],
-    "creature": [],
+    "creature": [
+      {
+        "type": "gingerbread_grove:reindeer",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 8
+      },
+      {
+        "type": "gingerbread_grove:gingerbread_man",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 6
+      },
+      {
+        "type": "gingerbread_grove:elf",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 3
+      }
+    ],
     "misc": [],
-    "monster": [],
+    "monster": [
+      {
+        "type": "gingerbread_grove:gumdrop_blob",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 60
+      },
+      {
+        "type": "gingerbread_grove:cookie_soldier",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 45
+      },
+      {
+        "type": "gingerbread_grove:evil_snowman",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 35
+      }
+    ],
     "underground_water_creature": [],
     "water_ambient": [],
     "water_creature": []

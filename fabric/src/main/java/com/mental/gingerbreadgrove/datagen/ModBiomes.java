@@ -1,6 +1,7 @@
 package com.mental.gingerbreadgrove.datagen;
 
 import com.mental.gingerbreadgrove.registry.ModDimensions;
+import com.mental.gingerbreadgrove.registry.ModEntities;
 import com.mental.gingerbreadgrove.worldgen.ModPlacedFeatures;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.particles.ParticleTypes;
@@ -8,6 +9,8 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.Carvers;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.AmbientMoodSettings;
 import net.minecraft.world.level.biome.AmbientParticleSettings;
 import net.minecraft.world.level.biome.Biome;
@@ -37,13 +40,21 @@ final class ModBiomes {
                 features(placed, carvers)
                         .vegetal(ModPlacedFeatures.CANDY_CANE_TREES, ModPlacedFeatures.SPARSE_FESTIVE_FIR_TREES,
                                 ModPlacedFeatures.GUMDROP_BUSHES, ModPlacedFeatures.SWEET_FLOWERS,
-                                ModPlacedFeatures.SUGAR_GRASS, ModPlacedFeatures.GIFT_BOXES)));
+                                ModPlacedFeatures.SUGAR_GRASS, ModPlacedFeatures.GIFT_BOXES)
+                        .spawn(MobCategory.CREATURE, ModEntities.GINGERBREAD_MAN.get(), 12, 2, 4)
+                        .spawn(MobCategory.CREATURE, ModEntities.PEPPERMINT_PUP.get(), 5, 1, 3)
+                        .spawn(MobCategory.CREATURE, ModEntities.ELF.get(), 2, 1, 2)
+                        .landMonsters()));
 
         context.register(ModDimensions.FESTIVE_FIR_FOREST, biome(0.3F, 0.8F,
                 colours(0xD8E4F4, 0xE8F0FA, 0x6B3E26, 0x3D2214), 0.02F,
                 features(placed, carvers)
                         .vegetal(ModPlacedFeatures.DENSE_FESTIVE_FIR_TREES, ModPlacedFeatures.SWEET_FLOWERS,
-                                ModPlacedFeatures.SUGAR_GRASS, ModPlacedFeatures.GIFT_BOXES_COMMON)));
+                                ModPlacedFeatures.SUGAR_GRASS, ModPlacedFeatures.GIFT_BOXES_COMMON)
+                        .spawn(MobCategory.CREATURE, ModEntities.REINDEER.get(), 8, 2, 4)
+                        .spawn(MobCategory.CREATURE, ModEntities.GINGERBREAD_MAN.get(), 6, 1, 3)
+                        .spawn(MobCategory.CREATURE, ModEntities.ELF.get(), 3, 1, 3)
+                        .landMonsters()));
 
         context.register(ModDimensions.FROSTED_FLATS, biome(0.3F, 0.2F,
                 colours(0xFDF3E7, 0xFFFFFF, 0x6B3E26, 0x3D2214), 0.025F,
@@ -51,13 +62,19 @@ final class ModBiomes {
                         .local(ModPlacedFeatures.FROSTING_PATCHES)
                         .surfaceStructures(ModPlacedFeatures.GIANT_CANDY_CANES)
                         .vegetal(ModPlacedFeatures.SPARSE_CANDY_CANE_TREES, ModPlacedFeatures.SUGAR_GRASS_DENSE,
-                                ModPlacedFeatures.SWEET_FLOWERS, ModPlacedFeatures.GIFT_BOXES)));
+                                ModPlacedFeatures.SWEET_FLOWERS, ModPlacedFeatures.GIFT_BOXES)
+                        .spawn(MobCategory.CREATURE, ModEntities.REINDEER.get(), 12, 3, 6)
+                        .spawn(MobCategory.CREATURE, ModEntities.GINGERBREAD_MAN.get(), 4, 1, 2)
+                        .landMonsters()
+                        .spawn(MobCategory.MONSTER, ModEntities.EVIL_SNOWMAN.get(), 40, 1, 3)));
 
         context.register(ModDimensions.PEPPERMINT_PEAKS, biome(0.4F, 0.3F,
                 colours(0xEADCF2, 0xF3E9F7, 0x6B3E26, 0x3D2214), 0.015F,
                 features(placed, carvers)
                         .ores(ModPlacedFeatures.ORE_CINNAMON_EXTRA)
-                        .vegetal(ModPlacedFeatures.SPARSE_FESTIVE_FIR_TREES, ModPlacedFeatures.SUGAR_GRASS)));
+                        .vegetal(ModPlacedFeatures.SPARSE_FESTIVE_FIR_TREES, ModPlacedFeatures.SUGAR_GRASS)
+                        .spawn(MobCategory.CREATURE, ModEntities.REINDEER.get(), 4, 1, 3)
+                        .landMonsters()));
 
         context.register(ModDimensions.COCOA_SEA, biome(0.8F, 0.5F,
                 colours(0xF5D9C4, 0xE9CDB8, 0x5A3420, 0x2E1A10), 0.006F,
@@ -91,7 +108,7 @@ final class ModBiomes {
                 .temperature(temperature)
                 .downfall(downfall)
                 .specialEffects(effects)
-                .mobSpawnSettings(new MobSpawnSettings.Builder().build())
+                .mobSpawnSettings(features.spawns.build())
                 .generationSettings(features.build())
                 .build();
     }
@@ -104,6 +121,7 @@ final class ModBiomes {
     private static final class Features {
         private final HolderGetter<PlacedFeature> placed;
         private final BiomeGenerationSettings.Builder builder;
+        final MobSpawnSettings.Builder spawns = new MobSpawnSettings.Builder();
 
         Features(HolderGetter<PlacedFeature> placed, HolderGetter<ConfiguredWorldCarver<?>> carvers) {
             this.placed = placed;
@@ -138,6 +156,18 @@ final class ModBiomes {
         @SafeVarargs
         final Features vegetal(ResourceKey<PlacedFeature>... keys) {
             return add(GenerationStep.Decoration.VEGETAL_DECORATION, keys);
+        }
+
+        Features spawn(MobCategory category, EntityType<?> type, int weight, int min, int max) {
+            spawns.addSpawn(category, new MobSpawnSettings.SpawnerData(type, weight, min, max));
+            return this;
+        }
+
+        /** Night-time and cave monsters shared by every land biome. */
+        Features landMonsters() {
+            return spawn(MobCategory.MONSTER, ModEntities.GUMDROP_BLOB.get(), 60, 1, 3)
+                    .spawn(MobCategory.MONSTER, ModEntities.COOKIE_SOLDIER.get(), 45, 1, 2)
+                    .spawn(MobCategory.MONSTER, ModEntities.EVIL_SNOWMAN.get(), 35, 1, 2);
         }
 
         BiomeGenerationSettings build() {

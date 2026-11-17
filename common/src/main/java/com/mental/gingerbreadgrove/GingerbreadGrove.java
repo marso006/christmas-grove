@@ -4,6 +4,7 @@ import com.mental.gingerbreadgrove.platform.Services;
 import com.mental.gingerbreadgrove.registry.ModArmorMaterials;
 import com.mental.gingerbreadgrove.registry.ModBlocks;
 import com.mental.gingerbreadgrove.registry.ModCreativeTabs;
+import com.mental.gingerbreadgrove.registry.ModEntities;
 import com.mental.gingerbreadgrove.registry.ModItems;
 import com.mental.gingerbreadgrove.registry.ModWorldgenTypes;
 import net.minecraft.world.level.block.Block;
@@ -27,6 +28,7 @@ public final class GingerbreadGrove {
         // Blocks before items: ModItems registers the block items of everything in ModBlocks.
         ModBlocks.init();
         ModArmorMaterials.init();
+        ModEntities.init(); // before items: spawn eggs refer to entity types
         ModItems.init();
         ModCreativeTabs.init();
         ModWorldgenTypes.init();

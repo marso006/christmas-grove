@@ -7,7 +7,7 @@ All characters and designs are original or drawn from public-domain folklore (Sa
 Krampus, elves, gingerbread men, nutcracker-style soldiers). No licensed characters, songs or
 logos.
 
-## Phase 1: World blocks and festive decor
+## Phase 1: World blocks and festive decor ✅
 
 **Ground:** Frosting, Frosted Gingerbread, Gingerbread, Peppermint Stone, Sugar Sand (falls like sand),
 Marshmallow (bouncy, no fall damage).
@@ -28,7 +28,7 @@ Gingerbread Bricks, Cookie Tiles. Plus Candy Glass and panes.
 **Decor:** Festive Lights (wall-mounted, glowing), Wreath, Christmas Star (light 15), Gift Boxes in
 red, green and blue (open one for random loot; found scattered in the world).
 
-## Phase 2: Items, food, tools, Santa gear
+## Phase 2: Items, food, tools, Santa gear ✅
 
 **Food:** Gingerbread Cookie, Sugar Cookie, Candy Cane, Gumdrops, Hot Cocoa (Speed), Eggnog
 (Regeneration), Marshmallow → Roasted Marshmallow (campfire), Gingerbread Heart (rare, extra hearts).
@@ -38,7 +38,7 @@ Candy Cane Sword.
 
 **Santa Suit armor:** hat, coat, trousers, boots. Immune to freezing in powder snow.
 
-## Phase 3: A multi-biome dimension
+## Phase 3: A multi-biome dimension ✅
 
 - **Gingerbread Grove**: candy-cane forest, gumdrop bushes, gingerbread cliffs
 - **Festive Fir Forest**: decorated Christmas trees, lights, presents underneath
@@ -48,7 +48,7 @@ Candy Cane Sword.
 
 Plus giant candy canes as landmarks, gumdrop boulders, and sugar-crystal ore underground.
 
-## Phase 4: Mobs
+## Phase 4: Mobs ✅ (except Krampus and the reindeer glide, which move to Phase 5)
 
 | Mob | Role |
 | --- | --- |

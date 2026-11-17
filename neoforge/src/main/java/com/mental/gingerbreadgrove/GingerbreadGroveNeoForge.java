@@ -1,5 +1,6 @@
 package com.mental.gingerbreadgrove;
 
+import com.mental.gingerbreadgrove.platform.NeoForgeEntityHelper;
 import com.mental.gingerbreadgrove.platform.NeoForgeRegistryHelper;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
@@ -10,6 +11,8 @@ public class GingerbreadGroveNeoForge {
     public GingerbreadGroveNeoForge(IEventBus modBus) {
         // DeferredRegisters created during common init attach themselves to this bus.
         NeoForgeRegistryHelper.setModBus(modBus);
+        modBus.addListener(NeoForgeEntityHelper::onAttributes);
+        modBus.addListener(NeoForgeEntityHelper::onSpawnPlacements);
         GingerbreadGrove.init();
     }
 }

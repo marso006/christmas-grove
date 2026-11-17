@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
+import net.minecraft.data.models.model.ModelLocationUtils;
 import net.minecraft.data.models.model.ModelTemplate;
 import net.minecraft.data.models.model.ModelTemplates;
 import net.minecraft.data.models.model.TextureMapping;
@@ -98,6 +99,10 @@ public class ModModelProvider extends FabricModelProvider {
                 continue; // the bush's createCrossBlock already writes the flat model for its item
             }
             items.generateFlatItem(item.get(), ModelTemplates.FLAT_ITEM);
+        }
+        ModelTemplate spawnEgg = new ModelTemplate(Optional.of(ResourceLocation.withDefaultNamespace("item/template_spawn_egg")), Optional.empty());
+        for (Supplier<? extends Item> egg : ModItems.spawnEggs()) {
+            spawnEgg.create(ModelLocationUtils.getModelLocation(egg.get()), new TextureMapping(), items.output);
         }
         for (Supplier<? extends Item> tool : ModItems.handheldItems()) {
             items.generateFlatItem(tool.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
