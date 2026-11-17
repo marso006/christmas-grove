@@ -1,0 +1,9 @@
+{
+  "block.gingerbread_grove.frosted_gingerbread": "Frosted Gingerbread",
+  "block.gingerbread_grove.frosting": "Frosting",
+  "block.gingerbread_grove.gingerbread": "Gingerbread",
+  "block.gingerbread_grove.peppermint_stone": "Peppermint Stone",
+  "item.gingerbread_grove.snow_globe": "Snow Globe",
+  "item.gingerbread_grove.snow_globe.missing": "The globe is cloudy: the Gingerbread Grove dimension failed to load.",
+  "itemGroup.gingerbread_grove": "Gingerbread Grove"
+}
