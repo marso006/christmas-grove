@@ -1,0 +1,53 @@
+{
+  "carvers": {
+    "air": "minecraft:cave"
+  },
+  "downfall": 0.5,
+  "effects": {
+    "fog_color": 15322552,
+    "foliage_color": 15237774,
+    "grass_color": 15259083,
+    "mood_sound": {
+      "block_search_extent": 8,
+      "offset": 2.0,
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000
+    },
+    "particle": {
+      "options": {
+        "type": "minecraft:white_ash"
+      },
+      "probability": 0.006
+    },
+    "sky_color": 16112068,
+    "water_color": 5911584,
+    "water_fog_color": 3021328
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [
+      "gingerbread_grove:marshmallow_islands"
+    ],
+    [],
+    [
+      "gingerbread_grove:ore_sugar_crystal",
+      "gingerbread_grove:ore_cinnamon"
+    ]
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 0.8
+}

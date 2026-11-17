@@ -28,5 +28,6 @@ public class GingerbreadGroveDataGen implements DataGeneratorEntrypoint {
     public void buildRegistry(RegistrySetBuilder registryBuilder) {
         registryBuilder.add(Registries.CONFIGURED_FEATURE, ModWorldgen::configured);
         registryBuilder.add(Registries.PLACED_FEATURE, ModWorldgen::placed);
+        registryBuilder.add(Registries.BIOME, ModBiomes::bootstrap);
     }
 }

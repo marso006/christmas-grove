@@ -1,31 +1,27 @@
 {
-  "has_precipitation": false,
-  "temperature": 0.7,
-  "downfall": 0.4,
+  "carvers": {
+    "air": "minecraft:cave"
+  },
+  "downfall": 0.8,
   "effects": {
-    "sky_color": 16312008,
-    "fog_color": 16376298,
-    "water_color": 7028262,
-    "water_fog_color": 4006420,
-    "grass_color": 15259339,
+    "fog_color": 15266042,
     "foliage_color": 15237774,
-    "particle": {
-      "options": {
-        "type": "minecraft:white_ash"
-      },
-      "probability": 0.012
-    },
+    "grass_color": 15259083,
     "mood_sound": {
       "block_search_extent": 8,
       "offset": 2.0,
       "sound": "minecraft:ambient.cave",
       "tick_delay": 6000
-    }
-  },
-  "carvers": {
-    "air": [
-      "minecraft:cave"
-    ]
+    },
+    "particle": {
+      "options": {
+        "type": "minecraft:white_ash"
+      },
+      "probability": 0.02
+    },
+    "sky_color": 14214388,
+    "water_color": 7028262,
+    "water_fog_color": 4006420
   },
   "features": [
     [],
@@ -41,15 +37,14 @@
     [],
     [],
     [
-      "gingerbread_grove:candy_cane_trees",
-      "gingerbread_grove:festive_fir_trees",
-      "gingerbread_grove:gumdrop_bushes",
+      "gingerbread_grove:dense_festive_fir_trees",
       "gingerbread_grove:sweet_flowers",
       "gingerbread_grove:sugar_grass",
-      "gingerbread_grove:gift_boxes"
-    ],
-    []
+      "gingerbread_grove:gift_boxes_common"
+    ]
   ],
+  "has_precipitation": false,
+  "spawn_costs": {},
   "spawners": {
     "ambient": [],
     "axolotls": [],
@@ -60,5 +55,5 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "spawn_costs": {}
+  "temperature": 0.3
 }

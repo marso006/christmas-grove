@@ -428,12 +428,48 @@
                   {
                     "type": "minecraft:condition",
                     "if_true": {
+                      "type": "minecraft:biome",
+                      "biome_is": [
+                        "gingerbread_grove:peppermint_peaks"
+                      ]
+                    },
+                    "then_run": {
+                      "type": "minecraft:condition",
+                      "if_true": {
+                        "type": "minecraft:steep"
+                      },
+                      "then_run": {
+                        "type": "minecraft:block",
+                        "result_state": {
+                          "Name": "gingerbread_grove:peppermint_stone"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "minecraft:condition",
+                    "if_true": {
                       "type": "minecraft:steep"
                     },
                     "then_run": {
                       "type": "minecraft:block",
                       "result_state": {
                         "Name": "gingerbread_grove:gingerbread"
+                      }
+                    }
+                  },
+                  {
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:biome",
+                      "biome_is": [
+                        "gingerbread_grove:cocoa_sea"
+                      ]
+                    },
+                    "then_run": {
+                      "type": "minecraft:block",
+                      "result_state": {
+                        "Name": "gingerbread_grove:sugar_sand"
                       }
                     }
                   },
@@ -463,16 +499,41 @@
                       "add_stone_depth": false
                     },
                     "then_run": {
-                      "type": "minecraft:block",
-                      "result_state": {
-                        "Name": "gingerbread_grove:frosted_gingerbread"
-                      }
+                      "type": "minecraft:sequence",
+                      "sequence": [
+                        {
+                          "type": "minecraft:condition",
+                          "if_true": {
+                            "type": "minecraft:not",
+                            "invert": {
+                              "type": "minecraft:y_above",
+                              "anchor": {
+                                "absolute": 66
+                              },
+                              "surface_depth_multiplier": 0,
+                              "add_stone_depth": false
+                            }
+                          },
+                          "then_run": {
+                            "type": "minecraft:block",
+                            "result_state": {
+                              "Name": "gingerbread_grove:sugar_sand"
+                            }
+                          }
+                        },
+                        {
+                          "type": "minecraft:block",
+                          "result_state": {
+                            "Name": "gingerbread_grove:frosted_gingerbread"
+                          }
+                        }
+                      ]
                     }
                   },
                   {
                     "type": "minecraft:block",
                     "result_state": {
-                      "Name": "gingerbread_grove:gingerbread"
+                      "Name": "gingerbread_grove:sugar_sand"
                     }
                   }
                 ]
@@ -488,10 +549,30 @@
                 "secondary_depth_range": 0
               },
               "then_run": {
-                "type": "minecraft:block",
-                "result_state": {
-                  "Name": "gingerbread_grove:gingerbread"
-                }
+                "type": "minecraft:sequence",
+                "sequence": [
+                  {
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:biome",
+                      "biome_is": [
+                        "gingerbread_grove:cocoa_sea"
+                      ]
+                    },
+                    "then_run": {
+                      "type": "minecraft:block",
+                      "result_state": {
+                        "Name": "gingerbread_grove:sugar_sand"
+                      }
+                    }
+                  },
+                  {
+                    "type": "minecraft:block",
+                    "result_state": {
+                      "Name": "gingerbread_grove:gingerbread"
+                    }
+                  }
+                ]
               }
             }
           ]

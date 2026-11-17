@@ -1,6 +1,7 @@
 package com.mental.gingerbreadgrove.datagen;
 
 import com.mental.gingerbreadgrove.registry.ModBlocks;
+import com.mental.gingerbreadgrove.registry.ModWorldgenTypes;
 import com.mental.gingerbreadgrove.worldgen.ModConfiguredFeatures;
 import com.mental.gingerbreadgrove.worldgen.ModPlacedFeatures;
 import com.mental.gingerbreadgrove.worldgen.StarTopDecorator;
@@ -20,6 +21,7 @@ import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.DiskConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
@@ -28,6 +30,7 @@ import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSi
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.SpruceFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.RuleBasedBlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.BiomeFilter;
@@ -107,6 +110,14 @@ final class ModWorldgen {
                                 BlockPredicate.matchesBlocks(Direction.DOWN.getNormal(),
                                         ModBlocks.FROSTED_GINGERBREAD.get(), ModBlocks.FROSTING.get())))));
 
+        FeatureUtils.register(context, ModConfiguredFeatures.GIANT_CANDY_CANE, ModWorldgenTypes.GIANT_CANDY_CANE.get());
+        FeatureUtils.register(context, ModConfiguredFeatures.MARSHMALLOW_ISLAND, ModWorldgenTypes.MARSHMALLOW_ISLAND.get());
+        // Patches of pure white frosting on the Frosted Flats.
+        FeatureUtils.register(context, ModConfiguredFeatures.FROSTING_PATCH, Feature.DISK,
+                new DiskConfiguration(RuleBasedBlockStateProvider.simple(ModBlocks.FROSTING.get()),
+                        BlockPredicate.matchesBlocks(List.of(ModBlocks.FROSTED_GINGERBREAD.get())),
+                        UniformInt.of(2, 5), 1));
+
         Block stone = ModBlocks.PEPPERMINT_STONE.base().get();
         FeatureUtils.register(context, ModConfiguredFeatures.ORE_SUGAR_CRYSTAL, Feature.ORE,
                 new OreConfiguration(new BlockMatchTest(stone), ModBlocks.SUGAR_CRYSTAL_ORE.get().defaultBlockState(), 7));
@@ -137,5 +148,26 @@ final class ModWorldgen {
         PlacementUtils.register(context, ModPlacedFeatures.ORE_CINNAMON, features.getOrThrow(ModConfiguredFeatures.ORE_CINNAMON),
                 CountPlacement.of(18), InSquarePlacement.spread(),
                 HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(160)), BiomeFilter.biome());
+        PlacementUtils.register(context, ModPlacedFeatures.ORE_CINNAMON_EXTRA, features.getOrThrow(ModConfiguredFeatures.ORE_CINNAMON),
+                CountPlacement.of(20), InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.absolute(60), VerticalAnchor.absolute(256)), BiomeFilter.biome());
+
+        // Biome-specific densities of the same features
+        PlacementUtils.register(context, ModPlacedFeatures.SPARSE_CANDY_CANE_TREES, features.getOrThrow(ModConfiguredFeatures.CANDY_CANE_TREE),
+                VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(6), ModBlocks.CANDY_CANE.sapling().get()));
+        PlacementUtils.register(context, ModPlacedFeatures.DENSE_FESTIVE_FIR_TREES, features.getOrThrow(ModConfiguredFeatures.FESTIVE_FIR_TREE),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(7, 0.1F, 2), ModBlocks.FESTIVE_FIR.sapling().get()));
+        PlacementUtils.register(context, ModPlacedFeatures.SPARSE_FESTIVE_FIR_TREES, features.getOrThrow(ModConfiguredFeatures.FESTIVE_FIR_TREE),
+                VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(3), ModBlocks.FESTIVE_FIR.sapling().get()));
+        PlacementUtils.register(context, ModPlacedFeatures.GIFT_BOXES_COMMON, features.getOrThrow(ModConfiguredFeatures.GIFT_BOXES),
+                RarityFilter.onAverageOnceEvery(2), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+        PlacementUtils.register(context, ModPlacedFeatures.SUGAR_GRASS_DENSE, features.getOrThrow(ModConfiguredFeatures.SUGAR_GRASS),
+                CountPlacement.of(8), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+        PlacementUtils.register(context, ModPlacedFeatures.GIANT_CANDY_CANES, features.getOrThrow(ModConfiguredFeatures.GIANT_CANDY_CANE),
+                RarityFilter.onAverageOnceEvery(5), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+        PlacementUtils.register(context, ModPlacedFeatures.MARSHMALLOW_ISLANDS, features.getOrThrow(ModConfiguredFeatures.MARSHMALLOW_ISLAND),
+                RarityFilter.onAverageOnceEvery(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
+        PlacementUtils.register(context, ModPlacedFeatures.FROSTING_PATCHES, features.getOrThrow(ModConfiguredFeatures.FROSTING_PATCH),
+                CountPlacement.of(2), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
     }
 }

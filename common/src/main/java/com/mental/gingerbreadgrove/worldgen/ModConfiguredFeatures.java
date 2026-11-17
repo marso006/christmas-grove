@@ -16,6 +16,9 @@ public final class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> GIFT_BOXES = key("gift_boxes");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_SUGAR_CRYSTAL = key("ore_sugar_crystal");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_CINNAMON = key("ore_cinnamon");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> GIANT_CANDY_CANE = key("giant_candy_cane");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MARSHMALLOW_ISLAND = key("marshmallow_island");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FROSTING_PATCH = key("frosting_patch");
 
     private ModConfiguredFeatures() {
     }

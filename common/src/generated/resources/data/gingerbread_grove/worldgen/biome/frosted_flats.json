@@ -1,0 +1,63 @@
+{
+  "carvers": {
+    "air": "minecraft:cave"
+  },
+  "downfall": 0.2,
+  "effects": {
+    "fog_color": 16777215,
+    "foliage_color": 15237774,
+    "grass_color": 15259083,
+    "mood_sound": {
+      "block_search_extent": 8,
+      "offset": 2.0,
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000
+    },
+    "particle": {
+      "options": {
+        "type": "minecraft:white_ash"
+      },
+      "probability": 0.025
+    },
+    "sky_color": 16643047,
+    "water_color": 7028262,
+    "water_fog_color": 4006420
+  },
+  "features": [
+    [],
+    [],
+    [
+      "gingerbread_grove:frosting_patches"
+    ],
+    [],
+    [
+      "gingerbread_grove:giant_candy_canes"
+    ],
+    [],
+    [
+      "gingerbread_grove:ore_sugar_crystal",
+      "gingerbread_grove:ore_cinnamon"
+    ],
+    [],
+    [],
+    [
+      "gingerbread_grove:sparse_candy_cane_trees",
+      "gingerbread_grove:sugar_grass_dense",
+      "gingerbread_grove:sweet_flowers",
+      "gingerbread_grove:gift_boxes"
+    ]
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 0.3
+}
