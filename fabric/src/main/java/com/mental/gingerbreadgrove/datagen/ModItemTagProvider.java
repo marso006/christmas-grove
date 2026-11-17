@@ -44,6 +44,20 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         copy(BlockTags.SMALL_FLOWERS, ItemTags.SMALL_FLOWERS);
         copy(BlockTags.SAND, ItemTags.SAND);
 
+        // Tools and armor: these tags decide which enchantments apply
+        getOrCreateTagBuilder(ItemTags.SWORDS).add(ModItems.CANDY_CANE_SWORD.get());
+        getOrCreateTagBuilder(ItemTags.PICKAXES).add(ModItems.SUGAR_CRYSTAL_PICKAXE.get());
+        getOrCreateTagBuilder(ItemTags.AXES).add(ModItems.SUGAR_CRYSTAL_AXE.get());
+        getOrCreateTagBuilder(ItemTags.SHOVELS).add(ModItems.SUGAR_CRYSTAL_SHOVEL.get());
+        getOrCreateTagBuilder(ItemTags.HOES).add(ModItems.SUGAR_CRYSTAL_HOE.get());
+        getOrCreateTagBuilder(ItemTags.HEAD_ARMOR).add(ModItems.SANTA_HAT.get());
+        getOrCreateTagBuilder(ItemTags.CHEST_ARMOR).add(ModItems.SANTA_COAT.get());
+        getOrCreateTagBuilder(ItemTags.LEG_ARMOR).add(ModItems.SANTA_TROUSERS.get());
+        getOrCreateTagBuilder(ItemTags.FOOT_ARMOR).add(ModItems.SANTA_BOOTS.get());
+        // Wearing any Santa Suit piece stops you freezing in powder snow.
+        getOrCreateTagBuilder(ItemTags.FREEZE_IMMUNE_WEARABLES).add(ModItems.SANTA_HAT.get(), ModItems.SANTA_COAT.get(),
+                ModItems.SANTA_TROUSERS.get(), ModItems.SANTA_BOOTS.get());
+
         // Foxes eat gumdrops the way they eat sweet berries.
         getOrCreateTagBuilder(ItemTags.FOX_FOOD).add(ModItems.GUMDROPS.get());
     }

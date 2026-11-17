@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "gingerbread_grove:item/sugar_crystal_hoe"
+  }
+}

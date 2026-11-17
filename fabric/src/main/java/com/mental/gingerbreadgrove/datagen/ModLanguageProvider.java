@@ -45,6 +45,10 @@ public class ModLanguageProvider extends FabricLanguageProvider {
             builder.add(item, name(BuiltInRegistries.ITEM.getKey(item).getPath()));
         }
 
+        for (Supplier<? extends Item> supplier : ModItems.handheldItems()) {
+            builder.add(supplier.get(), name(BuiltInRegistries.ITEM.getKey(supplier.get()).getPath()));
+        }
+
         builder.add("item.gingerbread_grove.snow_globe.missing", "The globe is cloudy: the Gingerbread Grove dimension failed to load.");
     }
 

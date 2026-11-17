@@ -35,6 +35,47 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         materials(output);
         food(output);
         decor(output);
+        gear(output);
+    }
+
+    private void gear(RecipeOutput output) {
+        ItemLike crystal = ModItems.SUGAR_CRYSTAL.get();
+        ItemLike cane = ModItems.CANDY_CANE.get();
+        tool(output, ModItems.CANDY_CANE_SWORD.get(), crystal, cane, " C ", " C ", " S ");
+        tool(output, ModItems.SUGAR_CRYSTAL_PICKAXE.get(), crystal, cane, "CCC", " S ", " S ");
+        tool(output, ModItems.SUGAR_CRYSTAL_AXE.get(), crystal, cane, "CC ", "CS ", " S ");
+        tool(output, ModItems.SUGAR_CRYSTAL_SHOVEL.get(), crystal, cane, " C ", " S ", " S ");
+        tool(output, ModItems.SUGAR_CRYSTAL_HOE.get(), crystal, cane, "CC ", " S ", " S ");
+
+        // Red wool suit with white wool trim
+        armor(output, ModItems.SANTA_HAT.get(), "RRR", "W W");
+        armor(output, ModItems.SANTA_COAT.get(), "R R", "RWR", "RRR");
+        armor(output, ModItems.SANTA_TROUSERS.get(), "RRR", "R R", "W W");
+        armor(output, ModItems.SANTA_BOOTS.get(), "W W", "B B");
+    }
+
+    /** C = sugar crystal, S = candy cane (the handle). */
+    private static void tool(RecipeOutput output, ItemLike result, ItemLike crystal, ItemLike cane, String... pattern) {
+        ShapedRecipeBuilder builder = ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, result);
+        for (String row : pattern) {
+            builder.pattern(row);
+        }
+        builder.define('C', crystal).define('S', cane)
+                .unlockedBy(getHasName(crystal), has(crystal))
+                .save(output);
+    }
+
+    /** R = red wool, W = white wool, B = black wool. */
+    private static void armor(RecipeOutput output, ItemLike result, String... pattern) {
+        ShapedRecipeBuilder builder = ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result);
+        String all = String.join("", pattern);
+        for (String row : pattern) {
+            builder.pattern(row);
+        }
+        if (all.contains("R")) builder.define('R', Items.RED_WOOL);
+        if (all.contains("W")) builder.define('W', Items.WHITE_WOOL);
+        if (all.contains("B")) builder.define('B', Items.BLACK_WOOL);
+        builder.unlockedBy(getHasName(Items.RED_WOOL), has(Items.RED_WOOL)).save(output);
     }
 
     private void travel(RecipeOutput output) {

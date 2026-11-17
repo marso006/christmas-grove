@@ -669,6 +669,140 @@ SPRITES: dict[str, list[str]] = {
         ".....rRrrRr",
         "......r..r",
     ],
+    # ---- tools (candy-cane handles, crystal heads)
+    "item/candy_cane_sword": [
+        "..............wl",
+        ".............wlL",
+        "............wlL",
+        "...........wlL",
+        "..........wlL",
+        ".........wlL",
+        "........wlL",
+        ".......wlL",
+        "..o...wlL",
+        "...o.wlL",
+        "....olL",
+        "....ro",
+        "...w..o",
+        "..r",
+        ".w",
+        "o",
+    ],
+    "item/sugar_crystal_pickaxe": [
+        "",
+        "....wllllll",
+        "...wlLLLLLLl",
+        "..wlL....rwLl",
+        "..lL....rw..Ll",
+        "..l....rw....l",
+        "......rw",
+        ".....rw",
+        "....rw",
+        "...rw",
+        "..rw",
+        ".rw",
+        "rw",
+    ],
+    "item/sugar_crystal_axe": [
+        "",
+        ".......wll",
+        "......wlLLl",
+        ".....wlLLLLl",
+        ".....lLLLrwL",
+        "......lLrwL",
+        "........rw",
+        ".......rw",
+        "......rw",
+        ".....rw",
+        "....rw",
+        "...rw",
+        "..rw",
+        ".rw",
+    ],
+    "item/sugar_crystal_shovel": [
+        "",
+        "...........wll",
+        "..........wlLLl",
+        "..........lLLLl",
+        "...........lLL",
+        "..........rw",
+        ".........rw",
+        "........rw",
+        ".......rw",
+        "......rw",
+        ".....rw",
+        "....rw",
+        "...rw",
+        "..rw",
+    ],
+    "item/sugar_crystal_hoe": [
+        "",
+        "....wlllll",
+        "...wlLLLLLl",
+        "...L....rwL",
+        "........rw",
+        ".......rw",
+        "......rw",
+        ".....rw",
+        "....rw",
+        "...rw",
+        "..rw",
+        ".rw",
+    ],
+    # ---- Santa Suit
+    "item/santa_hat": [
+        "",
+        "............ww",
+        "...........wwww",
+        "..........rrww",
+        ".........rrrR",
+        "........rrrrR",
+        ".......rrrrrR",
+        "......rrrrrrR",
+        ".....rrrrrrrR",
+        "....rrrrrrrrrR",
+        "...rrrrrrrrrrR",
+        "..wwwwwwwwwwwww",
+        "..WwwwwwwwwwwwW",
+        "...WWWWWWWWWWW",
+    ],
+    "item/santa_coat": [
+        "",
+        "...rrr....rrr",
+        "..rrrrrwwrrrrr",
+        ".rrrrrrwwrrrrrr",
+        ".rrrrrrwwrrrrrr",
+        ".rrr.rrwwrr.rrr",
+        ".rrr.rrwwrr.rrr",
+        ".rrr.xxoxxx.rrr",
+        ".www.rrwwrr.www",
+        ".....rrwwrr",
+        ".....RrwwrR",
+        ".....wwwwww",
+    ],
+    "item/santa_trousers": [
+        "",
+        "...xxxoxxx",
+        "...rrrrrrr",
+        "...rrrrrrR",
+        "...rrr.rrR",
+        "...rrr.rrR",
+        "...rrr.rrR",
+        "...rrr.rrR",
+        "...rrR.rrR",
+        "...www.www",
+    ],
+    "item/santa_boots": [
+        "", "", "", "",
+        "..ww.....ww",
+        "..WW.....WW",
+        "..xx.....xx",
+        "..xx.....xx",
+        "..xx.....xx",
+        ".xxx....xxx",
+        "xxxx...xxxx",
+        "xxxx...xxxx",
+    ],
 }
 
 
@@ -913,6 +1047,105 @@ for _key, _rows in SPRITES.items():
     (ITEMS if _folder == "item" else BLOCKS)[_name] = (lambda rows=_rows: sprite(rows, P))
 
 
+
+# ---- Armor layers (64x32 humanoid armor textures) ------------------------------------------
+
+ARMOR_DIR = ASSETS / "textures/models/armor"
+SUIT_RED = [(198, 30, 42), (186, 24, 36), (210, 40, 50)]
+SUIT_WHITE = [(250, 250, 250), (238, 238, 242)]
+BELT = (30, 26, 28)
+
+
+def _box(img: Image.Image, u: int, v: int, w: int, h: int, d: int, paint) -> None:
+    """Paints a Minecraft model box UV layout (top/bottom row of height d, then the side strip of height h).
+    paint(x_in_face, y_in_face, face, face_w, face_h) returns a colour or None."""
+    faces = {  # name: (x, y, width, height)
+        "top": (u + d, v, w, d), "bottom": (u + d + w, v, w, d),
+        "right": (u, v + d, d, h), "front": (u + d, v + d, w, h),
+        "left": (u + d + w, v + d, d, h), "back": (u + d + w + d, v + d, w, h),
+    }
+    for face, (fx, fy, fw, fh) in faces.items():
+        for y in range(fh):
+            for x in range(fw):
+                c = paint(x, y, face, fw, fh)
+                if c is not None:
+                    img.putpixel((fx + x, fy + y), rgba(c))
+
+
+def santa_layers() -> tuple[Image.Image, Image.Image]:
+    rng = random.Random("santa_suit")
+    red = lambda: rng.choice(SUIT_RED)
+    white = lambda: rng.choice(SUIT_WHITE)
+    l1 = Image.new("RGBA", (64, 32), (0, 0, 0, 0))
+    l2 = Image.new("RGBA", (64, 32), (0, 0, 0, 0))
+
+    # Hat: red with a white fur brim; a white pompom on top
+    def hat(x, y, face, w, h):
+        if face == "top":
+            return white() if 2 <= x <= 5 and 2 <= y <= 5 else red()
+        if face == "bottom":
+            return None
+        return white() if y >= h - 2 else red()
+    _box(l1, 0, 0, 8, 8, 8, hat)
+
+    # Coat: red, white fur down the front and at the hem, black belt with a gold buckle
+    def coat(x, y, face, w, h):
+        if face in ("top", "bottom"):
+            return red()
+        if y == 8:
+            return GOLD if face == "front" and x in (3, 4) else BELT
+        if y >= h - 1:
+            return white()
+        if face == "front" and x in (3, 4):
+            return white()
+        return red()
+    _box(l1, 16, 16, 8, 12, 4, coat)
+
+    # Sleeves: red with white cuffs
+    def sleeve(x, y, face, w, h):
+        if face == "top":
+            return red()
+        if face == "bottom":
+            return white()
+        return white() if y >= h - 2 else red()
+    _box(l1, 40, 16, 4, 12, 4, sleeve)
+
+    # Boots (layer 1 legs): black boots with a white fur top
+    def boots(x, y, face, w, h):
+        if face == "top":
+            return None
+        if face == "bottom":
+            return BELT
+        if y < 6:
+            return None
+        return white() if y in (6, 7) else (shade(BELT, 1.3) if (x + y) % 5 == 0 else BELT)
+    _box(l1, 0, 16, 4, 12, 4, boots)
+
+    # Trousers (layer 2): red legs, a red waistband
+    def trousers(x, y, face, w, h):
+        if face in ("top", "bottom"):
+            return red()
+        return red()
+    _box(l2, 0, 16, 4, 12, 4, trousers)
+
+    def waist(x, y, face, w, h):
+        if face in ("top", "bottom"):
+            return None
+        if y < 8:
+            return None
+        return BELT if y == 8 else red()
+    _box(l2, 16, 16, 8, 12, 4, waist)
+    return l1, l2
+
+
+def write_armor() -> None:
+    ARMOR_DIR.mkdir(parents=True, exist_ok=True)
+    l1, l2 = santa_layers()
+    l1.save(ARMOR_DIR / "santa_suit_layer_1.png")
+    l2.save(ARMOR_DIR / "santa_suit_layer_2.png")
+    print("wrote armor layers")
+
+
 # ---- Missing-texture check -----------------------------------------------------------------
 
 def referenced_textures() -> set[str]:
@@ -950,6 +1183,7 @@ def main() -> None:
             img.save(folder / f"{name}.png")
             made.append((name, img))
     print(f"wrote {len(made)} textures")
+    write_armor()
 
     if "--preview" in sys.argv and made:
         scale, pad, per_row = 5, 6, 12

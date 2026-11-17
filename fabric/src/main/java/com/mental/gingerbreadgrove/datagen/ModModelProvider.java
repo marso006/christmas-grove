@@ -99,5 +99,8 @@ public class ModModelProvider extends FabricModelProvider {
             }
             items.generateFlatItem(item.get(), ModelTemplates.FLAT_ITEM);
         }
+        for (Supplier<? extends Item> tool : ModItems.handheldItems()) {
+            items.generateFlatItem(tool.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        }
     }
 }

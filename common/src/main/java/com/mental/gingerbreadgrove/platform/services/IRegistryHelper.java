@@ -1,5 +1,6 @@
 package com.mental.gingerbreadgrove.platform.services;
 
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 
 import java.util.function.Supplier;
@@ -14,4 +15,7 @@ import java.util.function.Supplier;
 public interface IRegistryHelper {
 
     <T, R extends T> Supplier<R> register(Registry<T> registry, String name, Supplier<R> factory);
+
+    /** Like {@link #register} but returns a {@link Holder}, for APIs that take holders (e.g. armor materials). */
+    <T> Holder<T> registerForHolder(Registry<T> registry, String name, Supplier<T> factory);
 }
