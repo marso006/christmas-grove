@@ -28,3 +28,6 @@ common/src/generated/resources/.cache
 tools/textures/preview.png
 tools/textures/preview_gear.png
 tools/textures/preview_entities.png
+
+# python
+__pycache__/
