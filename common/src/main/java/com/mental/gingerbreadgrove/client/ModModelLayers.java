@@ -23,6 +23,7 @@ public final class ModModelLayers {
     public static final ModelLayerLocation SANTA_CLAUS = layer("santa_claus");
     public static final ModelLayerLocation COOKIE_SOLDIER = layer("cookie_soldier");
     public static final ModelLayerLocation REINDEER = layer("reindeer");
+    public static final ModelLayerLocation SANTA_HAT = layer("santa_hat");
 
     private ModModelLayers() {
     }
@@ -52,7 +53,7 @@ public final class ModModelLayers {
         return LayerDefinition.create(mesh, 64, 64);
     }
 
-    /** A round belly, a long beard and the pom-pom tip of his hat. */
+    /** A round belly and a long beard (his hat is drawn by SantaHatLayer). */
     public static LayerDefinition santaClaus() {
         MeshDefinition mesh = humanoid();
         PartDefinition root = mesh.getRoot();
@@ -61,8 +62,6 @@ public final class ModModelLayers {
         PartDefinition head = root.getChild("head");
         head.addOrReplaceChild("beard", CubeListBuilder.create().texOffs(24, 32)
                 .addBox(-4.0F, -3.0F, -4.6F, 8.0F, 6.0F, 1.0F), PartPose.ZERO);
-        head.addOrReplaceChild("hat_tip", CubeListBuilder.create().texOffs(0, 48)
-                .addBox(-2.0F, -12.0F, 1.0F, 4.0F, 4.0F, 4.0F), PartPose.rotation(-0.35F, 0.0F, 0.0F));
         return LayerDefinition.create(mesh, 64, 64);
     }
 

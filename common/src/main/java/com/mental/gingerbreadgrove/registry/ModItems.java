@@ -93,7 +93,9 @@ public final class ModItems {
 
     // ---- Santa Suit -----------------------------------------------------------------------------
 
-    public static final Supplier<ArmorItem> SANTA_HAT = santaSuit("santa_hat", ArmorItem.Type.HELMET);
+    public static final Supplier<ArmorItem> SANTA_HAT = flat(registerRaw("santa_hat", () -> new ArmorItem(
+            ModArmorMaterials.SANTA_HAT, ArmorItem.Type.HELMET,
+            new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(20)))));
     public static final Supplier<ArmorItem> SANTA_COAT = santaSuit("santa_coat", ArmorItem.Type.CHESTPLATE);
     public static final Supplier<ArmorItem> SANTA_TROUSERS = santaSuit("santa_trousers", ArmorItem.Type.LEGGINGS);
     public static final Supplier<ArmorItem> SANTA_BOOTS = santaSuit("santa_boots", ArmorItem.Type.BOOTS);

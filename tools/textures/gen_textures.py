@@ -1138,11 +1138,38 @@ def santa_layers() -> tuple[Image.Image, Image.Image]:
     return l1, l2
 
 
+def santa_hat() -> Image.Image:
+    """64x64 texture for the 3D Santa hat model (client/SantaHatModel.java): brim, three cone
+    segments, tip and pom-pom, each at its texOffs."""
+    rng = random.Random("santa_hat")
+    img = Image.new("RGBA", (64, 64), (0, 0, 0, 0))
+    fur = lambda: rng.choice([(252, 252, 252), (240, 240, 244), (230, 230, 236)])
+
+    def red_part(shade_top: float):
+        def paint(x, y, face, w, h):
+            c = rng.choice(SUIT_RED)
+            if face in ("right", "left", "front", "back") and y == 0:
+                c = shade(c, shade_top)            # a soft fold line at the top of each segment
+            if face == "bottom":
+                c = shade(c, 0.75)
+            return c
+        return paint
+
+    _box(img, 0, 0, 9, 3, 9, lambda x, y, face, w, h: fur())          # brim
+    _box(img, 0, 12, 8, 4, 8, red_part(1.08))                         # base
+    _box(img, 0, 24, 6, 4, 6, red_part(1.08))                         # mid
+    _box(img, 24, 24, 4, 3, 4, red_part(1.1))                         # top
+    _box(img, 40, 24, 2, 3, 2, red_part(1.1))                         # tip
+    _box(img, 0, 34, 3, 3, 3, lambda x, y, face, w, h: fur())         # pom-pom
+    return img
+
+
 def write_armor() -> None:
     ARMOR_DIR.mkdir(parents=True, exist_ok=True)
     l1, l2 = santa_layers()
     l1.save(ARMOR_DIR / "santa_suit_layer_1.png")
     l2.save(ARMOR_DIR / "santa_suit_layer_2.png")
+    santa_hat().save(ARMOR_DIR / "santa_hat_layer_1.png")
     print("wrote armor layers")
 
 

@@ -27,6 +27,14 @@ public final class ModArmorMaterials {
                     List.of(new ArmorMaterial.Layer(Constants.id("santa_suit"))),
                     0.5F, 0.0F));
 
+    /** Same stats as the suit, but its own texture: the hat is a separate 3D model (SantaHatModel). */
+    public static final Holder<ArmorMaterial> SANTA_HAT = Services.REGISTRY.registerForHolder(
+            BuiltInRegistries.ARMOR_MATERIAL, "santa_hat", () -> new ArmorMaterial(
+                    defense(2, 5, 6, 2), 22, SoundEvents.ARMOR_EQUIP_LEATHER,
+                    () -> Ingredient.of(Items.RED_WOOL),
+                    List.of(new ArmorMaterial.Layer(Constants.id("santa_hat"))),
+                    0.5F, 0.0F));
+
     private ModArmorMaterials() {
     }
 

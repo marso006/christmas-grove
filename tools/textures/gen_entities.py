@@ -179,17 +179,6 @@ def santa_claus() -> Image.Image:
             return WHITE if y >= 4 or x < 3 else jitter(rng, SKIN, 0.03)
         return WHITE
 
-    def hat(x, y, face, w, h):
-        if face == "bottom":
-            return None
-        if face == "top":
-            return red()
-        if y < 2:
-            return red()
-        if y == 2:
-            return WHITE                          # fur brim
-        return None
-
     def coat(x, y, face, w, h):
         if face in ("top", "bottom"):
             return red()
@@ -221,9 +210,8 @@ def santa_claus() -> Image.Image:
         return red()
 
     beard = lambda x, y, face, w, h: OFFWHITE if (x + y) % 3 == 0 else WHITE
-    tip = lambda x, y, face, w, h: WHITE if face == "top" else red()
-    return humanoid({"head": head, "hat": hat, "body": coat, "arm": arm, "leg": leg},
-                    [(0, 32, 9, 6, 2, belly), (24, 32, 8, 6, 1, beard), (0, 48, 4, 4, 4, tip)])
+    return humanoid({"head": head, "body": coat, "arm": arm, "leg": leg},
+                    [(0, 32, 9, 6, 2, belly), (24, 32, 8, 6, 1, beard)])
 
 
 def cookie_soldier() -> Image.Image:
