@@ -10,7 +10,7 @@ gingerbread forest with candy-cane trees, festive mobs, and gingerbread houses t
 
 ## Building
 
-Requires a JDK 21 or newer to run Gradle. The Java 21 toolchain used to compile is downloaded
+Requires JDK 25 to run Gradle (Fabric Loom 1.19 needs it). The Java 21 toolchain used to compile is downloaded
 automatically.
 
 ```sh
