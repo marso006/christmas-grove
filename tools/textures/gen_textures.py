@@ -1291,6 +1291,13 @@ def write_armor() -> None:
     l1.save(ARMOR_DIR / "santa_suit_layer_1.png")
     l2.save(ARMOR_DIR / "santa_suit_layer_2.png")
     santa_hat().save(ARMOR_DIR / "santa_hat_layer_1.png")
+    # 1.21.2+ equipment textures (referenced by models/equipment/*.json)
+    equipment = ASSETS / "textures/entity/equipment"
+    (equipment / "humanoid").mkdir(parents=True, exist_ok=True)
+    (equipment / "humanoid_leggings").mkdir(parents=True, exist_ok=True)
+    l1.save(equipment / "humanoid/santa_suit.png")
+    l2.save(equipment / "humanoid_leggings/santa_suit.png")
+    santa_hat().save(equipment / "humanoid/santa_hat.png")
     print("wrote armor layers")
 
 

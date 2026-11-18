@@ -2,7 +2,10 @@ package com.mental.christmasgrove.platform;
 
 import com.mental.christmasgrove.platform.services.IPlatformHelper;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.fml.ModList;
@@ -15,6 +18,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
 import java.util.HashMap;
+import java.util.Set;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.Map;
 import java.util.function.Supplier;
@@ -44,6 +49,11 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
                         .setValue(RotatedPillarBlock.AXIS, state.getValue(RotatedPillarBlock.AXIS)));
             }
         });
+    }
+
+    @Override
+    public <T extends BlockEntity> BlockEntityType<T> createBlockEntityType(BiFunction<BlockPos, BlockState, T> factory, Block... blocks) {
+        return new BlockEntityType<>(factory::apply, Set.of(blocks));
     }
 
     @Override

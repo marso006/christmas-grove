@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "wooden_fence",
   "key": {
-    "#": {
-      "item": "minecraft:stick"
-    },
-    "W": {
-      "item": "christmas_grove:festive_fir_planks"
-    }
+    "#": "minecraft:stick",
+    "W": "christmas_grove:festive_fir_planks"
   },
   "pattern": [
     "W#W",

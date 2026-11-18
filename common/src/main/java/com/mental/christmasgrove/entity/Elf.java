@@ -107,7 +107,7 @@ public class Elf extends AbstractVillager {
                 setTradingPlayer(player);
                 openTradingScreen(player, getDisplayName(), 1);
             }
-            return InteractionResult.sidedSuccess(level().isClientSide());
+            return InteractionResult.SUCCESS;
         }
         return super.mobInteract(player, hand);
     }

@@ -56,6 +56,6 @@ public class GumdropBushBlock extends SweetBerryBushBlock {
         BlockState picked = state.setValue(AGE, 1);
         level.setBlock(pos, picked, 2);
         level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, picked));
-        return InteractionResult.sidedSuccess(level.isClientSide());
+        return InteractionResult.SUCCESS;
     }
 }

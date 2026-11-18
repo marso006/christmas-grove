@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "G": {
-      "item": "christmas_grove:candy_glass"
-    }
+    "G": "christmas_grove:candy_glass"
   },
   "pattern": [
     "GGG",

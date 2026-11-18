@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "marshmallow",
   "ingredients": [
-    {
-      "item": "christmas_grove:marshmallow_block"
-    }
+    "christmas_grove:marshmallow_block"
   ],
   "result": {
     "count": 9,

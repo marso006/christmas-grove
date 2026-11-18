@@ -201,7 +201,7 @@ public final class ShowcaseDirector {
     }
 
     private static void camera(MinecraftServer server, double x, double y, double z, float yaw, float pitch) {
-        player(server).teleportTo(grove(server), x + 0.5, y, z + 0.5, yaw, pitch);
+        player(server).teleportTo(grove(server), x + 0.5, y, z + 0.5, java.util.Set.of(), yaw, pitch, true);
     }
 
     /** Clears a flat stage: air above, frosted ground at y-1, so scenes are built on level ground. */

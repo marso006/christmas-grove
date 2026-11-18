@@ -59,7 +59,7 @@ public class ModEntityLootProvider extends SimpleFabricLootTableProvider {
     }
 
     private static ResourceKey<LootTable> key(EntityType<?> type) {
-        return type.getDefaultLootTable();
+        return type.getDefaultLootTable().orElseThrow();
     }
 
     private static LootPool.Builder pool(ItemLike item, int min, int max) {

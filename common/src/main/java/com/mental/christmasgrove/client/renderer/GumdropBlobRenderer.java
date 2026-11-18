@@ -4,6 +4,7 @@ import com.mental.christmasgrove.Constants;
 import com.mental.christmasgrove.entity.GumdropBlob;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.SlimeRenderer;
+import net.minecraft.client.renderer.entity.state.SlimeRenderState;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.monster.Slime;
 
@@ -17,12 +18,30 @@ public class GumdropBlobRenderer extends SlimeRenderer {
             Constants.id("textures/entity/gumdrop_blob/grape.png"),
     };
 
+    /** The slime render state plus which flavour to draw. */
+    public static class State extends SlimeRenderState {
+        public int flavour;
+    }
+
     public GumdropBlobRenderer(EntityRendererProvider.Context context) {
         super(context);
     }
 
     @Override
-    public ResourceLocation getTextureLocation(Slime entity) {
-        return entity instanceof GumdropBlob blob ? FLAVOURS[blob.flavour()] : FLAVOURS[0];
+    public SlimeRenderState createRenderState() {
+        return new State();
+    }
+
+    @Override
+    public void extractRenderState(Slime entity, SlimeRenderState state, float partialTick) {
+        super.extractRenderState(entity, state, partialTick);
+        if (state instanceof State gumdrop && entity instanceof GumdropBlob blob) {
+            gumdrop.flavour = blob.flavour();
+        }
+    }
+
+    @Override
+    public ResourceLocation getTextureLocation(SlimeRenderState state) {
+        return FLAVOURS[state instanceof State gumdrop ? gumdrop.flavour : 0];
     }
 }

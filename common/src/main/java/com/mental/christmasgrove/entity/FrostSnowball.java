@@ -1,5 +1,6 @@
 package com.mental.christmasgrove.entity;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
@@ -18,8 +19,8 @@ public class FrostSnowball extends Snowball {
     @Override
     protected void onHitEntity(EntityHitResult result) {
         // Not super: vanilla snowballs deal no damage, and a zero-damage hit would eat the real one.
-        if (result.getEntity() instanceof LivingEntity target) {
-            target.hurt(damageSources().thrown(this, getOwner()), 2.0F);
+        if (result.getEntity() instanceof LivingEntity target && level() instanceof ServerLevel serverLevel) {
+            target.hurtServer(serverLevel, damageSources().thrown(this, getOwner()), 2.0F);
             target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 1), getOwner());
         }
     }

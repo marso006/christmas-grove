@@ -5,14 +5,15 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Mob;
 
 /**
- * A humanoid mob drawn with one texture at a fixed scale. Held items, armor-free heads and the
- * walking animation all come from {@link HumanoidMobRenderer}.
+ * A humanoid mob drawn with one texture at a fixed scale. Held items, heads and the walking animation
+ * all come from {@link HumanoidMobRenderer} (render-state based since 1.21.2).
  */
-public class SimpleHumanoidRenderer<T extends Mob> extends HumanoidMobRenderer<T, HumanoidModel<T>> {
+public class SimpleHumanoidRenderer<T extends Mob> extends HumanoidMobRenderer<T, HumanoidRenderState, HumanoidModel<HumanoidRenderState>> {
 
     private final ResourceLocation texture;
     private final float scale;
@@ -25,12 +26,17 @@ public class SimpleHumanoidRenderer<T extends Mob> extends HumanoidMobRenderer<T
     }
 
     @Override
-    public ResourceLocation getTextureLocation(T entity) {
+    public HumanoidRenderState createRenderState() {
+        return new HumanoidRenderState();
+    }
+
+    @Override
+    public ResourceLocation getTextureLocation(HumanoidRenderState state) {
         return texture;
     }
 
     @Override
-    protected void scale(T entity, PoseStack poseStack, float partialTick) {
+    protected void scale(HumanoidRenderState state, PoseStack poseStack) {
         poseStack.scale(scale, scale, scale);
     }
 }

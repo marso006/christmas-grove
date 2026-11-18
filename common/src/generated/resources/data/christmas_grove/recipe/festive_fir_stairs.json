@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wooden_stairs",
   "key": {
-    "#": {
-      "item": "christmas_grove:festive_fir_planks"
-    }
+    "#": "christmas_grove:festive_fir_planks"
   },
   "pattern": [
     "#  ",

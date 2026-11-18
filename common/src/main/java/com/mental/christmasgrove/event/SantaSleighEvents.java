@@ -1,5 +1,6 @@
 package com.mental.christmasgrove.event;
 
+import net.minecraft.world.entity.EntitySpawnReason;
 import com.mental.christmasgrove.entity.SantaSleigh;
 import com.mental.christmasgrove.registry.ModDimensions;
 import com.mental.christmasgrove.registry.ModEntities;
@@ -57,7 +58,7 @@ public final class SantaSleighEvents {
     /** Starts a sleigh far from the player, heading on a path that passes just beside them. */
     public static void flyOver(ServerPlayer player, boolean fromLetter) {
         ServerLevel level = player.serverLevel();
-        SantaSleigh sleigh = ModEntities.SANTA_SLEIGH.get().create(level);
+        SantaSleigh sleigh = ModEntities.SANTA_SLEIGH.get().create(level, EntitySpawnReason.MOB_SUMMONED);
         if (sleigh == null) {
             return;
         }

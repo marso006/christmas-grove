@@ -34,9 +34,9 @@ public class MarshmallowBlock extends Block {
     }
 
     @Override
-    public void updateEntityAfterFallOn(BlockGetter level, Entity entity) {
+    public void updateEntityMovementAfterFallOn(BlockGetter level, Entity entity) {
         if (entity.isSuppressingBounce()) {
-            super.updateEntityAfterFallOn(level, entity);
+            super.updateEntityMovementAfterFallOn(level, entity);
             return;
         }
         Vec3 motion = entity.getDeltaMovement();

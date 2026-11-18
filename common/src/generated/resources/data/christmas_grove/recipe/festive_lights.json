@@ -2,18 +2,10 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "item": "minecraft:blue_dye"
-    },
-    "G": {
-      "item": "minecraft:glowstone_dust"
-    },
-    "R": {
-      "item": "minecraft:red_dye"
-    },
-    "S": {
-      "item": "minecraft:string"
-    }
+    "B": "minecraft:blue_dye",
+    "G": "minecraft:glowstone_dust",
+    "R": "minecraft:red_dye",
+    "S": "minecraft:string"
   },
   "pattern": [
     "SSS",

@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "christmas_grove:peppermint_bricks"
-  },
+  "ingredient": "christmas_grove:peppermint_bricks",
   "result": {
     "count": 1,
     "id": "christmas_grove:peppermint_bricks_wall"

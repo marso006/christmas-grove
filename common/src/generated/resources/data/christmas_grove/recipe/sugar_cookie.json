@@ -2,18 +2,10 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:wheat"
-    },
-    {
-      "item": "minecraft:wheat"
-    },
-    {
-      "item": "minecraft:sugar"
-    },
-    {
-      "item": "minecraft:egg"
-    }
+    "minecraft:wheat",
+    "minecraft:wheat",
+    "minecraft:sugar",
+    "minecraft:egg"
   ],
   "result": {
     "count": 4,

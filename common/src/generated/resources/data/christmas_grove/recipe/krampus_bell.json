@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:bell"
-    },
-    {
-      "item": "minecraft:chain"
-    },
-    {
-      "item": "minecraft:coal"
-    }
+    "minecraft:bell",
+    "minecraft:chain",
+    "minecraft:coal"
   ],
   "result": {
     "count": 1,

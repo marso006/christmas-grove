@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "C": {
-      "item": "christmas_grove:sugar_crystal"
-    },
-    "S": {
-      "item": "christmas_grove:candy_cane"
-    }
+    "C": "christmas_grove:sugar_crystal",
+    "S": "christmas_grove:candy_cane"
   },
   "pattern": [
     " C ",

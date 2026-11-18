@@ -1,7 +1,7 @@
 package com.mental.christmasgrove.client;
 
 import com.mental.christmasgrove.Constants;
-import net.minecraft.client.model.HorseModel;
+import net.minecraft.client.model.AbstractEquineModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.PartPose;
@@ -101,7 +101,7 @@ public final class ModModelLayers {
 
     /** The horse mesh with branching antlers on the head. */
     public static LayerDefinition reindeer() {
-        MeshDefinition mesh = HorseModel.createBodyMesh(CubeDeformation.NONE);
+        MeshDefinition mesh = AbstractEquineModel.createBodyMesh(CubeDeformation.NONE);
         PartDefinition head = mesh.getRoot().getChild("head_parts").getChild("head");
         for (int side : new int[]{-1, 1}) {
             float x = side > 0 ? 1.5F : -2.5F;          // main beam just inside each ear

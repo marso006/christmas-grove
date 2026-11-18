@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "christmas_grove:sugar_crystal_block"
-    }
+    "christmas_grove:sugar_crystal_block"
   ],
   "result": {
     "count": 9,

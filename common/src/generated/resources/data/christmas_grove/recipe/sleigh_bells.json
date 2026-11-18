@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "G": {
-      "item": "minecraft:gold_ingot"
-    },
-    "L": {
-      "item": "minecraft:leather"
-    },
-    "N": {
-      "item": "minecraft:gold_nugget"
-    }
+    "G": "minecraft:gold_ingot",
+    "L": "minecraft:leather",
+    "N": "minecraft:gold_nugget"
   },
   "pattern": [
     "NLN",

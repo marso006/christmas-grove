@@ -10,6 +10,6 @@ public class SantaClausRenderer extends SimpleHumanoidRenderer<SantaClaus> {
 
     public SantaClausRenderer(EntityRendererProvider.Context context) {
         super(context, ModModelLayers.SANTA_CLAUS, Constants.id("textures/entity/santa_claus.png"), 1.05F);
-        addLayer(new SantaHatLayer<>(this, context.getModelSet()));
+        addLayer(new SantaHatLayer(this, context.getModelSet()));
     }
 }

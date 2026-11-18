@@ -3,38 +3,48 @@ package com.mental.christmasgrove.registry;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.component.Consumable;
+import net.minecraft.world.item.component.Consumables;
+import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
 
-/** Food values. Sweets are quick to eat but not very filling; the drinks give short buffs. */
+/**
+ * Food values. Since 1.21.2 the hunger values ({@link FoodProperties}) and what happens when you eat
+ * (effects, eating time: {@link Consumable}) are separate components.
+ */
 public final class ModFoods {
 
-    public static final FoodProperties GUMDROPS = new FoodProperties.Builder()
-            .nutrition(2).saturationModifier(0.1F).fast().build();
-    public static final FoodProperties CANDY_CANE = new FoodProperties.Builder()
-            .nutrition(3).saturationModifier(0.2F)
-            .effect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200, 0), 1.0F).build();
-    public static final FoodProperties GINGERBREAD_COOKIE = new FoodProperties.Builder()
-            .nutrition(4).saturationModifier(0.3F).build();
-    public static final FoodProperties SUGAR_COOKIE = new FoodProperties.Builder()
-            .nutrition(3).saturationModifier(0.3F).fast().build();
-    public static final FoodProperties MARSHMALLOW = new FoodProperties.Builder()
-            .nutrition(2).saturationModifier(0.2F).fast().build();
-    public static final FoodProperties ROASTED_MARSHMALLOW = new FoodProperties.Builder()
-            .nutrition(5).saturationModifier(0.6F).build();
-    public static final FoodProperties HOT_COCOA = new FoodProperties.Builder()
-            .nutrition(4).saturationModifier(0.5F).alwaysEdible()
-            .effect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1200, 0), 1.0F)
-            .effect(new MobEffectInstance(MobEffects.DIG_SPEED, 1200, 0), 1.0F).build();
-    public static final FoodProperties EGGNOG = new FoodProperties.Builder()
-            .nutrition(5).saturationModifier(0.6F).alwaysEdible()
-            .effect(new MobEffectInstance(MobEffects.REGENERATION, 200, 0), 1.0F).build();
-    public static final FoodProperties FRUITCAKE_SLICE = new FoodProperties.Builder()
-            .nutrition(6).saturationModifier(0.8F).build();
+    public static final FoodProperties GUMDROPS = food(2, 0.1F, false);
+    public static final FoodProperties CANDY_CANE = food(3, 0.2F, false);
+    public static final FoodProperties GINGERBREAD_COOKIE = food(4, 0.3F, false);
+    public static final FoodProperties SUGAR_COOKIE = food(3, 0.3F, false);
+    public static final FoodProperties MARSHMALLOW = food(2, 0.2F, false);
+    public static final FoodProperties ROASTED_MARSHMALLOW = food(5, 0.6F, false);
+    public static final FoodProperties HOT_COCOA = food(4, 0.5F, true);
+    public static final FoodProperties EGGNOG = food(5, 0.6F, true);
+    public static final FoodProperties FRUITCAKE_SLICE = food(6, 0.8F, false);
+    public static final FoodProperties GINGERBREAD_HEART = food(4, 1.0F, true);
+
+    /** Sweets are quick to eat. */
+    public static final Consumable QUICK = Consumables.defaultFood().consumeSeconds(0.8F).build();
+    public static final Consumable CANDY_CANE_EFFECT = Consumables.defaultFood()
+            .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200, 0))).build();
+    public static final Consumable HOT_COCOA_EFFECT = Consumables.defaultDrink()
+            .onConsume(new ApplyStatusEffectsConsumeEffect(java.util.List.of(
+                    new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1200, 0),
+                    new MobEffectInstance(MobEffects.DIG_SPEED, 1200, 0)))).build();
+    public static final Consumable EGGNOG_EFFECT = Consumables.defaultDrink()
+            .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.REGENERATION, 200, 0))).build();
     /** Rare drop from Gingerbread Men: two extra hearts for two minutes. */
-    public static final FoodProperties GINGERBREAD_HEART = new FoodProperties.Builder()
-            .nutrition(4).saturationModifier(1.0F).alwaysEdible()
-            .effect(new MobEffectInstance(MobEffects.HEALTH_BOOST, 2400, 0), 1.0F)
-            .effect(new MobEffectInstance(MobEffects.ABSORPTION, 2400, 1), 1.0F).build();
+    public static final Consumable GINGERBREAD_HEART_EFFECT = Consumables.defaultFood()
+            .onConsume(new ApplyStatusEffectsConsumeEffect(java.util.List.of(
+                    new MobEffectInstance(MobEffects.HEALTH_BOOST, 2400, 0),
+                    new MobEffectInstance(MobEffects.ABSORPTION, 2400, 1)))).build();
 
     private ModFoods() {
+    }
+
+    private static FoodProperties food(int nutrition, float saturation, boolean alwaysEdible) {
+        FoodProperties.Builder builder = new FoodProperties.Builder().nutrition(nutrition).saturationModifier(saturation);
+        return (alwaysEdible ? builder.alwaysEdible() : builder).build();
     }
 }

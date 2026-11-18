@@ -57,7 +57,7 @@ public class CookieJarBlock extends BaseEntityBlock {
             player.openMenu(jar);
             level.playSound(null, pos, SoundEvents.DECORATED_POT_INSERT, SoundSource.BLOCKS, 0.8F, 1.4F);
         }
-        return InteractionResult.sidedSuccess(level.isClientSide());
+        return InteractionResult.SUCCESS;
     }
 
     @Override

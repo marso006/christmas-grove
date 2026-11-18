@@ -6,7 +6,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -23,7 +23,7 @@ public class NiceListItem extends Item {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+    public InteractionResult use(Level level, Player player, InteractionHand hand) {
         if (player instanceof ServerPlayer serverPlayer) {
             int score = NaughtyNice.score(serverPlayer);
             NaughtyNice.Standing standing = NaughtyNice.standing(score);
@@ -32,11 +32,11 @@ public class NiceListItem extends Item {
                 case NICE -> ChatFormatting.GREEN;
                 case NEUTRAL -> ChatFormatting.YELLOW;
             };
-            player.sendSystemMessage(Component.translatable(
+            serverPlayer.sendSystemMessage(Component.translatable(
                     "item.christmas_grove.nice_list." + standing.name().toLowerCase(), score).withStyle(colour));
         }
         player.playSound(SoundEvents.BOOK_PAGE_TURN, 1.0F, 1.0F);
-        return InteractionResultHolder.sidedSuccess(player.getItemInHand(hand), level.isClientSide());
+        return InteractionResult.SUCCESS;
     }
 
     @Override

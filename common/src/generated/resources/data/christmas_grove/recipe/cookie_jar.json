@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "C": {
-      "item": "christmas_grove:gingerbread_cookie"
-    },
-    "G": {
-      "item": "minecraft:glass"
-    },
-    "S": {
-      "tag": "minecraft:wooden_slabs"
-    }
+    "C": "christmas_grove:gingerbread_cookie",
+    "G": "minecraft:glass",
+    "S": "#minecraft:wooden_slabs"
   },
   "pattern": [
     " S ",

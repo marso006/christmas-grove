@@ -62,9 +62,9 @@ public class GingerbreadMan extends PathfinderMob {
         if (level() instanceof ServerLevel server) {
             // Caught! It crumbles into cookies.
             int cookies = 2 + random.nextInt(2);
-            spawnAtLocation(new ItemStack(ModItems.GINGERBREAD_COOKIE.get(), cookies));
+            spawnAtLocation(server, new ItemStack(ModItems.GINGERBREAD_COOKIE.get(), cookies));
             if (random.nextInt(20) == 0) {
-                spawnAtLocation(new ItemStack(ModItems.GINGERBREAD_HEART.get()));
+                spawnAtLocation(server, new ItemStack(ModItems.GINGERBREAD_HEART.get()));
             }
             server.sendParticles(new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(ModItems.GINGERBREAD_COOKIE.get())),
                     getX(), getY() + 0.5, getZ(), 20, 0.2, 0.3, 0.2, 0.08);
@@ -72,7 +72,7 @@ public class GingerbreadMan extends PathfinderMob {
             player.displayClientMessage(Component.translatable("entity.christmas_grove.gingerbread_man.caught"), true);
             discard();
         }
-        return InteractionResult.sidedSuccess(level().isClientSide());
+        return InteractionResult.SUCCESS;
     }
 
     @Override

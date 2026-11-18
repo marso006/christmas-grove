@@ -1,5 +1,7 @@
 package com.mental.christmasgrove.entity;
 
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EntitySpawnReason;
 import com.mental.christmasgrove.naughty.NaughtyNice;
 import com.mental.christmasgrove.registry.ModEntities;
 import net.minecraft.core.particles.ParticleTypes;
@@ -110,7 +112,7 @@ public class SantaSleigh extends Entity {
             level.addFreshEntity(coal);
             return;
         }
-        PresentDrop present = ModEntities.PRESENT_DROP.get().create(level);
+        PresentDrop present = ModEntities.PRESENT_DROP.get().create(level, EntitySpawnReason.MOB_SUMMONED);
         if (present != null) {
             present.setColour(random.nextInt(3));
             present.moveTo(getX(), getY() - 1.5, getZ(), random.nextFloat() * 360, 0);
@@ -118,6 +120,11 @@ public class SantaSleigh extends Entity {
             level.addFreshEntity(present);
             level.playSound(null, getX(), getY(), getZ(), SoundEvents.BUNDLE_DROP_CONTENTS, SoundSource.NEUTRAL, 1.5F, 1.2F);
         }
+    }
+
+    @Override
+    public boolean hurtServer(ServerLevel level, DamageSource source, float amount) {
+        return false; // the sleigh can't be hurt
     }
 
     @Override

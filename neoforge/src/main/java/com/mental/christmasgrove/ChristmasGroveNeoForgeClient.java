@@ -5,13 +5,14 @@ import com.mental.christmasgrove.client.SantaHatModel;
 import com.mental.christmasgrove.registry.ModItems;
 import com.mental.christmasgrove.registry.ModBlocks;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.Model;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
+import net.minecraft.world.item.equipment.EquipmentModel;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -41,9 +42,15 @@ public final class ChristmasGroveNeoForgeClient {
         // The Santa Hat is a real 3D hat; NeoForge copies the head pose and uses the hat material's texture.
         event.registerItem(new IClientItemExtensions() {
             @Override
-            public HumanoidModel<?> getHumanoidArmorModel(LivingEntity entity, ItemStack stack, EquipmentSlot slot,
-                                                          HumanoidModel<?> original) {
-                return SantaHatModel.armorModel();
+            @SuppressWarnings({"unchecked", "rawtypes"})
+            public Model getHumanoidArmorModel(ItemStack stack, EquipmentModel.LayerType layer, Model original) {
+                HumanoidModel<HumanoidRenderState> hat = SantaHatModel.armorModel();
+                if (original instanceof HumanoidModel wearer) {
+                    wearer.copyPropertiesTo(hat); // follow the wearer's head
+                }
+                hat.setAllVisible(false);
+                hat.head.visible = true;
+                return hat;
             }
         }, ModItems.SANTA_HAT.get());
     }

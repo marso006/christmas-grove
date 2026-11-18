@@ -126,7 +126,7 @@ final class ModBiomes {
         Features(HolderGetter<PlacedFeature> placed, HolderGetter<ConfiguredWorldCarver<?>> carvers) {
             this.placed = placed;
             this.builder = new BiomeGenerationSettings.Builder(placed, carvers);
-            builder.addCarver(GenerationStep.Carving.AIR, Carvers.CAVE);
+            builder.addCarver(carvers.getOrThrow(Carvers.CAVE));
             add(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_SUGAR_CRYSTAL, ModPlacedFeatures.ORE_CINNAMON);
         }
 

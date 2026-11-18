@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "christmas_grove:frosting"
-    }
+    "#": "christmas_grove:frosting"
   },
   "pattern": [
     "##",

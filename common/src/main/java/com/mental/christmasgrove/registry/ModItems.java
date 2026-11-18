@@ -1,6 +1,5 @@
 package com.mental.christmasgrove.registry;
 
-import com.mental.christmasgrove.item.DrinkItem;
 import com.mental.christmasgrove.item.KrampusBellItem;
 import com.mental.christmasgrove.item.LetterToSantaItem;
 import com.mental.christmasgrove.item.NiceListItem;
@@ -12,21 +11,26 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.minecraft.world.item.equipment.ArmorType;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
+/**
+ * Every item in the mod. Since Minecraft 1.21.2 an item's properties must carry its registry id, so
+ * each registration receives fresh {@code Item.Properties} with the id already set.
+ */
 public final class ModItems {
 
     /** Every item this mod adds (block items included), in registration order, for the creative tab. */
@@ -42,76 +46,66 @@ public final class ModItems {
         // Block items first. Touching ModBlocks here guarantees every block is registered before any
         // item that refers to one (Fabric registers immediately, so order matters there).
         ModBlocks.blocksWithItems().forEach((name, block) ->
-                registerRaw(name, () -> new BlockItem(block.get(), new Item.Properties())));
+                registerRaw(name, p -> new BlockItem(block.get(), p.useBlockDescriptionPrefix())));
     }
 
     /** The way into the dimension (and back). */
     public static final Supplier<SnowGlobeItem> SNOW_GLOBE = flat(registerRaw("snow_globe",
-            () -> new SnowGlobeItem(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON))));
+            p -> new SnowGlobeItem(p.stacksTo(1).rarity(Rarity.UNCOMMON))));
 
     // ---- Materials ------------------------------------------------------------------------------
 
-    public static final Supplier<Item> SUGAR_CRYSTAL = simple("sugar_crystal", new Item.Properties());
-    public static final Supplier<Item> CINNAMON_STICK = simple("cinnamon_stick", new Item.Properties());
-    public static final Supplier<Item> MUG = simple("mug", new Item.Properties().stacksTo(16));
-    public static final Supplier<NiceListItem> NICE_LIST = flat(registerRaw("nice_list",
-            () -> new NiceListItem(new Item.Properties().stacksTo(1))));
+    public static final Supplier<Item> SUGAR_CRYSTAL = simple("sugar_crystal", p -> p);
+    public static final Supplier<Item> CINNAMON_STICK = simple("cinnamon_stick", p -> p);
+    public static final Supplier<Item> MUG = simple("mug", p -> p.stacksTo(16));
+    public static final Supplier<NiceListItem> NICE_LIST = flat(registerRaw("nice_list", p -> new NiceListItem(p.stacksTo(1))));
     public static final Supplier<KrampusBellItem> KRAMPUS_BELL = flat(registerRaw("krampus_bell",
-            () -> new KrampusBellItem(new Item.Properties().stacksTo(1).rarity(Rarity.RARE))));
-    public static final Supplier<Item> KRAMPUS_HORN = simple("krampus_horn", new Item.Properties().rarity(Rarity.EPIC));
+            p -> new KrampusBellItem(p.stacksTo(1).rarity(Rarity.RARE))));
+    public static final Supplier<Item> KRAMPUS_HORN = simple("krampus_horn", p -> p.rarity(Rarity.EPIC));
     /** Send it and Santa's sleigh flies over, dropping presents. */
     public static final Supplier<LetterToSantaItem> LETTER_TO_SANTA = flat(registerRaw("letter_to_santa",
-            () -> new LetterToSantaItem(new Item.Properties().stacksTo(16).rarity(Rarity.UNCOMMON))));
+            p -> new LetterToSantaItem(p.stacksTo(16).rarity(Rarity.UNCOMMON))));
     /** Put them on a tamed reindeer and it glides when ridden. */
-    public static final Supplier<Item> SLEIGH_BELLS = simple("sleigh_bells", new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON));
+    public static final Supplier<Item> SLEIGH_BELLS = simple("sleigh_bells", p -> p.stacksTo(1).rarity(Rarity.UNCOMMON));
 
     // ---- Food -----------------------------------------------------------------------------------
 
     /** Also plants a Gumdrop Bush, the way sweet berries plant a berry bush. */
     public static final Supplier<Item> GUMDROPS = flat(registerRaw("gumdrops",
-            () -> new ItemNameBlockItem(ModBlocks.GUMDROP_BUSH.get(), new Item.Properties().food(ModFoods.GUMDROPS))));
-    public static final Supplier<Item> CANDY_CANE = simple("candy_cane", new Item.Properties().food(ModFoods.CANDY_CANE));
-    public static final Supplier<Item> GINGERBREAD_COOKIE = simple("gingerbread_cookie",
-            new Item.Properties().food(ModFoods.GINGERBREAD_COOKIE));
-    public static final Supplier<Item> SUGAR_COOKIE = simple("sugar_cookie", new Item.Properties().food(ModFoods.SUGAR_COOKIE));
-    public static final Supplier<Item> MARSHMALLOW = simple("marshmallow", new Item.Properties().food(ModFoods.MARSHMALLOW));
-    public static final Supplier<Item> ROASTED_MARSHMALLOW = simple("roasted_marshmallow",
-            new Item.Properties().food(ModFoods.ROASTED_MARSHMALLOW));
-    public static final Supplier<Item> FRUITCAKE_SLICE = simple("fruitcake_slice",
-            new Item.Properties().food(ModFoods.FRUITCAKE_SLICE));
+            p -> new BlockItem(ModBlocks.GUMDROP_BUSH.get(), p.food(ModFoods.GUMDROPS, ModFoods.QUICK))));
+    public static final Supplier<Item> CANDY_CANE = simple("candy_cane", p -> p.food(ModFoods.CANDY_CANE, ModFoods.CANDY_CANE_EFFECT));
+    public static final Supplier<Item> GINGERBREAD_COOKIE = simple("gingerbread_cookie", p -> p.food(ModFoods.GINGERBREAD_COOKIE));
+    public static final Supplier<Item> SUGAR_COOKIE = simple("sugar_cookie", p -> p.food(ModFoods.SUGAR_COOKIE, ModFoods.QUICK));
+    public static final Supplier<Item> MARSHMALLOW = simple("marshmallow", p -> p.food(ModFoods.MARSHMALLOW, ModFoods.QUICK));
+    public static final Supplier<Item> ROASTED_MARSHMALLOW = simple("roasted_marshmallow", p -> p.food(ModFoods.ROASTED_MARSHMALLOW));
+    public static final Supplier<Item> FRUITCAKE_SLICE = simple("fruitcake_slice", p -> p.food(ModFoods.FRUITCAKE_SLICE));
     public static final Supplier<Item> GINGERBREAD_HEART = simple("gingerbread_heart",
-            new Item.Properties().food(ModFoods.GINGERBREAD_HEART).rarity(Rarity.RARE));
-    public static final Supplier<DrinkItem> HOT_COCOA = flat(registerRaw("hot_cocoa",
-            () -> new DrinkItem(MUG, new Item.Properties().food(ModFoods.HOT_COCOA).stacksTo(16))));
-    public static final Supplier<DrinkItem> EGGNOG = flat(registerRaw("eggnog",
-            () -> new DrinkItem(() -> Items.GLASS_BOTTLE, new Item.Properties().food(ModFoods.EGGNOG).stacksTo(16))));
+            p -> p.food(ModFoods.GINGERBREAD_HEART, ModFoods.GINGERBREAD_HEART_EFFECT).rarity(Rarity.RARE));
+    /** Drinks leave their container behind. */
+    public static final Supplier<Item> HOT_COCOA = simple("hot_cocoa",
+            p -> p.food(ModFoods.HOT_COCOA, ModFoods.HOT_COCOA_EFFECT).usingConvertsTo(MUG.get()).stacksTo(16));
+    public static final Supplier<Item> EGGNOG = simple("eggnog",
+            p -> p.food(ModFoods.EGGNOG, ModFoods.EGGNOG_EFFECT).usingConvertsTo(Items.GLASS_BOTTLE).stacksTo(16));
 
     // ---- Tools (candy-cane handles, sugar-crystal heads) ----------------------------------------
 
     public static final Supplier<SwordItem> CANDY_CANE_SWORD = handheld(registerRaw("candy_cane_sword",
-            () -> new SwordItem(ModTiers.SUGAR_CRYSTAL, new Item.Properties()
-                    .attributes(SwordItem.createAttributes(ModTiers.SUGAR_CRYSTAL, 3, -2.4F)))));
+            p -> new SwordItem(ModTiers.SUGAR_CRYSTAL, 3.0F, -2.4F, p)));
     public static final Supplier<PickaxeItem> SUGAR_CRYSTAL_PICKAXE = handheld(registerRaw("sugar_crystal_pickaxe",
-            () -> new PickaxeItem(ModTiers.SUGAR_CRYSTAL, new Item.Properties()
-                    .attributes(DiggerItem.createAttributes(ModTiers.SUGAR_CRYSTAL, 1.0F, -2.8F)))));
+            p -> new PickaxeItem(ModTiers.SUGAR_CRYSTAL, 1.0F, -2.8F, p)));
     public static final Supplier<AxeItem> SUGAR_CRYSTAL_AXE = handheld(registerRaw("sugar_crystal_axe",
-            () -> new AxeItem(ModTiers.SUGAR_CRYSTAL, new Item.Properties()
-                    .attributes(DiggerItem.createAttributes(ModTiers.SUGAR_CRYSTAL, 5.5F, -3.1F)))));
+            p -> new AxeItem(ModTiers.SUGAR_CRYSTAL, 5.5F, -3.1F, p)));
     public static final Supplier<ShovelItem> SUGAR_CRYSTAL_SHOVEL = handheld(registerRaw("sugar_crystal_shovel",
-            () -> new ShovelItem(ModTiers.SUGAR_CRYSTAL, new Item.Properties()
-                    .attributes(DiggerItem.createAttributes(ModTiers.SUGAR_CRYSTAL, 1.5F, -3.0F)))));
+            p -> new ShovelItem(ModTiers.SUGAR_CRYSTAL, 1.5F, -3.0F, p)));
     public static final Supplier<HoeItem> SUGAR_CRYSTAL_HOE = handheld(registerRaw("sugar_crystal_hoe",
-            () -> new HoeItem(ModTiers.SUGAR_CRYSTAL, new Item.Properties()
-                    .attributes(DiggerItem.createAttributes(ModTiers.SUGAR_CRYSTAL, -2.5F, -0.5F)))));
+            p -> new HoeItem(ModTiers.SUGAR_CRYSTAL, -2.5F, -0.5F, p)));
 
     // ---- Santa Suit -----------------------------------------------------------------------------
 
-    public static final Supplier<ArmorItem> SANTA_HAT = flat(registerRaw("santa_hat", () -> new ArmorItem(
-            ModArmorMaterials.SANTA_HAT, ArmorItem.Type.HELMET,
-            new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(20)))));
-    public static final Supplier<ArmorItem> SANTA_COAT = santaSuit("santa_coat", ArmorItem.Type.CHESTPLATE);
-    public static final Supplier<ArmorItem> SANTA_TROUSERS = santaSuit("santa_trousers", ArmorItem.Type.LEGGINGS);
-    public static final Supplier<ArmorItem> SANTA_BOOTS = santaSuit("santa_boots", ArmorItem.Type.BOOTS);
+    public static final Supplier<ArmorItem> SANTA_HAT = armor("santa_hat", ModArmorMaterials.SANTA_HAT, ArmorType.HELMET);
+    public static final Supplier<ArmorItem> SANTA_COAT = armor("santa_coat", ModArmorMaterials.SANTA_SUIT, ArmorType.CHESTPLATE);
+    public static final Supplier<ArmorItem> SANTA_TROUSERS = armor("santa_trousers", ModArmorMaterials.SANTA_SUIT, ArmorType.LEGGINGS);
+    public static final Supplier<ArmorItem> SANTA_BOOTS = armor("santa_boots", ModArmorMaterials.SANTA_SUIT, ArmorType.BOOTS);
 
     // ---- Spawn eggs ----------------------------------------------------------------------------
 
@@ -128,25 +122,21 @@ public final class ModItems {
     private ModItems() {
     }
 
+    // ---- Helpers --------------------------------------------------------------------------------
+
+    /** A plain item; {@code properties} adds to the (id-carrying) default properties. */
+    private static Supplier<Item> simple(String name, Function<Item.Properties, Item.Properties> properties) {
+        return flat(registerRaw(name, p -> new Item(properties.apply(p))));
+    }
+
+    private static Supplier<ArmorItem> armor(String name, ArmorMaterial material, ArmorType type) {
+        return flat(registerRaw(name, p -> new ArmorItem(material, type, p)));
+    }
+
     private static Supplier<Item> spawnEgg(String entity, Supplier<? extends EntityType<? extends Mob>> type, int background, int highlight) {
-        Supplier<Item> egg = registerRaw(entity + "_spawn_egg",
-                () -> Services.ENTITIES.createSpawnEgg(type, background, highlight, new Item.Properties()));
+        Supplier<Item> egg = registerRaw(entity + "_spawn_egg", p -> Services.ENTITIES.createSpawnEgg(type, background, highlight, p));
         SPAWN_EGGS.add(egg);
         return egg;
-    }
-
-    private static Supplier<ArmorItem> santaSuit(String name, ArmorItem.Type type) {
-        return flat(registerRaw(name, () -> new ArmorItem(ModArmorMaterials.SANTA_SUIT, type,
-                new Item.Properties().durability(type.getDurability(20)))));
-    }
-
-    private static <I extends Item> Supplier<I> handheld(Supplier<I> item) {
-        HANDHELD.add(item);
-        return item;
-    }
-
-    private static Supplier<Item> simple(String name, Item.Properties properties) {
-        return flat(registerRaw(name, () -> new Item(properties)));
     }
 
     private static <I extends Item> Supplier<I> flat(Supplier<I> item) {
@@ -154,8 +144,15 @@ public final class ModItems {
         return item;
     }
 
-    private static <I extends Item> Supplier<I> registerRaw(String name, Supplier<I> factory) {
-        Supplier<I> item = Services.REGISTRY.register(BuiltInRegistries.ITEM, name, factory);
+    private static <I extends Item> Supplier<I> handheld(Supplier<I> item) {
+        HANDHELD.add(item);
+        return item;
+    }
+
+    /** Registers an item; the constructor receives fresh properties with the registry id set. */
+    private static <I extends Item> Supplier<I> registerRaw(String name, Function<Item.Properties, I> constructor) {
+        Supplier<I> item = Services.REGISTRY.registerKeyed(BuiltInRegistries.ITEM, name,
+                key -> constructor.apply(new Item.Properties().setId(key)));
         ALL.add(item);
         return item;
     }

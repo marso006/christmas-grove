@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "D": {
-      "item": "minecraft:glowstone_dust"
-    },
-    "G": {
-      "item": "minecraft:gold_ingot"
-    }
+    "D": "minecraft:glowstone_dust",
+    "G": "minecraft:gold_ingot"
   },
   "pattern": [
     " G ",

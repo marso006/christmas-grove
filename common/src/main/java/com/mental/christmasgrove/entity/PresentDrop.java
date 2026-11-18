@@ -1,5 +1,6 @@
 package com.mental.christmasgrove.entity;
 
+import net.minecraft.world.damagesource.DamageSource;
 import com.mental.christmasgrove.block.GiftBoxBlock;
 import com.mental.christmasgrove.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
@@ -81,11 +82,16 @@ public class PresentDrop extends Entity {
         if (level.getBlockState(pos).canBeReplaced() && box.canSurvive(level, pos) && !level.getBlockState(pos.below()).isAir()) {
             level.setBlockAndUpdate(pos, box); // a fresh gift box block is a surprise by default
         } else {
-            spawnAtLocation(GiftBoxBlock.surprise(new ItemStack(box.getBlock())));
+            spawnAtLocation(level, GiftBoxBlock.surprise(new ItemStack(box.getBlock())));
         }
         level.playSound(null, pos, SoundEvents.WOOL_PLACE, SoundSource.BLOCKS, 1.0F, 1.2F);
         level.sendParticles(ParticleTypes.HAPPY_VILLAGER, getX(), getY() + 0.5, getZ(), 12, 0.4, 0.3, 0.4, 0.02);
         discard();
+    }
+
+    @Override
+    public boolean hurtServer(ServerLevel level, DamageSource source, float amount) {
+        return false; // presents can't be shot down
     }
 
     @Override

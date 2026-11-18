@@ -4,9 +4,7 @@
   "cookingtime": 100,
   "experience": 1.0,
   "group": "sugar_crystal",
-  "ingredient": {
-    "item": "christmas_grove:sugar_crystal_ore"
-  },
+  "ingredient": "christmas_grove:sugar_crystal_ore",
   "result": {
     "id": "christmas_grove:sugar_crystal"
   }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "christmas_grove:gingerbread_bricks_slab_from_gingerbread_bricks_stonecutting"
+        "recipe": "minecraft:gingerbread_bricks_slab_from_gingerbread_bricks_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "christmas_grove:gingerbread_bricks_slab_from_gingerbread_bricks_stonecutting"
+      "minecraft:gingerbread_bricks_slab_from_gingerbread_bricks_stonecutting"
     ]
   }
 }

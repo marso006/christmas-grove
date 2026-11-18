@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "christmas_grove:peppermint_bricks"
-    }
+    "#": "christmas_grove:peppermint_bricks"
   },
   "pattern": [
     "###"

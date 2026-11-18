@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "christmas_grove:peppermint_stone_stairs_from_peppermint_stone_stonecutting"
+        "recipe": "minecraft:peppermint_stone_stairs_from_peppermint_stone_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "christmas_grove:peppermint_stone_stairs_from_peppermint_stone_stonecutting"
+      "minecraft:peppermint_stone_stairs_from_peppermint_stone_stonecutting"
     ]
   }
 }

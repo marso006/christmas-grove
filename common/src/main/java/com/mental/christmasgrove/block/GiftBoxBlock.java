@@ -91,7 +91,7 @@ public class GiftBoxBlock extends BaseEntityBlock {
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         if (!(level instanceof ServerLevel server) || !(level.getBlockEntity(pos) instanceof GiftBoxBlockEntity box)) {
-            return InteractionResult.sidedSuccess(level.isClientSide());
+            return InteractionResult.SUCCESS;
         }
         if (player.isShiftKeyDown()) {
             wrap(box, player);

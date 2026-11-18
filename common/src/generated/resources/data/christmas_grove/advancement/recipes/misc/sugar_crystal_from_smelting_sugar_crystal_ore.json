@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "christmas_grove:sugar_crystal_from_smelting_sugar_crystal_ore"
+        "recipe": "minecraft:sugar_crystal_from_smelting_sugar_crystal_ore"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "christmas_grove:sugar_crystal_from_smelting_sugar_crystal_ore"
+      "minecraft:sugar_crystal_from_smelting_sugar_crystal_ore"
     ]
   }
 }

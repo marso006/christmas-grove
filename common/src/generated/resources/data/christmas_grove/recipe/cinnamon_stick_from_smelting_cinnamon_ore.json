@@ -4,9 +4,7 @@
   "cookingtime": 200,
   "experience": 0.5,
   "group": "cinnamon_stick",
-  "ingredient": {
-    "item": "christmas_grove:cinnamon_ore"
-  },
+  "ingredient": "christmas_grove:cinnamon_ore",
   "result": {
     "id": "christmas_grove:cinnamon_stick"
   }

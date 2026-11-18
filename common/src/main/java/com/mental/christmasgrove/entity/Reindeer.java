@@ -1,5 +1,6 @@
 package com.mental.christmasgrove.entity;
 
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.server.level.ServerPlayer;
 import com.mental.christmasgrove.naughty.NaughtyNice;
 import com.mental.christmasgrove.registry.ModEntities;
@@ -60,7 +61,7 @@ public class Reindeer extends AbstractHorse {
                 stack.consume(1, player);
                 playSound(SoundEvents.NOTE_BLOCK_BELL.value(), 1.0F, 1.8F);
             }
-            return InteractionResult.sidedSuccess(level().isClientSide());
+            return InteractionResult.SUCCESS;
         }
         return super.mobInteract(player, hand);
     }
@@ -90,10 +91,10 @@ public class Reindeer extends AbstractHorse {
     }
 
     @Override
-    protected void dropEquipment() {
-        super.dropEquipment();
+    protected void dropEquipment(ServerLevel level) {
+        super.dropEquipment(level);
         if (hasSleighBells()) {
-            spawnAtLocation(new ItemStack(ModItems.SLEIGH_BELLS.get()));
+            spawnAtLocation(level, new ItemStack(ModItems.SLEIGH_BELLS.get()));
         }
     }
 
@@ -135,7 +136,7 @@ public class Reindeer extends AbstractHorse {
     @Override
     @Nullable
     public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob partner) {
-        return ModEntities.REINDEER.get().create(level);
+        return ModEntities.REINDEER.get().create(level, EntitySpawnReason.BREEDING);
     }
 
     @Override

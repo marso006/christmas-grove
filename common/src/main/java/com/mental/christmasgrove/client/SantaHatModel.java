@@ -10,7 +10,7 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 
 /**
  * A proper 3D Santa hat: a white fur brim around the head, a red cone in three segments that flops
@@ -23,7 +23,7 @@ public final class SantaHatModel {
 
     public static final ResourceLocation TEXTURE = Constants.id("textures/models/armor/santa_hat_layer_1.png");
 
-    private static HumanoidModel<LivingEntity> armorModel;
+    private static HumanoidModel<HumanoidRenderState> armorModel;
 
     private SantaHatModel() {
     }
@@ -47,8 +47,8 @@ public final class SantaHatModel {
         tip.addOrReplaceChild("pompom", CubeListBuilder.create().texOffs(0, 34)
                 .addBox(-1.5F, -2.0F, -1.5F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.2F)), PartPose.offset(0.0F, -3.0F, 0.0F));
 
-        // HumanoidModel needs every part to exist; the rest stay empty.
-        root.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
+        // HumanoidModel needs every part to exist; the rest stay empty. Since 1.21.2 "hat" lives inside "head".
+        head.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
         root.addOrReplaceChild("body", CubeListBuilder.create(), PartPose.ZERO);
         root.addOrReplaceChild("right_arm", CubeListBuilder.create(), PartPose.offset(-5.0F, 2.0F, 0.0F));
         root.addOrReplaceChild("left_arm", CubeListBuilder.create(), PartPose.offset(5.0F, 2.0F, 0.0F));
@@ -58,7 +58,7 @@ public final class SantaHatModel {
     }
 
     /** The shared model used when a player or mob wears the Santa Hat (baked on first use). */
-    public static HumanoidModel<LivingEntity> armorModel() {
+    public static HumanoidModel<HumanoidRenderState> armorModel() {
         if (armorModel == null) {
             armorModel = new HumanoidModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(ModModelLayers.SANTA_HAT));
         }

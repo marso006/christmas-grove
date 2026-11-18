@@ -3,9 +3,7 @@
   "category": "building",
   "group": "bark",
   "key": {
-    "#": {
-      "item": "christmas_grove:candy_cane_log"
-    }
+    "#": "christmas_grove:candy_cane_log"
   },
   "pattern": [
     "##",

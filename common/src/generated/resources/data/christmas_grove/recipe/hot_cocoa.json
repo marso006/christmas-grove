@@ -2,18 +2,10 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "christmas_grove:mug"
-    },
-    {
-      "item": "minecraft:cocoa_beans"
-    },
-    {
-      "item": "minecraft:sugar"
-    },
-    {
-      "item": "minecraft:milk_bucket"
-    }
+    "christmas_grove:mug",
+    "minecraft:cocoa_beans",
+    "minecraft:sugar",
+    "minecraft:milk_bucket"
   ],
   "result": {
     "count": 1,

@@ -1,5 +1,6 @@
 package com.mental.christmasgrove.entity;
 
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.server.level.ServerPlayer;
 import com.mental.christmasgrove.naughty.NaughtyNice;
@@ -51,7 +52,7 @@ public class PeppermintPup extends Wolf {
                     level().broadcastEntityEvent(this, (byte) 6); // smoke
                 }
             }
-            return InteractionResult.sidedSuccess(level().isClientSide());
+            return InteractionResult.SUCCESS;
         }
         return super.mobInteract(player, hand);
     }
@@ -59,7 +60,7 @@ public class PeppermintPup extends Wolf {
     @Override
     @Nullable
     public Wolf getBreedOffspring(ServerLevel level, AgeableMob partner) {
-        PeppermintPup pup = ModEntities.PEPPERMINT_PUP.get().create(level);
+        PeppermintPup pup = ModEntities.PEPPERMINT_PUP.get().create(level, EntitySpawnReason.BREEDING);
         if (pup != null && isTame() && getOwnerUUID() != null) {
             pup.setOwnerUUID(getOwnerUUID());
             pup.setTame(true, true);

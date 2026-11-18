@@ -12,16 +12,16 @@ import java.util.function.Supplier;
 public final class ModBlockEntities {
 
     public static final Supplier<BlockEntityType<GiftBoxBlockEntity>> GIFT_BOX = Services.REGISTRY.register(
-            BuiltInRegistries.BLOCK_ENTITY_TYPE, "gift_box", () -> BlockEntityType.Builder.of(GiftBoxBlockEntity::new,
-                    ModBlocks.RED_GIFT_BOX.get(), ModBlocks.GREEN_GIFT_BOX.get(), ModBlocks.BLUE_GIFT_BOX.get()).build(null));
+            BuiltInRegistries.BLOCK_ENTITY_TYPE, "gift_box", () -> Services.PLATFORM.createBlockEntityType(GiftBoxBlockEntity::new,
+                    ModBlocks.RED_GIFT_BOX.get(), ModBlocks.GREEN_GIFT_BOX.get(), ModBlocks.BLUE_GIFT_BOX.get()));
 
     public static final Supplier<BlockEntityType<CookieJarBlockEntity>> COOKIE_JAR = Services.REGISTRY.register(
             BuiltInRegistries.BLOCK_ENTITY_TYPE, "cookie_jar",
-            () -> BlockEntityType.Builder.of(CookieJarBlockEntity::new, ModBlocks.COOKIE_JAR.get()).build(null));
+            () -> Services.PLATFORM.createBlockEntityType(CookieJarBlockEntity::new, ModBlocks.COOKIE_JAR.get()));
 
     public static final Supplier<BlockEntityType<AdventCalendarBlockEntity>> ADVENT_CALENDAR = Services.REGISTRY.register(
             BuiltInRegistries.BLOCK_ENTITY_TYPE, "advent_calendar",
-            () -> BlockEntityType.Builder.of(AdventCalendarBlockEntity::new, ModBlocks.ADVENT_CALENDAR.get()).build(null));
+            () -> Services.PLATFORM.createBlockEntityType(AdventCalendarBlockEntity::new, ModBlocks.ADVENT_CALENDAR.get()));
 
     private ModBlockEntities() {
     }

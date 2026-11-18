@@ -20,7 +20,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
@@ -88,7 +88,7 @@ public class Krampus extends Monster {
             player.displayClientMessage(Component.translatable("entity.christmas_grove.krampus.peaceful"), true);
             return;
         }
-        Krampus krampus = ModEntities.KRAMPUS.get().create(level);
+        Krampus krampus = ModEntities.KRAMPUS.get().create(level, EntitySpawnReason.MOB_SUMMONED);
         if (krampus == null) {
             return;
         }
@@ -97,7 +97,7 @@ public class Krampus extends Monster {
         int z = (int) (player.getZ() + Math.sin(angle) * 12);
         int y = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x, z);
         krampus.moveTo(x + 0.5, y, z + 0.5, player.getYRot() + 180, 0);
-        krampus.finalizeSpawn(level, level.getCurrentDifficultyAt(new BlockPos(x, y, z)), MobSpawnType.EVENT, null);
+        krampus.finalizeSpawn(level, level.getCurrentDifficultyAt(new BlockPos(x, y, z)), EntitySpawnReason.EVENT, null);
         krampus.setTarget(player);
         level.addFreshEntity(krampus);
         level.sendParticles(ParticleTypes.LARGE_SMOKE, x + 0.5, y + 1, z + 0.5, 60, 0.6, 1.2, 0.6, 0.02);
@@ -109,8 +109,8 @@ public class Krampus extends Monster {
     }
 
     @Override
-    protected void customServerAiStep() {
-        super.customServerAiStep();
+    protected void customServerAiStep(ServerLevel serverLevel) {
+        super.customServerAiStep(serverLevel);
         bossEvent.setProgress(getHealth() / getMaxHealth());
 
         LivingEntity target = getTarget();
@@ -149,10 +149,10 @@ public class Krampus extends Monster {
         }
         playSound(SoundEvents.EVOKER_PREPARE_SUMMON, 2.0F, 0.6F);
         for (int i = 0; i < 3; i++) {
-            EvilSnowman snowman = ModEntities.EVIL_SNOWMAN.get().create(server);
+            EvilSnowman snowman = ModEntities.EVIL_SNOWMAN.get().create(server, EntitySpawnReason.MOB_SUMMONED);
             if (snowman != null) {
                 snowman.moveTo(getX() + random.nextInt(7) - 3, getY(), getZ() + random.nextInt(7) - 3, 0, 0);
-                snowman.finalizeSpawn(server, server.getCurrentDifficultyAt(blockPosition()), MobSpawnType.MOB_SUMMONED, null);
+                snowman.finalizeSpawn(server, server.getCurrentDifficultyAt(blockPosition()), EntitySpawnReason.MOB_SUMMONED, null);
                 snowman.setTarget(getTarget());
                 server.addFreshEntity(snowman);
                 server.sendParticles(ParticleTypes.SNOWFLAKE, snowman.getX(), snowman.getY() + 1, snowman.getZ(), 20, 0.3, 0.6, 0.3, 0.02);

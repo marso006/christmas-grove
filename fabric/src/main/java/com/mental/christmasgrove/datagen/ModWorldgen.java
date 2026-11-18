@@ -107,7 +107,7 @@ final class ModWorldgen {
                                 .add(ModBlocks.GREEN_GIFT_BOX.get().defaultBlockState(), 1)
                                 .add(ModBlocks.BLUE_GIFT_BOX.get().defaultBlockState(), 1))),
                         BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE,
-                                BlockPredicate.matchesBlocks(Direction.DOWN.getNormal(),
+                                BlockPredicate.matchesBlocks(Direction.DOWN.getUnitVec3i(),
                                         ModBlocks.FROSTED_GINGERBREAD.get(), ModBlocks.FROSTING.get())))));
 
         FeatureUtils.register(context, ModConfiguredFeatures.GIANT_CANDY_CANE, ModWorldgenTypes.GIANT_CANDY_CANE.get());

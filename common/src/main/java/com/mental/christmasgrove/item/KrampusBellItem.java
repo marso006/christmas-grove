@@ -7,7 +7,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -24,15 +24,15 @@ public class KrampusBellItem extends Item {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+    public InteractionResult use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         level.playSound(null, player.blockPosition(), SoundEvents.BELL_BLOCK, SoundSource.PLAYERS, 2.0F, 0.5F);
         if (player instanceof ServerPlayer serverPlayer) {
             Krampus.summonFor(serverPlayer, true);
             stack.consume(1, player);
-            player.getCooldowns().addCooldown(this, 200);
+            player.getCooldowns().addCooldown(player.getItemInHand(hand), 200);
         }
-        return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
+        return InteractionResult.SUCCESS;
     }
 
     @Override

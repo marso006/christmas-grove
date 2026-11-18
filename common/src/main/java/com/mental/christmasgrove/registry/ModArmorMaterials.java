@@ -1,54 +1,41 @@
 package com.mental.christmasgrove.registry;
 
 import com.mental.christmasgrove.Constants;
-import com.mental.christmasgrove.platform.Services;
-import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.minecraft.world.item.equipment.ArmorType;
 
 import java.util.EnumMap;
-import java.util.List;
+import java.util.Map;
 
 /**
- * Armor materials. The Santa Suit protects about as well as iron, is very enchantable, and (through
- * the #freeze_immune_wearables tag) stops you freezing in powder snow.
- * Textures: assets/christmas_grove/textures/models/armor/santa_suit_layer_1.png and _layer_2.png.
+ * Armor materials (plain records since 1.21.2). The Santa Suit protects about as well as iron, is
+ * very enchantable, and (through #freeze_immune_wearables) stops you freezing in powder snow.
+ * Each material points at an equipment model: assets/christmas_grove/models/equipment/&lt;name&gt;.json.
  */
 public final class ModArmorMaterials {
 
-    public static final Holder<ArmorMaterial> SANTA_SUIT = Services.REGISTRY.registerForHolder(
-            BuiltInRegistries.ARMOR_MATERIAL, "santa_suit", () -> new ArmorMaterial(
-                    defense(2, 5, 6, 2), 22, SoundEvents.ARMOR_EQUIP_LEATHER,
-                    () -> Ingredient.of(Items.RED_WOOL),
-                    List.of(new ArmorMaterial.Layer(Constants.id("santa_suit"))),
-                    0.5F, 0.0F));
-
-    /** Same stats as the suit, but its own texture: the hat is a separate 3D model (SantaHatModel). */
-    public static final Holder<ArmorMaterial> SANTA_HAT = Services.REGISTRY.registerForHolder(
-            BuiltInRegistries.ARMOR_MATERIAL, "santa_hat", () -> new ArmorMaterial(
-                    defense(2, 5, 6, 2), 22, SoundEvents.ARMOR_EQUIP_LEATHER,
-                    () -> Ingredient.of(Items.RED_WOOL),
-                    List.of(new ArmorMaterial.Layer(Constants.id("santa_hat"))),
-                    0.5F, 0.0F));
+    public static final ArmorMaterial SANTA_SUIT = new ArmorMaterial(20, defense(2, 5, 6, 2), 22,
+            SoundEvents.ARMOR_EQUIP_LEATHER, 0.5F, 0.0F, ItemTags.WOOL, Constants.id("santa_suit"));
+    /** Same stats as the suit, but its own model: the 3D hat (see SantaHatModel). */
+    public static final ArmorMaterial SANTA_HAT = new ArmorMaterial(20, defense(2, 5, 6, 2), 22,
+            SoundEvents.ARMOR_EQUIP_LEATHER, 0.5F, 0.0F, ItemTags.WOOL, Constants.id("santa_hat"));
 
     private ModArmorMaterials() {
     }
 
-    private static EnumMap<ArmorItem.Type, Integer> defense(int boots, int leggings, int chestplate, int helmet) {
-        EnumMap<ArmorItem.Type, Integer> map = new EnumMap<>(ArmorItem.Type.class);
-        map.put(ArmorItem.Type.BOOTS, boots);
-        map.put(ArmorItem.Type.LEGGINGS, leggings);
-        map.put(ArmorItem.Type.CHESTPLATE, chestplate);
-        map.put(ArmorItem.Type.HELMET, helmet);
-        map.put(ArmorItem.Type.BODY, chestplate);
+    private static Map<ArmorType, Integer> defense(int boots, int leggings, int chestplate, int helmet) {
+        EnumMap<ArmorType, Integer> map = new EnumMap<>(ArmorType.class);
+        map.put(ArmorType.BOOTS, boots);
+        map.put(ArmorType.LEGGINGS, leggings);
+        map.put(ArmorType.CHESTPLATE, chestplate);
+        map.put(ArmorType.HELMET, helmet);
+        map.put(ArmorType.BODY, chestplate);
         return map;
     }
 
-    /** Forces class loading so the static fields above register. Call before ModItems. */
+    /** Kept so ChristmasGrove.init stays the same across versions. */
     public static void init() {
     }
 }

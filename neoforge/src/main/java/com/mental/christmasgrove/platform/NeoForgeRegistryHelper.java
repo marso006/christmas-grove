@@ -10,6 +10,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class NeoForgeRegistryHelper implements IRegistryHelper {
@@ -24,6 +25,11 @@ public class NeoForgeRegistryHelper implements IRegistryHelper {
     @Override
     public <T, R extends T> Supplier<R> register(Registry<T> registry, String name, Supplier<R> factory) {
         return deferredFor(registry, name).register(name, factory);
+    }
+
+    @Override
+    public <T, R extends T> Supplier<R> registerKeyed(Registry<T> registry, String name, Function<ResourceKey<T>, R> factory) {
+        return deferredFor(registry, name).register(name, id -> factory.apply(ResourceKey.create(registry.key(), id)));
     }
 
     @Override

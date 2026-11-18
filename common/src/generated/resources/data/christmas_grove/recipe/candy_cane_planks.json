@@ -3,9 +3,7 @@
   "category": "building",
   "group": "planks",
   "ingredients": [
-    {
-      "tag": "christmas_grove:candy_cane_logs"
-    }
+    "#christmas_grove:candy_cane_logs"
   ],
   "result": {
     "count": 4,

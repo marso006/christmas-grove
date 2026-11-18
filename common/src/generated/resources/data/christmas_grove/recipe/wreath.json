@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "H": {
-      "item": "christmas_grove:holly"
-    },
-    "L": {
-      "item": "christmas_grove:festive_fir_leaves"
-    }
+    "H": "christmas_grove:holly",
+    "L": "christmas_grove:festive_fir_leaves"
   },
   "pattern": [
     "LLL",

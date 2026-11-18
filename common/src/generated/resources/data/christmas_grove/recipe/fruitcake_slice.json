@@ -2,21 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:wheat"
-    },
-    {
-      "item": "minecraft:sugar"
-    },
-    {
-      "item": "minecraft:egg"
-    },
-    {
-      "item": "minecraft:sweet_berries"
-    },
-    {
-      "item": "christmas_grove:gumdrops"
-    }
+    "minecraft:wheat",
+    "minecraft:sugar",
+    "minecraft:egg",
+    "minecraft:sweet_berries",
+    "christmas_grove:gumdrops"
   ],
   "result": {
     "count": 4,

@@ -3,9 +3,7 @@
   "category": "food",
   "cookingtime": 200,
   "experience": 0.35,
-  "ingredient": {
-    "item": "christmas_grove:marshmallow"
-  },
+  "ingredient": "christmas_grove:marshmallow",
   "result": {
     "id": "christmas_grove:roasted_marshmallow"
   }

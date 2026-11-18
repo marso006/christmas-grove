@@ -25,7 +25,7 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
@@ -41,7 +41,7 @@ import java.util.function.Supplier;
 public class AdventCalendarBlock extends BaseEntityBlock {
 
     public static final MapCodec<AdventCalendarBlock> CODEC = simpleCodec(AdventCalendarBlock::new);
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
     /** Day 1..25 (index 0 unused). */
     private static final List<Supplier<List<ItemStack>>> GIFTS = List.of(
@@ -110,7 +110,7 @@ public class AdventCalendarBlock extends BaseEntityBlock {
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         if (!(level instanceof ServerLevel server) || !(level.getBlockEntity(pos) instanceof AdventCalendarBlockEntity calendar)) {
-            return InteractionResult.sidedSuccess(level.isClientSide());
+            return InteractionResult.SUCCESS;
         }
         LocalDate today = LocalDate.now();
         if (today.getMonth() != Month.DECEMBER) {

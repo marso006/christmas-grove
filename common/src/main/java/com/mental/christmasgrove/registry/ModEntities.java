@@ -70,7 +70,7 @@ public final class ModEntities {
     }
 
     private static <T extends Entity> Supplier<EntityType<T>> register(String name, EntityType.Builder<T> builder) {
-        return Services.REGISTRY.register(BuiltInRegistries.ENTITY_TYPE, name, () -> builder.build(name));
+        return Services.REGISTRY.registerKeyed(BuiltInRegistries.ENTITY_TYPE, name, builder::build);
     }
 
     /** Forces class loading so the static fields above register. Call before ModItems (spawn eggs). */

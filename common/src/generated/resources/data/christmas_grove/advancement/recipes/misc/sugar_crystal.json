@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "christmas_grove:sugar_crystal"
+        "recipe": "minecraft:sugar_crystal"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "christmas_grove:sugar_crystal"
+      "minecraft:sugar_crystal"
     ]
   }
 }

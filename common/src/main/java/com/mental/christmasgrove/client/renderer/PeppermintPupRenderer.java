@@ -3,8 +3,8 @@ package com.mental.christmasgrove.client.renderer;
 import com.mental.christmasgrove.Constants;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.WolfRenderer;
+import net.minecraft.client.renderer.entity.state.WolfRenderState;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.animal.Wolf;
 
 /** The wolf renderer (collar, armor, sitting pose) with peppermint-striped fur. */
 public class PeppermintPupRenderer extends WolfRenderer {
@@ -17,7 +17,7 @@ public class PeppermintPupRenderer extends WolfRenderer {
     }
 
     @Override
-    public ResourceLocation getTextureLocation(Wolf entity) {
-        return entity.isAngry() ? ANGRY : TEXTURE;
+    public ResourceLocation getTextureLocation(WolfRenderState state) {
+        return state.isAngry ? ANGRY : TEXTURE;
     }
 }

@@ -31,6 +31,8 @@ public final class ModTags {
     public static final class Items {
         public static final TagKey<Item> SUGAR_CRYSTAL_ORES = tag("sugar_crystal_ores");
         public static final TagKey<Item> CINNAMON_ORES = tag("cinnamon_ores");
+        /** What repairs Sugar Crystal tools. */
+        public static final TagKey<Item> SUGAR_CRYSTAL_TOOL_MATERIALS = tag("sugar_crystal_tool_materials");
 
         private Items() {
         }

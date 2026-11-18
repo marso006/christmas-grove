@@ -15,7 +15,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 
 public class ChristmasGroveFabricClient implements ClientModInitializer {
 
@@ -26,8 +26,8 @@ public class ChristmasGroveFabricClient implements ClientModInitializer {
         ModBlocks.translucentBlocks().forEach(block -> BlockRenderLayerMap.INSTANCE.putBlock(block.get(), RenderType.translucent()));
 
         // The Santa Hat is a real 3D hat, not a reshaped helmet.
-        ArmorRenderer.register((poseStack, buffers, stack, entity, slot, light, wearerModel) -> {
-            HumanoidModel<LivingEntity> hat = SantaHatModel.armorModel();
+        ArmorRenderer.register((poseStack, buffers, stack, state, slot, light, wearerModel) -> {
+            HumanoidModel<HumanoidRenderState> hat = SantaHatModel.armorModel();
             wearerModel.copyPropertiesTo(hat);
             hat.setAllVisible(false);
             hat.head.visible = true;

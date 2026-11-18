@@ -8,7 +8,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.item.ItemStack;
@@ -36,7 +36,7 @@ public class GumdropBlob extends Slime {
         return Math.floorMod(getUUID().hashCode(), 4);
     }
 
-    public static boolean checkGumdropSpawnRules(EntityType<GumdropBlob> type, ServerLevelAccessor level, MobSpawnType reason,
+    public static boolean checkGumdropSpawnRules(EntityType<GumdropBlob> type, ServerLevelAccessor level, EntitySpawnReason reason,
                                                  BlockPos pos, RandomSource random) {
         return level.getDifficulty() != Difficulty.PEACEFUL
                 && Monster.isDarkEnoughToSpawn(level, pos, random)
