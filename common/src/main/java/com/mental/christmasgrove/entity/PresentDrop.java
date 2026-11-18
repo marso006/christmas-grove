@@ -101,7 +101,7 @@ public class PresentDrop extends Entity {
 
     @Override
     protected void readAdditionalSaveData(CompoundTag tag) {
-        setColour(tag.getInt("Colour"));
+        setColour(tag.getIntOr("Colour", 0));
     }
 
     @Override

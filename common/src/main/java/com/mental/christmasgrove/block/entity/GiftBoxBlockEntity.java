@@ -1,9 +1,11 @@
 package com.mental.christmasgrove.block.entity;
 
+import net.minecraft.core.UUIDUtil;
 import com.mental.christmasgrove.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
@@ -99,9 +101,9 @@ public class GiftBoxBlockEntity extends BaseContainerBlockEntity {
         super.loadAdditional(tag, registries);
         items = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
         ContainerHelper.loadAllItems(tag, items, registries);
-        surprise = !tag.contains(SURPRISE_TAG) || tag.getBoolean(SURPRISE_TAG);
-        wrapper = tag.hasUUID(WRAPPER_TAG) ? tag.getUUID(WRAPPER_TAG) : null;
-        wrapperName = tag.getString(WRAPPER_NAME_TAG);
+        surprise = !tag.contains(SURPRISE_TAG) || tag.getBooleanOr(SURPRISE_TAG, false);
+        wrapper = tag.read(WRAPPER_TAG, UUIDUtil.CODEC).orElse(null);
+        wrapperName = tag.getStringOr(WRAPPER_NAME_TAG, "");
     }
 
     @Override
@@ -110,7 +112,7 @@ public class GiftBoxBlockEntity extends BaseContainerBlockEntity {
         ContainerHelper.saveAllItems(tag, items, registries);
         tag.putBoolean(SURPRISE_TAG, surprise);
         if (wrapper != null) {
-            tag.putUUID(WRAPPER_TAG, wrapper);
+            tag.store(WRAPPER_TAG, UUIDUtil.CODEC, wrapper);
             tag.putString(WRAPPER_NAME_TAG, wrapperName);
         }
     }
@@ -118,13 +120,13 @@ public class GiftBoxBlockEntity extends BaseContainerBlockEntity {
     // ---- Item components (what the dropped box item remembers) -----------------------------------
 
     @Override
-    protected void applyImplicitComponents(DataComponentInput input) {
+    protected void applyImplicitComponents(DataComponentGetter input) {
         super.applyImplicitComponents(input);
         input.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).copyInto(items);
         CompoundTag data = input.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-        surprise = data.getBoolean(SURPRISE_TAG);
-        wrapper = data.hasUUID(WRAPPER_TAG) ? data.getUUID(WRAPPER_TAG) : null;
-        wrapperName = data.getString(WRAPPER_NAME_TAG);
+        surprise = data.getBooleanOr(SURPRISE_TAG, false);
+        wrapper = data.read(WRAPPER_TAG, UUIDUtil.CODEC).orElse(null);
+        wrapperName = data.getStringOr(WRAPPER_NAME_TAG, "");
     }
 
     @Override
@@ -136,7 +138,7 @@ public class GiftBoxBlockEntity extends BaseContainerBlockEntity {
             data.putBoolean(SURPRISE_TAG, true);
         }
         if (wrapper != null) {
-            data.putUUID(WRAPPER_TAG, wrapper);
+            data.store(WRAPPER_TAG, UUIDUtil.CODEC, wrapper);
             data.putString(WRAPPER_NAME_TAG, wrapperName);
         }
         if (!data.isEmpty()) {

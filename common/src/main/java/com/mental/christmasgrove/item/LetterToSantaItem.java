@@ -1,5 +1,7 @@
 package com.mental.christmasgrove.item;
 
+import net.minecraft.world.item.component.TooltipDisplay;
+import java.util.function.Consumer;
 import com.mental.christmasgrove.event.SantaSleighEvents;
 import com.mental.christmasgrove.naughty.NaughtyNice;
 import net.minecraft.ChatFormatting;
@@ -44,7 +46,7 @@ public class LetterToSantaItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
-        tooltip.add(Component.translatable("item.christmas_grove.letter_to_santa.tooltip").withStyle(ChatFormatting.GRAY));
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> tooltip, TooltipFlag flag) {
+        tooltip.accept(Component.translatable("item.christmas_grove.letter_to_santa.tooltip").withStyle(ChatFormatting.GRAY));
     }
 }

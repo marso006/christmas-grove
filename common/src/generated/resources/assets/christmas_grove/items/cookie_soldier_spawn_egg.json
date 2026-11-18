@@ -1,16 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "minecraft:item/template_spawn_egg",
-    "tints": [
-      {
-        "type": "minecraft:constant",
-        "value": -6673878
-      },
-      {
-        "type": "minecraft:constant",
-        "value": -2051984
-      }
-    ]
+    "model": "christmas_grove:item/cookie_soldier_spawn_egg"
   }
 }

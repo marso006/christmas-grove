@@ -27,11 +27,11 @@ public final class ModFoods {
     /** Sweets are quick to eat. */
     public static final Consumable QUICK = Consumables.defaultFood().consumeSeconds(0.8F).build();
     public static final Consumable CANDY_CANE_EFFECT = Consumables.defaultFood()
-            .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200, 0))).build();
+            .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.SPEED, 200, 0))).build();
     public static final Consumable HOT_COCOA_EFFECT = Consumables.defaultDrink()
             .onConsume(new ApplyStatusEffectsConsumeEffect(java.util.List.of(
-                    new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1200, 0),
-                    new MobEffectInstance(MobEffects.DIG_SPEED, 1200, 0)))).build();
+                    new MobEffectInstance(MobEffects.SPEED, 1200, 0),
+                    new MobEffectInstance(MobEffects.HASTE, 1200, 0)))).build();
     public static final Consumable EGGNOG_EFFECT = Consumables.defaultDrink()
             .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.REGENERATION, 200, 0))).build();
     /** Rare drop from Gingerbread Men: two extra hearts for two minutes. */

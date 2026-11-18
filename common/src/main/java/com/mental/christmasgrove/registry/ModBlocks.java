@@ -23,7 +23,9 @@ import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.FlowerBlock;
 import net.minecraft.world.level.block.IronBarsBlock;
-import net.minecraft.world.level.block.LeavesBlock;
+import net.minecraft.world.level.block.UntintedParticleLeavesBlock;
+import net.minecraft.core.particles.ColorParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SaplingBlock;
@@ -106,16 +108,16 @@ public final class ModBlocks {
             ModTreeGrowers.FESTIVE_FIR, BlockSetType.SPRUCE, WoodType.SPRUCE);
 
     /** Fir leaves strung with fairy lights. They glow, and decorated firs mix them in randomly. */
-    public static final Supplier<Block> RED_LIT_FIR_LEAVES = cutout(register("red_lit_festive_fir_leaves", LeavesBlock::new, ModBlocks::litLeaves));
-    public static final Supplier<Block> GOLD_LIT_FIR_LEAVES = cutout(register("gold_lit_festive_fir_leaves", LeavesBlock::new, ModBlocks::litLeaves));
-    public static final Supplier<Block> BLUE_LIT_FIR_LEAVES = cutout(register("blue_lit_festive_fir_leaves", LeavesBlock::new, ModBlocks::litLeaves));
+    public static final Supplier<Block> RED_LIT_FIR_LEAVES = cutout(register("red_lit_festive_fir_leaves", ModBlocks::leaves, ModBlocks::litLeaves));
+    public static final Supplier<Block> GOLD_LIT_FIR_LEAVES = cutout(register("gold_lit_festive_fir_leaves", ModBlocks::leaves, ModBlocks::litLeaves));
+    public static final Supplier<Block> BLUE_LIT_FIR_LEAVES = cutout(register("blue_lit_festive_fir_leaves", ModBlocks::leaves, ModBlocks::litLeaves));
 
     // ---- Plants ---------------------------------------------------------------------------------
 
     /** Grows gumdrops like a sweet berry bush, without the thorns. Planted by placing gumdrops. */
     public static final Supplier<Block> GUMDROP_BUSH = cutout(registerNoItem("gumdrop_bush", GumdropBushBlock::new,
             () -> Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH).mapColor(MapColor.COLOR_PINK)));
-    public static final Supplier<Block> LOLLIPOP_FLOWER = cutout(register("lollipop_flower", p -> new FlowerBlock(MobEffects.MOVEMENT_SPEED, 6.0F, p),
+    public static final Supplier<Block> LOLLIPOP_FLOWER = cutout(register("lollipop_flower", p -> new FlowerBlock(MobEffects.SPEED, 6.0F, p),
             () -> Properties.ofFullCopy(Blocks.POPPY).mapColor(MapColor.COLOR_PINK)));
     public static final Supplier<Block> POINSETTIA = cutout(register("poinsettia", p -> new FlowerBlock(MobEffects.REGENERATION, 4.0F, p),
             () -> Properties.ofFullCopy(Blocks.POPPY).mapColor(MapColor.COLOR_RED)));
@@ -173,6 +175,11 @@ public final class ModBlocks {
 
     private static Properties litLeaves() {
         return Properties.ofFullCopy(Blocks.SPRUCE_LEAVES).lightLevel(state -> 9);
+    }
+
+    /** Fir leaves (not biome tinted) that drop dark green leaf particles. */
+    private static Block leaves(Properties properties) {
+        return new UntintedParticleLeavesBlock(0.01F, ColorParticleOption.create(ParticleTypes.TINTED_LEAVES, 0xFF2E6B3A), properties);
     }
 
     private static Properties giftBox(MapColor colour) {
@@ -240,7 +247,7 @@ public final class ModBlocks {
                 () -> Properties.ofFullCopy(Blocks.OAK_BUTTON));
         Supplier<Block> pressurePlate = register(name + "_pressure_plate", p -> new PressurePlateBlock(setType, p),
                 () -> Properties.ofFullCopy(Blocks.OAK_PRESSURE_PLATE).mapColor(barkColour));
-        Supplier<Block> leaves = cutout(register(leavesName, LeavesBlock::new,
+        Supplier<Block> leaves = cutout(register(leavesName, ModBlocks::leaves,
                 () -> Properties.ofFullCopy(Blocks.OAK_LEAVES).mapColor(leafColour)));
         Supplier<Block> sapling = cutout(register(name + "_sapling", p -> new SaplingBlock(grower, p),
                 () -> Properties.ofFullCopy(Blocks.OAK_SAPLING).mapColor(leafColour)));

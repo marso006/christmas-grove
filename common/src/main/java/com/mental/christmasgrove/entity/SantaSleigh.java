@@ -115,7 +115,7 @@ public class SantaSleigh extends Entity {
         PresentDrop present = ModEntities.PRESENT_DROP.get().create(level, EntitySpawnReason.MOB_SUMMONED);
         if (present != null) {
             present.setColour(random.nextInt(3));
-            present.moveTo(getX(), getY() - 1.5, getZ(), random.nextFloat() * 360, 0);
+            present.snapTo(getX(), getY() - 1.5, getZ(), random.nextFloat() * 360, 0);
             present.setDeltaMovement(getDeltaMovement().scale(0.3));
             level.addFreshEntity(present);
             level.playSound(null, getX(), getY(), getZ(), SoundEvents.BUNDLE_DROP_CONTENTS, SoundSource.NEUTRAL, 1.5F, 1.2F);
@@ -144,10 +144,10 @@ public class SantaSleigh extends Entity {
 
     @Override
     protected void readAdditionalSaveData(CompoundTag tag) {
-        life = tag.getInt("Life");
-        drops = tag.getInt("Drops");
+        life = tag.getIntOr("Life", 0);
+        drops = tag.getIntOr("Drops", 0);
         if (tag.contains("DirX")) {
-            launch(new Vec3(tag.getDouble("DirX"), 0, tag.getDouble("DirZ")));
+            launch(new Vec3(tag.getDoubleOr("DirX", 0.0), 0, tag.getDoubleOr("DirZ", 0.0)));
         }
     }
 

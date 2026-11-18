@@ -86,7 +86,7 @@ public class Reindeer extends AbstractHorse {
     }
 
     @Override
-    public boolean causeFallDamage(float distance, float multiplier, DamageSource source) {
+    public boolean causeFallDamage(double distance, float multiplier, DamageSource source) {
         return !hasSleighBells() && super.causeFallDamage(distance, multiplier, source);
     }
 
@@ -107,7 +107,7 @@ public class Reindeer extends AbstractHorse {
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
-        entityData.set(SLEIGH_BELLS, tag.getBoolean("SleighBells"));
+        entityData.set(SLEIGH_BELLS, tag.getBooleanOr("SleighBells", false));
     }
 
     public static AttributeSupplier.Builder createAttributes() {

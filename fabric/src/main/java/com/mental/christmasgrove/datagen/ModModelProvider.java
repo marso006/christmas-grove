@@ -8,7 +8,6 @@ import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
-import net.minecraft.client.data.models.model.ItemModelUtils;
 import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.ModelTemplates;
@@ -90,7 +89,7 @@ public class ModModelProvider extends FabricModelProvider {
             ResourceLocation model = GIFT_BOX.create(block, new TextureMapping()
                     .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top"))
                     .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side")), blocks.modelOutput);
-            blocks.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, model));
+            blocks.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, BlockModelGenerators.plainVariant(model)));
         }
     }
 
@@ -103,12 +102,9 @@ public class ModModelProvider extends FabricModelProvider {
             }
             items.generateFlatItem(item.get(), ModelTemplates.FLAT_ITEM);
         }
-        // Spawn eggs: vanilla's template tinted with the egg's two colours (since 1.21.4 the tint lives here)
-        ResourceLocation spawnEgg = ModelLocationUtils.decorateItemModelLocation("template_spawn_egg");
+        // Spawn eggs: one sprite each since 1.21.5 (tools/textures draws them from the egg colours)
         for (Supplier<? extends Item> egg : ModItems.spawnEggs()) {
-            int[] colours = ModItems.spawnEggColours(egg);
-            items.itemModelOutput.accept(egg.get(), ItemModelUtils.tintedModel(spawnEgg,
-                    ItemModelUtils.constantTint(colours[0]), ItemModelUtils.constantTint(colours[1])));
+            items.generateFlatItem(egg.get(), ModelTemplates.FLAT_ITEM);
         }
         for (Supplier<? extends Item> tool : ModItems.handheldItems()) {
             items.generateFlatItem(tool.get(), ModelTemplates.FLAT_HANDHELD_ITEM);

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:cookie_tiles_stairs_from_cookie_tiles_stonecutting"
+        "recipe": "christmas_grove:cookie_tiles_stairs_from_cookie_tiles_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:cookie_tiles_stairs_from_cookie_tiles_stonecutting"
+      "christmas_grove:cookie_tiles_stairs_from_cookie_tiles_stonecutting"
     ]
   }
 }

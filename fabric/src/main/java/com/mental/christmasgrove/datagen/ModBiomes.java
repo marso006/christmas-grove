@@ -159,7 +159,7 @@ final class ModBiomes {
         }
 
         Features spawn(MobCategory category, EntityType<?> type, int weight, int min, int max) {
-            spawns.addSpawn(category, new MobSpawnSettings.SpawnerData(type, weight, min, max));
+            spawns.addSpawn(category, weight, new MobSpawnSettings.SpawnerData(type, min, max));
             return this;
         }
 

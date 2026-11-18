@@ -8,16 +8,15 @@ import com.mental.christmasgrove.platform.Services;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.BlockItem;
+import com.mental.christmasgrove.block.GiftBoxBlock;
+import com.mental.christmasgrove.item.GiftBoxItem;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.ShovelItem;
-import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.equipment.ArmorType;
 
@@ -50,7 +49,9 @@ public final class ModItems {
         // Block items first. Touching ModBlocks here guarantees every block is registered before any
         // item that refers to one (Fabric registers immediately, so order matters there).
         ModBlocks.blocksWithItems().forEach((name, block) ->
-                registerRaw(name, p -> new BlockItem(block.get(), p.useBlockDescriptionPrefix())));
+                registerRaw(name, p -> block.get() instanceof GiftBoxBlock
+                        ? new GiftBoxItem(block.get(), p.useBlockDescriptionPrefix())
+                        : new BlockItem(block.get(), p.useBlockDescriptionPrefix())));
     }
 
     /** The way into the dimension (and back). */
@@ -93,10 +94,10 @@ public final class ModItems {
 
     // ---- Tools (candy-cane handles, sugar-crystal heads) ----------------------------------------
 
-    public static final Supplier<SwordItem> CANDY_CANE_SWORD = handheld(registerRaw("candy_cane_sword",
-            p -> new SwordItem(ModTiers.SUGAR_CRYSTAL, 3.0F, -2.4F, p)));
-    public static final Supplier<PickaxeItem> SUGAR_CRYSTAL_PICKAXE = handheld(registerRaw("sugar_crystal_pickaxe",
-            p -> new PickaxeItem(ModTiers.SUGAR_CRYSTAL, 1.0F, -2.8F, p)));
+    public static final Supplier<Item> CANDY_CANE_SWORD = handheld(registerRaw("candy_cane_sword",
+            p -> new Item(p.sword(ModTiers.SUGAR_CRYSTAL, 3.0F, -2.4F))));
+    public static final Supplier<Item> SUGAR_CRYSTAL_PICKAXE = handheld(registerRaw("sugar_crystal_pickaxe",
+            p -> new Item(p.pickaxe(ModTiers.SUGAR_CRYSTAL, 1.0F, -2.8F))));
     public static final Supplier<AxeItem> SUGAR_CRYSTAL_AXE = handheld(registerRaw("sugar_crystal_axe",
             p -> new AxeItem(ModTiers.SUGAR_CRYSTAL, 5.5F, -3.1F, p)));
     public static final Supplier<ShovelItem> SUGAR_CRYSTAL_SHOVEL = handheld(registerRaw("sugar_crystal_shovel",
@@ -106,10 +107,10 @@ public final class ModItems {
 
     // ---- Santa Suit -----------------------------------------------------------------------------
 
-    public static final Supplier<ArmorItem> SANTA_HAT = armor("santa_hat", ModArmorMaterials.SANTA_HAT, ArmorType.HELMET);
-    public static final Supplier<ArmorItem> SANTA_COAT = armor("santa_coat", ModArmorMaterials.SANTA_SUIT, ArmorType.CHESTPLATE);
-    public static final Supplier<ArmorItem> SANTA_TROUSERS = armor("santa_trousers", ModArmorMaterials.SANTA_SUIT, ArmorType.LEGGINGS);
-    public static final Supplier<ArmorItem> SANTA_BOOTS = armor("santa_boots", ModArmorMaterials.SANTA_SUIT, ArmorType.BOOTS);
+    public static final Supplier<Item> SANTA_HAT = armor("santa_hat", ModArmorMaterials.SANTA_HAT, ArmorType.HELMET);
+    public static final Supplier<Item> SANTA_COAT = armor("santa_coat", ModArmorMaterials.SANTA_SUIT, ArmorType.CHESTPLATE);
+    public static final Supplier<Item> SANTA_TROUSERS = armor("santa_trousers", ModArmorMaterials.SANTA_SUIT, ArmorType.LEGGINGS);
+    public static final Supplier<Item> SANTA_BOOTS = armor("santa_boots", ModArmorMaterials.SANTA_SUIT, ArmorType.BOOTS);
 
     // ---- Spawn eggs ----------------------------------------------------------------------------
 
@@ -133,8 +134,8 @@ public final class ModItems {
         return flat(registerRaw(name, p -> new Item(properties.apply(p))));
     }
 
-    private static Supplier<ArmorItem> armor(String name, ArmorMaterial material, ArmorType type) {
-        return flat(registerRaw(name, p -> new ArmorItem(material, type, p)));
+    private static Supplier<Item> armor(String name, ArmorMaterial material, ArmorType type) {
+        return flat(registerRaw(name, p -> new Item(p.humanoidArmor(material, type))));
     }
 
     private static Supplier<Item> spawnEgg(String entity, Supplier<? extends EntityType<? extends Mob>> type, int background, int highlight) {

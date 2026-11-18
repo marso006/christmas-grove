@@ -59,12 +59,4 @@ public class CookieJarBlock extends BaseEntityBlock {
         }
         return InteractionResult.SUCCESS;
     }
-
-    @Override
-    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-        if (!state.is(newState.getBlock()) && level.getBlockEntity(pos) instanceof CookieJarBlockEntity jar) {
-            Containers.dropContents(level, pos, jar);
-        }
-        super.onRemove(state, level, pos, newState, movedByPiston);
-    }
 }

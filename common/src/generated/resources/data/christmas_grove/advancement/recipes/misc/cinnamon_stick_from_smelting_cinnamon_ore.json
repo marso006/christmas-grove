@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:cinnamon_stick_from_smelting_cinnamon_ore"
+        "recipe": "christmas_grove:cinnamon_stick_from_smelting_cinnamon_ore"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:cinnamon_stick_from_smelting_cinnamon_ore"
+      "christmas_grove:cinnamon_stick_from_smelting_cinnamon_ore"
     ]
   }
 }

@@ -1,16 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "minecraft:item/template_spawn_egg",
-    "tints": [
-      {
-        "type": "minecraft:constant",
-        "value": -1294216
-      },
-      {
-        "type": "minecraft:constant",
-        "value": -10827686
-      }
-    ]
+    "model": "christmas_grove:item/gumdrop_blob_spawn_egg"
   }
 }

@@ -883,6 +883,41 @@ SPRITES: dict[str, list[str]] = {
 }
 
 
+# Spawn eggs (1.21.5 removed the tinted vanilla template; each egg has its own sprite).
+# {background, highlight} colours match ModItems.
+SPAWN_EGGS = {
+    "gingerbread_man": (0xB0682F, 0xFFFFFF), "reindeer": (0x7A5230, 0xE8D8C0),
+    "peppermint_pup": (0xFFFFFF, 0xD62834), "elf": (0x2E8B3A, 0xD62834),
+    "santa_claus": (0xC81E2A, 0xFFFFFF), "cookie_soldier": (0x9A2A2A, 0xE0B070),
+    "gumdrop_blob": (0xEC4078, 0x5AC85A), "evil_snowman": (0xF4F4F4, 0x222222),
+    "krampus": (0x2A1A12, 0xB01020),
+}
+EGG_ROWS = [
+    "......XXXX......",
+    ".....XBBBBX.....",
+    "....XBBSBBBX....",
+    "...XBBSSBBBBX...",
+    "...XBBBBBHBBX...",
+    "..XBBBBBBHHBBX..",
+    "..XBBHBBBBBBBX..",
+    "..XBHHBBBBBBBX..",
+    ".XBBBBBBBHBBBBX.",
+    ".XBBBBBBBHHBBBX.",
+    ".XBBBHBBBBBBBDX.",
+    ".XBBHHBBBBBBBDX.",
+    "..XBBBBBBHBBDX..",
+    "..XDBBBBBBBDDX..",
+    "...XXDDDDDDXX...",
+    ".....XXXXXX.....",
+]
+
+
+def spawn_egg(background: int, highlight: int) -> Image.Image:
+    bg = ((background >> 16) & 255, (background >> 8) & 255, background & 255)
+    hl = ((highlight >> 16) & 255, (highlight >> 8) & 255, highlight & 255)
+    return sprite(EGG_ROWS, {"X": shade(bg, 0.45), "B": bg, "S": shade(bg, 1.35), "D": shade(bg, 0.75), "H": hl})
+
+
 def gift_box(colour: Pixel, ribbon: Pixel) -> tuple[Image.Image, Image.Image]:
     rng = random.Random(str(colour))
     side, top = blank(), blank()
@@ -1337,6 +1372,10 @@ def main() -> None:
             img = recipe()
             img.save(folder / f"{name}.png")
             made.append((name, img))
+    for mob, (bg, hl) in SPAWN_EGGS.items():
+        img = spawn_egg(bg, hl)
+        img.save(ITEM_DIR / f"{mob}_spawn_egg.png")
+        made.append((f"{mob}_spawn_egg", img))
     print(f"wrote {len(made)} textures")
     write_armor()
 

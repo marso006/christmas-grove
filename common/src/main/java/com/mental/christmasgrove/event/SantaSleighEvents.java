@@ -34,7 +34,7 @@ public final class SantaSleighEvents {
         if (level.getGameTime() % CHECK_INTERVAL != 0 || level.players().isEmpty()) {
             return;
         }
-        boolean night = level.isNight();
+        boolean night = level.isDarkOutside();
         double chance;
         if (level.dimension() == ModDimensions.GROVE) {
             chance = night ? 0.08 : 0.025;
@@ -70,7 +70,7 @@ public final class SantaSleighEvents {
         Vec3 sideways = new Vec3(-Math.sin(angle), 0, Math.cos(angle)).scale(level.random.nextInt(13) - 6);
         Vec3 target = player.position().add(sideways);
 
-        sleigh.moveTo(start.x, y, start.z, 0, 0);
+        sleigh.snapTo(start.x, y, start.z, 0, 0);
         sleigh.launch(target.subtract(start));
         level.addFreshEntity(sleigh);
 

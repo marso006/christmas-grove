@@ -11,7 +11,7 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
-import net.minecraft.util.random.SimpleWeightedRandomList;
+import net.minecraft.util.random.WeightedList;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Block;
@@ -70,7 +70,7 @@ final class ModWorldgen {
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(ModBlocks.FESTIVE_FIR.log().get()),
                         new StraightTrunkPlacer(6, 2, 1),
-                        new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+                        new WeightedStateProvider(WeightedList.<BlockState>builder()
                                 .add(ModBlocks.FESTIVE_FIR.leaves().get().defaultBlockState(), 14)
                                 .add(ModBlocks.RED_LIT_FIR_LEAVES.get().defaultBlockState(), 2)
                                 .add(ModBlocks.GOLD_LIT_FIR_LEAVES.get().defaultBlockState(), 2)
@@ -84,7 +84,7 @@ final class ModWorldgen {
 
         FeatureUtils.register(context, ModConfiguredFeatures.SWEET_FLOWERS, Feature.FLOWER,
                 FeatureUtils.simpleRandomPatchConfiguration(48, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
-                        new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+                        new SimpleBlockConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
                                 .add(ModBlocks.LOLLIPOP_FLOWER.get().defaultBlockState(), 3)
                                 .add(ModBlocks.POINSETTIA.get().defaultBlockState(), 3)
                                 .add(ModBlocks.HOLLY.get().defaultBlockState(), 2))))));
@@ -102,7 +102,7 @@ final class ModWorldgen {
         // A few wrapped presents left on the ground, never on leaves or in water.
         FeatureUtils.register(context, ModConfiguredFeatures.GIFT_BOXES, Feature.RANDOM_PATCH,
                 new RandomPatchConfiguration(6, 5, 2, PlacementUtils.filtered(Feature.SIMPLE_BLOCK,
-                        new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+                        new SimpleBlockConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
                                 .add(ModBlocks.RED_GIFT_BOX.get().defaultBlockState(), 1)
                                 .add(ModBlocks.GREEN_GIFT_BOX.get().defaultBlockState(), 1)
                                 .add(ModBlocks.BLUE_GIFT_BOX.get().defaultBlockState(), 1))),

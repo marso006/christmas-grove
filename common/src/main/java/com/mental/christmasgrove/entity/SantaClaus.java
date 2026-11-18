@@ -1,5 +1,6 @@
 package com.mental.christmasgrove.entity;
 
+import net.minecraft.core.UUIDUtil;
 import net.minecraft.world.item.Items;
 import com.mental.christmasgrove.registry.ModItems;
 import com.mental.christmasgrove.block.GiftBoxBlock;
@@ -168,7 +169,7 @@ public class SantaClaus extends PathfinderMob {
         ListTag list = new ListTag();
         lastGiftDay.forEach((uuid, day) -> {
             CompoundTag entry = new CompoundTag();
-            entry.put("Player", NbtUtils.createUUID(uuid));
+            entry.store("Player", UUIDUtil.CODEC, uuid);
             entry.putLong("Day", day);
             list.add(entry);
         });
@@ -179,9 +180,9 @@ public class SantaClaus extends PathfinderMob {
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
         lastGiftDay.clear();
-        for (Tag t : tag.getList(GIFTED_TAG, Tag.TAG_COMPOUND)) {
+        for (Tag t : tag.getListOrEmpty(GIFTED_TAG)) {
             CompoundTag entry = (CompoundTag) t;
-            lastGiftDay.put(NbtUtils.loadUUID(entry.get("Player")), entry.getLong("Day"));
+            lastGiftDay.put(entry.read("Player", UUIDUtil.CODEC).orElseThrow(), entry.getLongOr("Day", 0L));
         }
     }
 

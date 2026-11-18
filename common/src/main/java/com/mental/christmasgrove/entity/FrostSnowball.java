@@ -21,7 +21,7 @@ public class FrostSnowball extends Snowball {
         // Not super: vanilla snowballs deal no damage, and a zero-damage hit would eat the real one.
         if (result.getEntity() instanceof LivingEntity target && level() instanceof ServerLevel serverLevel) {
             target.hurtServer(serverLevel, damageSources().thrown(this, getOwner()), 2.0F);
-            target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 1), getOwner());
+            target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 60, 1), getOwner());
         }
     }
 }

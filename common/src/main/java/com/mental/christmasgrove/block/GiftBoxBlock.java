@@ -146,21 +146,4 @@ public class GiftBoxBlock extends BaseEntityBlock {
         level.sendParticles(ParticleTypes.HAPPY_VILLAGER, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
                 16, 0.4, 0.4, 0.4, 0.05);
     }
-
-    @Override
-    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
-        CompoundTag data = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-        ItemContainerContents contents = stack.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY);
-        String key;
-        if (data.getBoolean(GiftBoxBlockEntity.SURPRISE_TAG)) {
-            key = "surprise";
-        } else if (contents.nonEmptyStream().findAny().isPresent()) {
-            tooltip.add(Component.translatable("block.christmas_grove.gift_box.tooltip.wrapped",
-                    data.getString("ChristmasWrapperName")).withStyle(ChatFormatting.GOLD));
-            return;
-        } else {
-            key = "empty";
-        }
-        tooltip.add(Component.translatable("block.christmas_grove.gift_box.tooltip." + key).withStyle(ChatFormatting.GRAY));
-    }
 }

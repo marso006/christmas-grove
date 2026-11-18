@@ -1,16 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "minecraft:item/template_spawn_egg",
-    "tints": [
-      {
-        "type": "minecraft:constant",
-        "value": -14018030
-      },
-      {
-        "type": "minecraft:constant",
-        "value": -5238752
-      }
-    ]
+    "model": "christmas_grove:item/krampus_spawn_egg"
   }
 }

@@ -1,5 +1,7 @@
 package com.mental.christmasgrove.item;
 
+import net.minecraft.world.item.component.TooltipDisplay;
+import java.util.function.Consumer;
 import com.mental.christmasgrove.entity.Krampus;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -36,7 +38,7 @@ public class KrampusBellItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
-        tooltip.add(Component.translatable("item.christmas_grove.krampus_bell.tooltip").withStyle(ChatFormatting.DARK_RED));
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> tooltip, TooltipFlag flag) {
+        tooltip.accept(Component.translatable("item.christmas_grove.krampus_bell.tooltip").withStyle(ChatFormatting.DARK_RED));
     }
 }

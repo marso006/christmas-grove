@@ -96,7 +96,7 @@ public class Krampus extends Monster {
         int x = (int) (player.getX() + Math.cos(angle) * 12);
         int z = (int) (player.getZ() + Math.sin(angle) * 12);
         int y = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x, z);
-        krampus.moveTo(x + 0.5, y, z + 0.5, player.getYRot() + 180, 0);
+        krampus.snapTo(x + 0.5, y, z + 0.5, player.getYRot() + 180, 0);
         krampus.finalizeSpawn(level, level.getCurrentDifficultyAt(new BlockPos(x, y, z)), EntitySpawnReason.EVENT, null);
         krampus.setTarget(player);
         level.addFreshEntity(krampus);
@@ -131,7 +131,7 @@ public class Krampus extends Monster {
         Vec3 pull = position().subtract(target.position()).normalize().scale(1.4).add(0, 0.45, 0);
         target.setDeltaMovement(pull);
         target.hurtMarked = true; // makes the velocity reach a player's client
-        target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 1), this);
+        target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 60, 1), this);
         playSound(SoundEvents.CHAIN_PLACE, 2.0F, 0.5F);
         if (level() instanceof ServerLevel server) {
             Vec3 from = position().add(0, 1.5, 0);
@@ -151,7 +151,7 @@ public class Krampus extends Monster {
         for (int i = 0; i < 3; i++) {
             EvilSnowman snowman = ModEntities.EVIL_SNOWMAN.get().create(server, EntitySpawnReason.MOB_SUMMONED);
             if (snowman != null) {
-                snowman.moveTo(getX() + random.nextInt(7) - 3, getY(), getZ() + random.nextInt(7) - 3, 0, 0);
+                snowman.snapTo(getX() + random.nextInt(7) - 3, getY(), getZ() + random.nextInt(7) - 3, 0, 0);
                 snowman.finalizeSpawn(server, server.getCurrentDifficultyAt(blockPosition()), EntitySpawnReason.MOB_SUMMONED, null);
                 snowman.setTarget(getTarget());
                 server.addFreshEntity(snowman);
@@ -185,7 +185,7 @@ public class Krampus extends Monster {
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
-        calledMinions = tag.getBoolean("CalledMinions");
+        calledMinions = tag.getBooleanOr("CalledMinions", false);
         if (hasCustomName()) {
             bossEvent.setName(getDisplayName());
         }

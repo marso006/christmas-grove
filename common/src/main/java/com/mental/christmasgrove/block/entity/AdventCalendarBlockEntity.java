@@ -1,5 +1,6 @@
 package com.mental.christmasgrove.block.entity;
 
+import net.minecraft.core.UUIDUtil;
 import com.mental.christmasgrove.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -44,15 +45,15 @@ public class AdventCalendarBlockEntity extends BlockEntity {
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
-        year = tag.getInt("Year");
+        year = tag.getIntOr("Year", 0);
         opened.clear();
-        for (Tag t : tag.getList("Opened", Tag.TAG_COMPOUND)) {
+        for (Tag t : tag.getListOrEmpty("Opened")) {
             CompoundTag entry = (CompoundTag) t;
             BitSet doors = new BitSet(26);
-            for (int day : entry.getIntArray("Days")) {
+            for (int day : entry.getIntArray("Days").orElse(new int[0])) {
                 doors.set(day);
             }
-            opened.put(NbtUtils.loadUUID(entry.get("Player")), doors);
+            opened.put(entry.read("Player", UUIDUtil.CODEC).orElseThrow(), doors);
         }
     }
 
@@ -63,7 +64,7 @@ public class AdventCalendarBlockEntity extends BlockEntity {
         ListTag list = new ListTag();
         opened.forEach((uuid, doors) -> {
             CompoundTag entry = new CompoundTag();
-            entry.put("Player", NbtUtils.createUUID(uuid));
+            entry.store("Player", UUIDUtil.CODEC, uuid);
             entry.put("Days", new IntArrayTag(doors.stream().toArray()));
             list.add(entry);
         });

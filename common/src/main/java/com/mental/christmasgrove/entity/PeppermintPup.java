@@ -11,7 +11,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.animal.Wolf;
+import net.minecraft.world.entity.animal.wolf.Wolf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -61,8 +61,8 @@ public class PeppermintPup extends Wolf {
     @Nullable
     public Wolf getBreedOffspring(ServerLevel level, AgeableMob partner) {
         PeppermintPup pup = ModEntities.PEPPERMINT_PUP.get().create(level, EntitySpawnReason.BREEDING);
-        if (pup != null && isTame() && getOwnerUUID() != null) {
-            pup.setOwnerUUID(getOwnerUUID());
+        if (pup != null && isTame() && getOwnerReference() != null) {
+            pup.setOwnerReference(getOwnerReference());
             pup.setTame(true, true);
         }
         return pup;

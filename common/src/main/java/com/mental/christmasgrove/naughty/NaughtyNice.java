@@ -1,5 +1,6 @@
 package com.mental.christmasgrove.naughty;
 
+import net.minecraft.core.UUIDUtil;
 import com.mental.christmasgrove.entity.Krampus;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.HolderLookup;
@@ -15,6 +16,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.datafix.DataFixTypes;
 import net.minecraft.world.level.saveddata.SavedData;
+import net.minecraft.world.level.saveddata.SavedDataType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,8 +37,9 @@ public final class NaughtyNice extends SavedData {
     public static final int KRAMPUS_THRESHOLD = -15;
 
     private static final String ID = "christmas_grove_naughty_nice";
-    private static final Factory<NaughtyNice> FACTORY = new Factory<>(NaughtyNice::new, NaughtyNice::load,
-            DataFixTypes.SAVED_DATA_COMMAND_STORAGE);
+    /** Same file format as before; since 1.21.5 saved data is described by a codec. */
+    private static final SavedDataType<NaughtyNice> TYPE = new SavedDataType<>(ID, NaughtyNice::new,
+            CompoundTag.CODEC.xmap(NaughtyNice::load, NaughtyNice::toTag), DataFixTypes.SAVED_DATA_COMMAND_STORAGE);
 
     private final Map<UUID, Integer> scores = new HashMap<>();
 
@@ -97,24 +100,24 @@ public final class NaughtyNice extends SavedData {
     // ---- Storage -------------------------------------------------------------------------------
 
     private static NaughtyNice get(MinecraftServer server) {
-        return server.overworld().getDataStorage().computeIfAbsent(FACTORY, ID);
+        return server.overworld().getDataStorage().computeIfAbsent(TYPE);
     }
 
-    private static NaughtyNice load(CompoundTag tag, HolderLookup.Provider registries) {
+    private static NaughtyNice load(CompoundTag tag) {
         NaughtyNice data = new NaughtyNice();
-        for (Tag t : tag.getList("Scores", Tag.TAG_COMPOUND)) {
+        for (Tag t : tag.getListOrEmpty("Scores")) {
             CompoundTag entry = (CompoundTag) t;
-            data.scores.put(NbtUtils.loadUUID(entry.get("Player")), entry.getInt("Score"));
+            data.scores.put(entry.read("Player", UUIDUtil.CODEC).orElseThrow(), entry.getIntOr("Score", 0));
         }
         return data;
     }
 
-    @Override
-    public CompoundTag save(CompoundTag tag, HolderLookup.Provider registries) {
+    private CompoundTag toTag() {
+        CompoundTag tag = new CompoundTag();
         ListTag list = new ListTag();
         scores.forEach((uuid, score) -> {
             CompoundTag entry = new CompoundTag();
-            entry.put("Player", NbtUtils.createUUID(uuid));
+            entry.store("Player", UUIDUtil.CODEC, uuid);
             entry.putInt("Score", score);
             list.add(entry);
         });
