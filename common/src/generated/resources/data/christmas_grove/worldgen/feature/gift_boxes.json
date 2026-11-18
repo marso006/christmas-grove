@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:simple_block",
+  "to_place": {
+    "type": "minecraft:weighted",
+    "entries": [
+      {
+        "data": "christmas_grove:red_gift_box",
+        "weight": 1
+      },
+      {
+        "data": "christmas_grove:green_gift_box",
+        "weight": 1
+      },
+      {
+        "data": "christmas_grove:blue_gift_box",
+        "weight": 1
+      }
+    ]
+  }
+}

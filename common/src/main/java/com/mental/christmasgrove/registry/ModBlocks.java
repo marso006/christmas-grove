@@ -1,5 +1,7 @@
 package com.mental.christmasgrove.registry;
 
+import net.minecraft.world.level.block.sounds.AmbientLeavesBlockSoundPlayer;
+import net.minecraft.world.item.DyeColor;
 import com.mental.christmasgrove.block.AdventCalendarBlock;
 import com.mental.christmasgrove.block.CookieJarBlock;
 import com.mental.christmasgrove.block.FestiveWallDecorBlock;
@@ -85,7 +87,7 @@ public final class ModBlocks {
             () -> Properties.of().mapColor(MapColor.SAND).strength(0.5F).sound(SoundType.SAND));
     /** Bouncy, soft, and you never take fall damage on it. */
     public static final Supplier<Block> MARSHMALLOW_BLOCK = register("marshmallow_block", MarshmallowBlock::new,
-            () -> Properties.of().mapColor(MapColor.SNOW).strength(0.5F).sound(SoundType.WOOL));
+            () -> Properties.of().mapColor(MapColor.SNOW).strength(0.5F).sound(SoundType.WOOL).bounceRestitution(0.85F)); // bouncy like slime
 
     // ---- Stone and building sets ----------------------------------------------------------------
 
@@ -96,9 +98,9 @@ public final class ModBlocks {
     public static final StoneSet COOKIE_TILES = stoneSet("cookie_tiles", false, () -> stone(MapColor.COLOR_BROWN, 1.2F, 5.0F, SoundType.PACKED_MUD));
 
     public static final Supplier<Block> CANDY_GLASS = translucent(register("candy_glass", TransparentBlock::new,
-            () -> Properties.ofFullCopy(Blocks.PINK_STAINED_GLASS)));
+            () -> Properties.ofFullCopy(Blocks.STAINED_GLASS.pick(DyeColor.PINK))));
     public static final Supplier<Block> CANDY_GLASS_PANE = translucent(register("candy_glass_pane", IronBarsBlock::new,
-            () -> Properties.ofFullCopy(Blocks.PINK_STAINED_GLASS_PANE)));
+            () -> Properties.ofFullCopy(Blocks.STAINED_GLASS_PANE.pick(DyeColor.PINK))));
 
     // ---- Woods ----------------------------------------------------------------------------------
 
@@ -143,14 +145,14 @@ public final class ModBlocks {
     /** Strings of coloured bulbs, hung on walls like a ladder. */
     public static final Supplier<Block> FESTIVE_LIGHTS = cutout(register("festive_lights", FestiveWallDecorBlock::new,
             () -> Properties.of().mapColor(MapColor.COLOR_RED).noCollision().strength(0.2F).sound(SoundType.GLASS)
-                    .lightLevel(state -> 12).pushReaction(PushReaction.DESTROY)));
+                    .lightLevel(state -> 12).pushReaction(PushReaction.POPPED)));
     public static final Supplier<Block> WREATH = cutout(register("wreath", FestiveWallDecorBlock::new,
             () -> Properties.of().mapColor(MapColor.COLOR_GREEN).noCollision().strength(0.2F).sound(SoundType.AZALEA_LEAVES)
-                    .pushReaction(PushReaction.DESTROY)));
+                    .pushReaction(PushReaction.POPPED)));
     /** Grows on top of Festive Firs. Brightest light in the mod. */
     public static final Supplier<Block> CHRISTMAS_STAR = cutout(register("christmas_star", StarBlock::new,
             () -> Properties.of().mapColor(MapColor.GOLD).noCollision().instabreak().sound(SoundType.AMETHYST_CLUSTER)
-                    .lightLevel(state -> 15).pushReaction(PushReaction.DESTROY)));
+                    .lightLevel(state -> 15).pushReaction(PushReaction.POPPED)));
 
     public static final Supplier<Block> RED_GIFT_BOX = cutout(register("red_gift_box", GiftBoxBlock::new, () -> giftBox(MapColor.COLOR_RED)));
     public static final Supplier<Block> GREEN_GIFT_BOX = cutout(register("green_gift_box", GiftBoxBlock::new, () -> giftBox(MapColor.COLOR_GREEN)));
@@ -179,11 +181,12 @@ public final class ModBlocks {
 
     /** Fir leaves (not biome tinted) that drop dark green leaf particles. */
     private static Block leaves(Properties properties) {
-        return new UntintedParticleLeavesBlock(0.01F, ColorParticleOption.create(ParticleTypes.TINTED_LEAVES, 0xFF2E6B3A), properties);
+        return new UntintedParticleLeavesBlock(0.01F, ColorParticleOption.create(ParticleTypes.TINTED_LEAVES, 0xFF2E6B3A),
+                AmbientLeavesBlockSoundPlayer.noAmbientSound(), properties);
     }
 
     private static Properties giftBox(MapColor colour) {
-        return Properties.of().mapColor(colour).strength(0.4F).sound(SoundType.WOOL).pushReaction(PushReaction.DESTROY);
+        return Properties.of().mapColor(colour).strength(0.4F).sound(SoundType.WOOL).pushReaction(PushReaction.POPPED);
     }
 
     // ---- Registration helpers -------------------------------------------------------------------

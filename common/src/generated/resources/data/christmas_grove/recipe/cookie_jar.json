@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "key": {
     "C": "christmas_grove:gingerbread_cookie",
     "G": "minecraft:glass",
@@ -12,7 +11,6 @@
     "GGG"
   ],
   "result": {
-    "count": 1,
     "id": "christmas_grove:cookie_jar"
   }
 }

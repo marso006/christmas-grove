@@ -1,9 +1,10 @@
 package com.mental.christmasgrove.datagen;
 
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 import com.mental.christmasgrove.registry.ModBlocks;
 import com.mental.christmasgrove.registry.ModItems;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootSubProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -11,7 +12,6 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.block.Block;
 
 import java.util.HashSet;
@@ -20,11 +20,11 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
 /** Block drops. Anything without a special rule below simply drops itself. */
-public class ModBlockLootProvider extends FabricBlockLootTableProvider {
+public class ModBlockLootProvider extends FabricBlockLootSubProvider {
 
     private final Set<Block> handled = new HashSet<>();
 
-    public ModBlockLootProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+    public ModBlockLootProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries);
     }
 
@@ -54,7 +54,7 @@ public class ModBlockLootProvider extends FabricBlockLootTableProvider {
         special(ModBlocks.CINNAMON_ORE, b -> add(b, createOreDrop(b, ModItems.CINNAMON_STICK.get())));
         for (Supplier<Block> box : java.util.List.of(ModBlocks.RED_GIFT_BOX, ModBlocks.GREEN_GIFT_BOX, ModBlocks.BLUE_GIFT_BOX)) {
             special(box, b -> add(b, LootTable.lootTable().withPool(applyExplosionCondition(b, LootPool.lootPool()
-                    .setRolls(ConstantValue.exactly(1))
+                    .setRolls(ContextIntProviders.exactly(1))
                     .add(LootItem.lootTableItem(b).apply(CopyComponentsFunction.copyComponentsFromBlockEntity(LootContextParams.BLOCK_ENTITY)
                             .include(DataComponents.CONTAINER)
                             .include(DataComponents.CUSTOM_DATA)))))));

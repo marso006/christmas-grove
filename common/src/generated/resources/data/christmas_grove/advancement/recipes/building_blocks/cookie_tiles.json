@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "christmas_grove:cookie_tiles"
+        "recipes": "christmas_grove:cookie_tiles"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

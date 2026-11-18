@@ -10,7 +10,7 @@ import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.monster.Slime;
+import net.minecraft.world.entity.monster.cubemob.Slime;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -28,7 +28,7 @@ public class GumdropBlob extends Slime {
 
     @Override
     protected ParticleOptions getParticleType() {
-        return new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(ModItems.GUMDROPS.get()));
+        return new ItemParticleOption(ParticleTypes.ITEM, ModItems.GUMDROPS.get());
     }
 
     /** Flavour 0-3: cherry, lime, lemon, grape. */

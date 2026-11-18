@@ -8,8 +8,6 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.client.resources.model.EquipmentClientInfo;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.entity.Entity;
@@ -33,8 +31,7 @@ public final class ChristmasGroveNeoForgeClient {
     @SuppressWarnings("deprecation") // render types can also go in model JSON, but datagen is shared with Fabric
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            ModBlocks.cutoutBlocks().forEach(block -> ItemBlockRenderTypes.setRenderLayer(block.get(), ChunkSectionLayer.CUTOUT));
-            ModBlocks.translucentBlocks().forEach(block -> ItemBlockRenderTypes.setRenderLayer(block.get(), ChunkSectionLayer.TRANSLUCENT));
+        // Since 26.x the chunk layer follows each block's texture transparency; nothing to register.
         });
     }
 

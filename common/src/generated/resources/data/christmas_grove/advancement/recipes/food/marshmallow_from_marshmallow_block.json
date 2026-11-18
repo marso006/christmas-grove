@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "christmas_grove:marshmallow_from_marshmallow_block"
+        "recipes": "christmas_grove:marshmallow_from_marshmallow_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

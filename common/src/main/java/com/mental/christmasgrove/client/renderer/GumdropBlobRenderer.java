@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.SlimeRenderer;
 import net.minecraft.client.renderer.entity.state.SlimeRenderState;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.entity.monster.Slime;
+import net.minecraft.world.entity.monster.cubemob.Slime;
 
 /** The slime renderer (translucent outer jelly, squish animation) with four gumdrop flavours. */
 public class GumdropBlobRenderer extends SlimeRenderer {

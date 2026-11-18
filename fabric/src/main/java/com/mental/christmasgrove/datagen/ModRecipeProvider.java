@@ -1,9 +1,14 @@
 package com.mental.christmasgrove.datagen;
 
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.crafting.CookingBookCategory;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.data.worldgen.BootstrapContext;
 import com.mental.christmasgrove.registry.ModBlocks;
 import com.mental.christmasgrove.registry.ModItems;
 import com.mental.christmasgrove.registry.ModTags;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.BlockFamily;
@@ -24,13 +29,14 @@ import java.util.concurrent.CompletableFuture;
 
 public class ModRecipeProvider extends FabricRecipeProvider {
 
-    public ModRecipeProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+    public ModRecipeProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries);
     }
 
     @Override
-    protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {
-        return new Recipes(registries, output);
+    protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, BootstrapContext<Recipe<?>> recipes,
+                                                  BootstrapContext<Advancement> advancements) {
+        return new Recipes(recipes, advancements);
     }
 
     @Override
@@ -41,8 +47,8 @@ public class ModRecipeProvider extends FabricRecipeProvider {
     /** Since 1.21.2 recipes are built inside a RecipeProvider instance that holds the output. */
     private static final class Recipes extends RecipeProvider {
 
-        Recipes(HolderLookup.Provider registries, RecipeOutput output) {
-            super(registries, output);
+        Recipes(BootstrapContext<Recipe<?>> recipes, BootstrapContext<Advancement> advancements) {
+            super(recipes, advancements);
         }
 
         @Override
@@ -59,9 +65,9 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
         private void festive() {
             // Empty gift boxes for wrapping your own presents
-            shapelessOf(ModBlocks.RED_GIFT_BOX.get(), 1, Items.PAPER, Items.PAPER, Items.STRING, Items.RED_DYE);
-            shapelessOf(ModBlocks.GREEN_GIFT_BOX.get(), 1, Items.PAPER, Items.PAPER, Items.STRING, Items.GREEN_DYE);
-            shapelessOf(ModBlocks.BLUE_GIFT_BOX.get(), 1, Items.PAPER, Items.PAPER, Items.STRING, Items.BLUE_DYE);
+            shapelessOf(ModBlocks.RED_GIFT_BOX.get(), 1, Items.PAPER, Items.PAPER, Items.STRING, Items.DYE.pick(DyeColor.RED));
+            shapelessOf(ModBlocks.GREEN_GIFT_BOX.get(), 1, Items.PAPER, Items.PAPER, Items.STRING, Items.DYE.pick(DyeColor.GREEN));
+            shapelessOf(ModBlocks.BLUE_GIFT_BOX.get(), 1, Items.PAPER, Items.PAPER, Items.STRING, Items.DYE.pick(DyeColor.BLUE));
             shapelessOf(ModItems.NICE_LIST.get(), 1, Items.PAPER, Items.PAPER, Items.FEATHER, Items.INK_SAC);
             shapelessOf(ModItems.LETTER_TO_SANTA.get(), 1, Items.PAPER, Items.FEATHER, Items.INK_SAC, ModItems.CANDY_CANE.get());
             shapelessOf(ModItems.KRAMPUS_BELL.get(), 1, Items.BELL, Items.IRON_CHAIN, Items.COAL);
@@ -116,10 +122,10 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             for (String row : pattern) {
                 builder.pattern(row);
             }
-            if (all.contains("R")) builder.define('R', Items.RED_WOOL);
-            if (all.contains("W")) builder.define('W', Items.WHITE_WOOL);
-            if (all.contains("B")) builder.define('B', Items.BLACK_WOOL);
-            builder.unlockedBy(getHasName(Items.RED_WOOL), has(Items.RED_WOOL)).save(output);
+            if (all.contains("R")) builder.define('R', Items.WOOL.pick(DyeColor.RED));
+            if (all.contains("W")) builder.define('W', Items.WOOL.pick(DyeColor.WHITE));
+            if (all.contains("B")) builder.define('B', Items.WOOL.pick(DyeColor.BLACK));
+            builder.unlockedBy(getHasName(Items.WOOL.pick(DyeColor.RED)), has(Items.WOOL.pick(DyeColor.RED))).save(output);
         }
 
         private void travel() {
@@ -154,7 +160,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
             // Candy glass is smelted from sugar sand, like glass from sand.
             SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.SUGAR_SAND.get()), RecipeCategory.BUILDING_BLOCKS,
-                            ModBlocks.CANDY_GLASS.get(), 0.1F, 200)
+                            CookingBookCategory.BLOCKS, ModBlocks.CANDY_GLASS.get(), 0.1F, 200)
                     .unlockedBy(getHasName(ModBlocks.SUGAR_SAND.get()), has(ModBlocks.SUGAR_SAND.get()))
                     .save(output);
             shaped(RecipeCategory.DECORATIONS, ModBlocks.CANDY_GLASS_PANE.get(), 16)
@@ -182,11 +188,11 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         private void materials() {
             nineBlockStorageRecipes(RecipeCategory.MISC, ModItems.SUGAR_CRYSTAL.get(),
                     RecipeCategory.BUILDING_BLOCKS, ModBlocks.SUGAR_CRYSTAL_BLOCK.get());
-            oreSmelting(List.of(ModBlocks.SUGAR_CRYSTAL_ORE.get()), RecipeCategory.MISC, ModItems.SUGAR_CRYSTAL.get(),
+            oreSmelting(List.of(ModBlocks.SUGAR_CRYSTAL_ORE.get()), RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.SUGAR_CRYSTAL.get(),
                     1.0F, 200, "sugar_crystal");
-            oreBlasting(List.of(ModBlocks.SUGAR_CRYSTAL_ORE.get()), RecipeCategory.MISC, ModItems.SUGAR_CRYSTAL.get(),
+            oreBlasting(List.of(ModBlocks.SUGAR_CRYSTAL_ORE.get()), RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.SUGAR_CRYSTAL.get(),
                     1.0F, 100, "sugar_crystal");
-            oreSmelting(List.of(ModBlocks.CINNAMON_ORE.get()), RecipeCategory.MISC, ModItems.CINNAMON_STICK.get(),
+            oreSmelting(List.of(ModBlocks.CINNAMON_ORE.get()), RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.CINNAMON_STICK.get(),
                     0.5F, 200, "cinnamon_stick");
             shaped(RecipeCategory.MISC, ModItems.MUG.get(), 2)
                     .pattern("B B").pattern(" B ")
@@ -198,7 +204,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         private void food() {
             shapelessOf(ModItems.GINGERBREAD_COOKIE.get(), 4, Items.WHEAT, Items.WHEAT, ModItems.CINNAMON_STICK.get(), Items.SUGAR);
             shapelessOf(ModItems.SUGAR_COOKIE.get(), 4, Items.WHEAT, Items.WHEAT, Items.SUGAR, Items.EGG);
-            shapelessOf(ModItems.CANDY_CANE.get(), 2, Items.SUGAR, Items.SUGAR, Items.RED_DYE);
+            shapelessOf(ModItems.CANDY_CANE.get(), 2, Items.SUGAR, Items.SUGAR, Items.DYE.pick(DyeColor.RED));
             shapelessOf(ModItems.MARSHMALLOW.get(), 4, Items.SUGAR, Items.SUGAR, Items.EGG);
             shapelessOf(ModItems.HOT_COCOA.get(), 1, ModItems.MUG.get(), Items.COCOA_BEANS, Items.SUGAR, Items.MILK_BUCKET);
             shapelessOf(ModItems.EGGNOG.get(), 1, Items.GLASS_BOTTLE, Items.EGG, Items.SUGAR, Items.MILK_BUCKET,
@@ -206,18 +212,20 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             shapelessOf(ModItems.FRUITCAKE_SLICE.get(), 4, Items.WHEAT, Items.SUGAR, Items.EGG, Items.SWEET_BERRIES,
                     ModItems.GUMDROPS.get());
             // Roast marshmallows over a campfire (or in a smoker or furnace).
-            simpleCookingRecipe("smelting", net.minecraft.world.item.crafting.RecipeSerializer.SMELTING_RECIPE,
-                    net.minecraft.world.item.crafting.SmeltingRecipe::new, 200, ModItems.MARSHMALLOW.get(), ModItems.ROASTED_MARSHMALLOW.get(), 0.35F);
-            simpleCookingRecipe("smoking", net.minecraft.world.item.crafting.RecipeSerializer.SMOKING_RECIPE,
-                    net.minecraft.world.item.crafting.SmokingRecipe::new, 100, ModItems.MARSHMALLOW.get(), ModItems.ROASTED_MARSHMALLOW.get(), 0.35F);
-            simpleCookingRecipe("campfire_cooking", net.minecraft.world.item.crafting.RecipeSerializer.CAMPFIRE_COOKING_RECIPE,
-                    net.minecraft.world.item.crafting.CampfireCookingRecipe::new, 300, ModItems.MARSHMALLOW.get(), ModItems.ROASTED_MARSHMALLOW.get(), 0.35F);
+            Ingredient marshmallow = Ingredient.of(ModItems.MARSHMALLOW.get());
+            ItemLike roasted = ModItems.ROASTED_MARSHMALLOW.get();
+            SimpleCookingRecipeBuilder.smelting(marshmallow, RecipeCategory.FOOD, CookingBookCategory.FOOD, roasted, 0.35F, 200)
+                    .unlockedBy(getHasName(ModItems.MARSHMALLOW.get()), has(ModItems.MARSHMALLOW.get())).save(output, "roasted_marshmallow_from_smelting");
+            SimpleCookingRecipeBuilder.smoking(marshmallow, RecipeCategory.FOOD, roasted, 0.35F, 100)
+                    .unlockedBy(getHasName(ModItems.MARSHMALLOW.get()), has(ModItems.MARSHMALLOW.get())).save(output, "roasted_marshmallow_from_smoking");
+            SimpleCookingRecipeBuilder.campfireCooking(marshmallow, RecipeCategory.FOOD, roasted, 0.35F, 300)
+                    .unlockedBy(getHasName(ModItems.MARSHMALLOW.get()), has(ModItems.MARSHMALLOW.get())).save(output, "roasted_marshmallow_from_campfire_cooking");
         }
 
         private void decor() {
             shaped(RecipeCategory.DECORATIONS, ModBlocks.FESTIVE_LIGHTS.get(), 6)
                     .pattern("SSS").pattern("RGB")
-                    .define('S', Items.STRING).define('R', Items.RED_DYE).define('G', Items.GLOWSTONE_DUST).define('B', Items.BLUE_DYE)
+                    .define('S', Items.STRING).define('R', Items.DYE.pick(DyeColor.RED)).define('G', Items.GLOWSTONE_DUST).define('B', Items.DYE.pick(DyeColor.BLUE))
                     .unlockedBy(getHasName(Items.GLOWSTONE_DUST), has(Items.GLOWSTONE_DUST))
                     .save(output);
             shaped(RecipeCategory.DECORATIONS, ModBlocks.WREATH.get(), 2)

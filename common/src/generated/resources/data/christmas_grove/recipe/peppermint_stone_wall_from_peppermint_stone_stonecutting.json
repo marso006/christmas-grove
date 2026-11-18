@@ -2,7 +2,6 @@
   "type": "minecraft:stonecutting",
   "ingredient": "christmas_grove:peppermint_stone",
   "result": {
-    "count": 1,
     "id": "christmas_grove:peppermint_stone_wall"
   }
 }

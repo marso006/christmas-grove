@@ -48,7 +48,7 @@ public class SnowGlobeItem extends Item {
         ServerLevel target = current.getServer().getLevel(inGrove ? Level.OVERWORLD : ModDimensions.GROVE);
         if (target == null) {
             // The dimension JSON failed to load, e.g. a datapack error. Say so instead of failing silently.
-            player.displayClientMessage(Component.translatable("item.christmas_grove.snow_globe.missing"), true);
+            player.sendOverlayMessage(Component.translatable("item.christmas_grove.snow_globe.missing"));
             return InteractionResult.FAIL;
         }
 

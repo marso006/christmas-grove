@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:simple_block",
+  "to_place": {
+    "type": "minecraft:weighted",
+    "entries": [
+      {
+        "data": "christmas_grove:lollipop_flower",
+        "weight": 3
+      },
+      {
+        "data": "christmas_grove:poinsettia",
+        "weight": 3
+      },
+      {
+        "data": "christmas_grove:holly",
+        "weight": 2
+      }
+    ]
+  }
+}

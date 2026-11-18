@@ -10,15 +10,9 @@ import net.minecraft.world.level.block.LadderBlock;
  */
 public class FestiveWallDecorBlock extends LadderBlock {
 
-    public static final MapCodec<FestiveWallDecorBlock> CODEC = simpleCodec(FestiveWallDecorBlock::new);
 
     public FestiveWallDecorBlock(Properties properties) {
         super(properties);
     }
 
-    @Override
-    @SuppressWarnings("unchecked") // LadderBlock fixes the codec type to MapCodec<LadderBlock>
-    public MapCodec<LadderBlock> codec() {
-        return (MapCodec<LadderBlock>) (MapCodec<?>) CODEC;
-    }
 }

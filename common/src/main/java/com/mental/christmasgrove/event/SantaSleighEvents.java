@@ -45,7 +45,7 @@ public final class SantaSleighEvents {
             return;
         }
         for (ServerPlayer player : level.players()) {
-            if (level.random.nextDouble() < chance && !sleighNearby(level, player)) {
+            if (level.getRandom().nextDouble() < chance && !sleighNearby(level, player)) {
                 flyOver(player, false);
                 return; // at most one sleigh per check
             }
@@ -63,12 +63,12 @@ public final class SantaSleighEvents {
         if (sleigh == null) {
             return;
         }
-        double angle = level.random.nextDouble() * Math.PI * 2;
+        double angle = level.getRandom().nextDouble() * Math.PI * 2;
         Vec3 start = player.position().add(Math.cos(angle) * SPAWN_DISTANCE, 0, Math.sin(angle) * SPAWN_DISTANCE);
         int ground = Math.max(level.getHeight(Heightmap.Types.MOTION_BLOCKING, (int) player.getX(), (int) player.getZ()),
                 level.getHeight(Heightmap.Types.MOTION_BLOCKING, (int) start.x, (int) start.z));
-        double y = Math.max(player.getY(), ground) + 22 + level.random.nextInt(8);
-        Vec3 sideways = new Vec3(-Math.sin(angle), 0, Math.cos(angle)).scale(level.random.nextInt(13) - 6);
+        double y = Math.max(player.getY(), ground) + 22 + level.getRandom().nextInt(8);
+        Vec3 sideways = new Vec3(-Math.sin(angle), 0, Math.cos(angle)).scale(level.getRandom().nextInt(13) - 6);
         Vec3 target = player.position().add(sideways);
 
         sleigh.snapTo(start.x, y, start.z, 0, 0);

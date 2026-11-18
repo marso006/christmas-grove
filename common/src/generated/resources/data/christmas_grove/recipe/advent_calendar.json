@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "key": {
     "C": "christmas_grove:candy_cane",
     "P": "christmas_grove:festive_fir_planks"
@@ -11,7 +10,6 @@
     "PPP"
   ],
   "result": {
-    "count": 1,
     "id": "christmas_grove:advent_calendar"
   }
 }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "christmas_grove:festive_fir_stairs"
+        "recipes": "christmas_grove:festive_fir_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

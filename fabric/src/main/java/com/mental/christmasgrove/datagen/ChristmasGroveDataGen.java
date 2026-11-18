@@ -27,7 +27,7 @@ public class ChristmasGroveDataGen implements DataGeneratorEntrypoint {
 
     @Override
     public void buildRegistry(RegistrySetBuilder registryBuilder) {
-        registryBuilder.add(Registries.CONFIGURED_FEATURE, ModWorldgen::configured);
+        registryBuilder.add(Registries.FEATURE, ModWorldgen::features);
         registryBuilder.add(Registries.PLACED_FEATURE, ModWorldgen::placed);
         registryBuilder.add(Registries.BIOME, ModBiomes::bootstrap);
     }

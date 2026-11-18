@@ -1,32 +1,33 @@
 package com.mental.christmasgrove.worldgen;
 
+import net.minecraft.world.level.chunk.ChunkGenerator;
 import com.mental.christmasgrove.registry.ModBlocks;
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 /**
  * A puffy marshmallow bobbing on the Cocoa Sea: a flattened blob of bouncy Marshmallow Blocks half
  * sunk at the water line, sometimes with a few smaller ones clustered around it.
  */
-public class MarshmallowIslandFeature extends Feature<NoneFeatureConfiguration> {
+public record MarshmallowIslandFeature() implements Feature {
 
-    public MarshmallowIslandFeature(Codec<NoneFeatureConfiguration> codec) {
-        super(codec);
+    /** Since 26.x a feature is a self-contained record; this one has no settings. */
+    public static final MapCodec<MarshmallowIslandFeature> CODEC = MapCodec.unit(MarshmallowIslandFeature::new);
+
+    @Override
+    public MapCodec<MarshmallowIslandFeature> codec() {
+        return CODEC;
     }
 
     @Override
-    public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
-        WorldGenLevel level = context.level();
-        RandomSource random = context.random();
+    public boolean place(WorldGenLevel level, ChunkGenerator chunkGenerator, RandomSource random, BlockPos origin) {
         // The origin is the first air block above the surface; over the sea that is just above the water.
-        BlockPos waterline = context.origin().below();
+        BlockPos waterline = origin.below();
         if (!level.getBlockState(waterline).is(Blocks.WATER)) {
             return false;
         }

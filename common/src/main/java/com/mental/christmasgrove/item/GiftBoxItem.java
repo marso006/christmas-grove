@@ -29,7 +29,7 @@ public class GiftBoxItem extends BlockItem {
         String key;
         if (data.getBooleanOr(GiftBoxBlockEntity.SURPRISE_TAG, false)) {
             key = "surprise";
-        } else if (contents.nonEmptyStream().findAny().isPresent()) {
+        } else if (contents.nonEmptyItemCopyStream().findAny().isPresent()) {
             tooltip.accept(Component.translatable("block.christmas_grove.gift_box.tooltip.wrapped",
                     data.getStringOr("ChristmasWrapperName", "")).withStyle(ChatFormatting.GOLD));
             return;

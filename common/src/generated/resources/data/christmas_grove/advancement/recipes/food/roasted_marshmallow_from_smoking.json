@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "christmas_grove:roasted_marshmallow_from_smoking"
+        "recipes": "christmas_grove:roasted_marshmallow_from_smoking"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "christmas_grove:peppermint_bricks_wall_from_peppermint_bricks_stonecutting"
+        "recipes": "christmas_grove:peppermint_bricks_wall_from_peppermint_bricks_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

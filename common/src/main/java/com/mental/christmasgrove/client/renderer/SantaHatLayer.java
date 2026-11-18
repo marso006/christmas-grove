@@ -19,8 +19,7 @@ public class SantaHatLayer extends RenderLayer<HumanoidRenderState, HumanoidMode
         super(parent);
         this.hat = new HumanoidModel<>(models.bakeLayer(ModModelLayers.SANTA_HAT));
         // Only the head carries the hat; the model is posed from the same render state as the wearer.
-        hat.setAllVisible(false);
-        hat.head.visible = true;
+        SantaHatModel.onlyHead(hat);
     }
 
     @Override

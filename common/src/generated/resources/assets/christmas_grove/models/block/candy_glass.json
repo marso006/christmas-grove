@@ -1,6 +1,9 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "christmas_grove:block/candy_glass"
+    "all": {
+      "force_translucent": true,
+      "sprite": "christmas_grove:block/candy_glass"
+    }
   }
 }

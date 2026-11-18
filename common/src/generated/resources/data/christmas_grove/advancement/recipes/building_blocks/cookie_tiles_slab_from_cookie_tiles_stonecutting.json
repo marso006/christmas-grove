@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "christmas_grove:cookie_tiles_slab_from_cookie_tiles_stonecutting"
+        "recipes": "christmas_grove:cookie_tiles_slab_from_cookie_tiles_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

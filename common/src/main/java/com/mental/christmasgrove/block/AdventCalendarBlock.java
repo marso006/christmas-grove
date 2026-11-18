@@ -40,7 +40,6 @@ import java.util.function.Supplier;
  */
 public class AdventCalendarBlock extends BaseEntityBlock {
 
-    public static final MapCodec<AdventCalendarBlock> CODEC = simpleCodec(AdventCalendarBlock::new);
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
     /** Day 1..25 (index 0 unused). */
@@ -81,10 +80,6 @@ public class AdventCalendarBlock extends BaseEntityBlock {
         registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 
-    @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return CODEC;
-    }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
@@ -114,23 +109,23 @@ public class AdventCalendarBlock extends BaseEntityBlock {
         }
         LocalDate today = LocalDate.now();
         if (today.getMonth() != Month.DECEMBER) {
-            player.displayClientMessage(Component.translatable("block.christmas_grove.advent_calendar.sealed"), true);
+            player.sendOverlayMessage(Component.translatable("block.christmas_grove.advent_calendar.sealed"));
             return InteractionResult.CONSUME;
         }
         int day = today.getDayOfMonth();
         if (day > 25) {
-            player.displayClientMessage(Component.translatable("block.christmas_grove.advent_calendar.finished"), true);
+            player.sendOverlayMessage(Component.translatable("block.christmas_grove.advent_calendar.finished"));
             return InteractionResult.CONSUME;
         }
         if (!calendar.open(player.getUUID(), today.getYear(), day)) {
-            player.displayClientMessage(Component.translatable("block.christmas_grove.advent_calendar.tomorrow", day), true);
+            player.sendOverlayMessage(Component.translatable("block.christmas_grove.advent_calendar.tomorrow", day));
             return InteractionResult.CONSUME;
         }
         for (ItemStack gift : GIFTS.get(day).get()) {
             Block.popResourceFromFace(level, pos, state.getValue(FACING), gift);
         }
-        player.displayClientMessage(Component.translatable("block.christmas_grove.advent_calendar.opened", day)
-                .withStyle(ChatFormatting.GOLD), true);
+        player.sendOverlayMessage(Component.translatable("block.christmas_grove.advent_calendar.opened", day)
+                .withStyle(ChatFormatting.GOLD));
         server.playSound(null, pos, SoundEvents.BARREL_OPEN, SoundSource.BLOCKS, 0.8F, 1.6F);
         server.playSound(null, pos, SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 0.8F, day == 25 ? 2.0F : 1.2F);
         Direction face = state.getValue(FACING);

@@ -28,6 +28,13 @@ public final class SantaHatModel {
     private SantaHatModel() {
     }
 
+    /** Hides every part of a humanoid model except the head (and the hat parts parented to it). */
+    public static void onlyHead(HumanoidModel<?> model) {
+        model.root().getAllParts().forEach(part -> part.visible = false); // includes the root itself
+        model.root().visible = true;
+        model.head.getAllParts().forEach(part -> part.visible = true);
+    }
+
     public static LayerDefinition createLayer() {
         MeshDefinition mesh = new MeshDefinition();
         PartDefinition root = mesh.getRoot();
@@ -62,8 +69,7 @@ public final class SantaHatModel {
         if (armorModel == null) {
             armorModel = new HumanoidModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(ModModelLayers.SANTA_HAT));
             // Only the head part carries the hat. The model is posed from the wearer's render state when drawn.
-            armorModel.setAllVisible(false);
-            armorModel.head.visible = true;
+            onlyHead(armorModel);
         }
         return armorModel;
     }

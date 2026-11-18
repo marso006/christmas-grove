@@ -1,5 +1,6 @@
 package com.mental.christmasgrove.entity;
 
+import java.util.UUID;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.level.storage.ValueInput;
 import com.mental.christmasgrove.naughty.NaughtyNice;
@@ -50,7 +51,7 @@ public class Krampus extends Monster {
 
     private static final int CHAIN_COOLDOWN = 140;
 
-    private final ServerBossEvent bossEvent = (ServerBossEvent) new ServerBossEvent(getDisplayName(),
+    private final ServerBossEvent bossEvent = (ServerBossEvent) new ServerBossEvent(UUID.randomUUID(), getDisplayName(),
             BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.NOTCHED_10).setDarkenScreen(true);
     private int chainTimer = CHAIN_COOLDOWN;
     private boolean calledMinions;
@@ -87,14 +88,14 @@ public class Krampus extends Monster {
     public static void summonFor(ServerPlayer player, boolean rungBell) {
         ServerLevel level = player.level();
         if (level.getDifficulty() == Difficulty.PEACEFUL) {
-            player.displayClientMessage(Component.translatable("entity.christmas_grove.krampus.peaceful"), true);
+            player.sendOverlayMessage(Component.translatable("entity.christmas_grove.krampus.peaceful"));
             return;
         }
         Krampus krampus = ModEntities.KRAMPUS.get().create(level, EntitySpawnReason.MOB_SUMMONED);
         if (krampus == null) {
             return;
         }
-        double angle = level.random.nextDouble() * Math.PI * 2;
+        double angle = level.getRandom().nextDouble() * Math.PI * 2;
         int x = (int) (player.getX() + Math.cos(angle) * 12);
         int z = (int) (player.getZ() + Math.sin(angle) * 12);
         int y = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x, z);
@@ -132,7 +133,7 @@ public class Krampus extends Monster {
     private void chainPull(LivingEntity target) {
         Vec3 pull = position().subtract(target.position()).normalize().scale(1.4).add(0, 0.45, 0);
         target.setDeltaMovement(pull);
-        target.hurtMarked = true; // makes the velocity reach a player's client
+        target.needsSync = true; // makes the velocity reach a player's client
         target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 60, 1), this);
         playSound(SoundEvents.CHAIN_PLACE, 2.0F, 0.5F);
         if (level() instanceof ServerLevel server) {

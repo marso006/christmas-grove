@@ -1,8 +1,8 @@
 package com.mental.christmasgrove.platform;
 
 import com.mental.christmasgrove.platform.services.IPlatformHelper;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
+import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
+import net.fabricmc.fabric.api.item.v1.BlockTransformerHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.world.item.CreativeModeTab;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
@@ -24,13 +24,14 @@ public class FabricPlatformHelper implements IPlatformHelper {
 
     @Override
     public CreativeModeTab.Builder creativeTabBuilder() {
-        return FabricItemGroup.builder();
+        return FabricCreativeModeTab.builder();
     }
 
     @Override
     public void registerStrippables(Map<Supplier<? extends Block>, Supplier<? extends Block>> strippables) {
         // Fabric registers blocks immediately, so they can be resolved right away.
-        strippables.forEach((log, stripped) -> StrippableBlockRegistry.register(log.get(), stripped.get()));
+        // Since 26.x axe stripping is a data-driven block transformer; Fabric appends to vanilla's axe entry.
+        strippables.forEach((log, stripped) -> BlockTransformerHelper.registerStripping(log.get(), stripped.get()));
     }
 
     @Override
@@ -40,7 +41,7 @@ public class FabricPlatformHelper implements IPlatformHelper {
 
     @Override
     public void onServerLevelTick(Consumer<ServerLevel> callback) {
-        ServerTickEvents.END_WORLD_TICK.register(callback::accept);
+        ServerTickEvents.END_LEVEL_TICK.register(callback::accept);
     }
 
     @Override

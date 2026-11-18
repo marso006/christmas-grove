@@ -66,10 +66,10 @@ public class GingerbreadMan extends PathfinderMob {
             if (random.nextInt(20) == 0) {
                 spawnAtLocation(server, new ItemStack(ModItems.GINGERBREAD_HEART.get()));
             }
-            server.sendParticles(new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(ModItems.GINGERBREAD_COOKIE.get())),
+            server.sendParticles(new ItemParticleOption(ParticleTypes.ITEM, ModItems.GINGERBREAD_COOKIE.get()),
                     getX(), getY() + 0.5, getZ(), 20, 0.2, 0.3, 0.2, 0.08);
             playSound(SoundEvents.PLAYER_BURP, 1.0F, 1.4F);
-            player.displayClientMessage(Component.translatable("entity.christmas_grove.gingerbread_man.caught"), true);
+            player.sendOverlayMessage(Component.translatable("entity.christmas_grove.gingerbread_man.caught"));
             discard();
         }
         return InteractionResult.SUCCESS;
@@ -80,7 +80,7 @@ public class GingerbreadMan extends PathfinderMob {
         super.aiStep();
         // Crumbs fly off while it runs.
         if (level().isClientSide() && getDeltaMovement().horizontalDistanceSqr() > 0.003 && random.nextInt(3) == 0) {
-            level().addParticle(new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(ModItems.GINGERBREAD_COOKIE.get())),
+            level().addParticle(new ItemParticleOption(ParticleTypes.ITEM, ModItems.GINGERBREAD_COOKIE.get()),
                     getX(), getY() + 0.2, getZ(), 0.0, 0.05, 0.0);
         }
     }

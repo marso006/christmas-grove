@@ -8,15 +8,12 @@ import com.mental.christmasgrove.platform.Services;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.BlockItem;
 import com.mental.christmasgrove.block.GiftBoxBlock;
 import com.mental.christmasgrove.item.GiftBoxItem;
-import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.equipment.ArmorType;
 
@@ -98,12 +95,12 @@ public final class ModItems {
             p -> new Item(p.sword(ModTiers.SUGAR_CRYSTAL, 3.0F, -2.4F))));
     public static final Supplier<Item> SUGAR_CRYSTAL_PICKAXE = handheld(registerRaw("sugar_crystal_pickaxe",
             p -> new Item(p.pickaxe(ModTiers.SUGAR_CRYSTAL, 1.0F, -2.8F))));
-    public static final Supplier<AxeItem> SUGAR_CRYSTAL_AXE = handheld(registerRaw("sugar_crystal_axe",
-            p -> new AxeItem(ModTiers.SUGAR_CRYSTAL, 5.5F, -3.1F, p)));
-    public static final Supplier<ShovelItem> SUGAR_CRYSTAL_SHOVEL = handheld(registerRaw("sugar_crystal_shovel",
-            p -> new ShovelItem(ModTiers.SUGAR_CRYSTAL, 1.5F, -3.0F, p)));
-    public static final Supplier<HoeItem> SUGAR_CRYSTAL_HOE = handheld(registerRaw("sugar_crystal_hoe",
-            p -> new HoeItem(ModTiers.SUGAR_CRYSTAL, -2.5F, -0.5F, p)));
+    public static final Supplier<Item> SUGAR_CRYSTAL_AXE = handheld(registerRaw("sugar_crystal_axe",
+            p -> new Item(p.axe(ModTiers.SUGAR_CRYSTAL, 5.5F, -3.1F))));
+    public static final Supplier<Item> SUGAR_CRYSTAL_SHOVEL = handheld(registerRaw("sugar_crystal_shovel",
+            p -> new Item(p.shovel(ModTiers.SUGAR_CRYSTAL, 1.5F, -3.0F))));
+    public static final Supplier<Item> SUGAR_CRYSTAL_HOE = handheld(registerRaw("sugar_crystal_hoe",
+            p -> new Item(p.hoe(ModTiers.SUGAR_CRYSTAL, -2.5F, -0.5F))));
 
     // ---- Santa Suit -----------------------------------------------------------------------------
 

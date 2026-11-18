@@ -66,7 +66,7 @@ public final class ShowcaseDirector {
 
     private void tick(Minecraft mc) {
         // Vanilla flags any world with an extra dimension as "experimental" and asks before loading it.
-        if (mc.screen instanceof BackupConfirmScreen screen) {
+        if (mc.gui.screen() instanceof BackupConfirmScreen screen) {
             for (var child : screen.children()) {
                 if (child instanceof Button button
                         && button.getMessage().equals(Component.translatable("selectWorld.backupJoinSkipButton"))) {
@@ -75,7 +75,7 @@ public final class ShowcaseDirector {
                 }
             }
         }
-        if (mc.level == null || mc.player == null || mc.getSingleplayerServer() == null || mc.screen != null && joinedTicks < 5) {
+        if (mc.level == null || mc.player == null || mc.getSingleplayerServer() == null || mc.gui.screen() != null && joinedTicks < 5) {
             return;
         }
         if (joinedTicks++ == 0) {
@@ -130,7 +130,7 @@ public final class ShowcaseDirector {
 
     private void shot(String name) {
         steps.add((mc, t) -> {
-            Screenshot.grab(mc.gameDirectory, name + ".png", mc.getMainRenderTarget(), 1,
+            Screenshot.grab(mc.gameDirectory, name + ".png", mc.gameRenderer.mainRenderTarget(), 1,
                     message -> Constants.LOG.info("Showcase: {}", message.getString()));
             return true;
         });
@@ -237,7 +237,9 @@ public final class ShowcaseDirector {
 
     private void buildScript() {
         client(mc -> {
-            mc.options.hideGui = true;
+            if (!mc.gui.hud.isHidden()) {
+                mc.gui.hud.toggle(); // like pressing F1
+            }
             mc.options.fov().set(70);
             mc.options.renderDistance().set(16);
             mc.options.setCameraType(CameraType.FIRST_PERSON);

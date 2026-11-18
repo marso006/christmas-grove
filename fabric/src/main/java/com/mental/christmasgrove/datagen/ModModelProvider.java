@@ -3,7 +3,7 @@ package com.mental.christmasgrove.datagen;
 import com.mental.christmasgrove.Constants;
 import com.mental.christmasgrove.registry.ModBlocks;
 import com.mental.christmasgrove.registry.ModItems;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.client.data.models.BlockModelGenerators;
@@ -28,7 +28,7 @@ public class ModModelProvider extends FabricModelProvider {
     private static final ModelTemplate GIFT_BOX = new ModelTemplate(
             Optional.of(Constants.id("block/gift_box_template")), Optional.empty(), TextureSlot.TOP, TextureSlot.SIDE);
 
-    public ModModelProvider(FabricDataOutput output) {
+    public ModModelProvider(FabricPackOutput output) {
         super(output);
     }
 
@@ -39,7 +39,7 @@ public class ModModelProvider extends FabricModelProvider {
         blocks.createTrivialCube(ModBlocks.GINGERBREAD.get());
         blocks.createTrivialCube(ModBlocks.SUGAR_SAND.get());
         blocks.createTrivialCube(ModBlocks.MARSHMALLOW_BLOCK.get());
-        blocks.createTrivialBlock(ModBlocks.FROSTED_GINGERBREAD.get(), TexturedModel.CUBE_TOP_BOTTOM.updateTexture(t -> t
+        blocks.createTrivialBlock(ModBlocks.FROSTED_GINGERBREAD.get(), TexturedModel.CUBE_BOTTOM_TOP.updateTexture(t -> t
                 .put(TextureSlot.TOP, TextureMapping.getBlockTexture(ModBlocks.FROSTING.get()))
                 .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(ModBlocks.FROSTED_GINGERBREAD.get(), "_side"))
                 .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(ModBlocks.GINGERBREAD.get()))));

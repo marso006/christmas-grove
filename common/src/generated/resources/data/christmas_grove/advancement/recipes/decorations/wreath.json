@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "christmas_grove:wreath"
+        "recipes": "christmas_grove:wreath"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

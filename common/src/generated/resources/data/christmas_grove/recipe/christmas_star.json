@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "key": {
     "D": "minecraft:glowstone_dust",
     "G": "minecraft:gold_ingot"
@@ -11,7 +10,6 @@
     " G "
   ],
   "result": {
-    "count": 1,
     "id": "christmas_grove:christmas_star"
   }
 }

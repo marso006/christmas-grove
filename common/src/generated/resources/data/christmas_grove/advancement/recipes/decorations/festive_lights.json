@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "christmas_grove:festive_lights"
+        "recipes": "christmas_grove:festive_lights"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

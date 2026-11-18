@@ -52,7 +52,6 @@ import java.util.List;
  */
 public class GiftBoxBlock extends BaseEntityBlock {
 
-    public static final MapCodec<GiftBoxBlock> CODEC = simpleCodec(GiftBoxBlock::new);
     private static final VoxelShape SHAPE = Block.box(2.0, 0.0, 2.0, 14.0, 12.0, 14.0);
 
     public GiftBoxBlock(Properties properties) {
@@ -67,10 +66,6 @@ public class GiftBoxBlock extends BaseEntityBlock {
         return stack;
     }
 
-    @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return CODEC;
-    }
 
     @Override
     protected RenderShape getRenderShape(BlockState state) {
@@ -103,12 +98,12 @@ public class GiftBoxBlock extends BaseEntityBlock {
 
     private static void wrap(GiftBoxBlockEntity box, Player player) {
         if (box.isSurprise()) {
-            player.displayClientMessage(Component.translatable("block.christmas_grove.gift_box.sealed"), true);
+            player.sendOverlayMessage(Component.translatable("block.christmas_grove.gift_box.sealed"));
             return;
         }
         if (box.wrapper() != null && !box.wrapper().equals(player.getUUID()) && !box.isEmpty()) {
-            player.displayClientMessage(Component.translatable("block.christmas_grove.gift_box.not_yours",
-                    box.wrapperName()), true);
+            player.sendOverlayMessage(Component.translatable("block.christmas_grove.gift_box.not_yours",
+                    box.wrapperName()));
             return;
         }
         box.setWrapper(player.getUUID(), player.getGameProfile().name());
@@ -131,14 +126,14 @@ public class GiftBoxBlock extends BaseEntityBlock {
             level.removeBlock(pos, false);
             contents.forEach(stack -> Block.popResource(level, pos, stack));
             if (box.wrapper() != null && !box.wrapper().equals(player.getUUID())) {
-                player.displayClientMessage(Component.translatable("block.christmas_grove.gift_box.from",
-                        box.wrapperName()).withStyle(ChatFormatting.GOLD), false);
+                player.sendSystemMessage(Component.translatable("block.christmas_grove.gift_box.from",
+                        box.wrapperName()).withStyle(ChatFormatting.GOLD));
                 if (level.getServer().getPlayerList().getPlayer(box.wrapper()) instanceof ServerPlayer giver) {
                     NaughtyNice.change(giver, 3, "gift_given");
                 }
             }
         } else {
-            player.displayClientMessage(Component.translatable("block.christmas_grove.gift_box.empty"), true);
+            player.sendOverlayMessage(Component.translatable("block.christmas_grove.gift_box.empty"));
             return;
         }
         level.playSound(null, pos, SoundEvents.BUNDLE_DROP_CONTENTS, SoundSource.BLOCKS, 1.0F, 1.0F);

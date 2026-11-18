@@ -10,9 +10,9 @@ import com.mojang.math.Axis;
 import net.minecraft.client.model.animal.equine.HorseModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.renderer.LightTexture;
+import net.minecraft.util.LightCoordsUtil;
 import net.minecraft.client.renderer.SubmitNodeCollector;
-import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
@@ -66,8 +66,7 @@ public class SantaSleighRenderer extends EntityRenderer<SantaSleigh, SantaSleigh
         this.reindeer = new HorseModel(context.bakeLayer(ModModelLayers.REINDEER));
         this.santa = new WavingSantaModel(context.bakeLayer(ModModelLayers.SANTA_CLAUS));
         this.hat = new HumanoidModel<>(context.bakeLayer(ModModelLayers.SANTA_HAT));
-        hat.setAllVisible(false);
-        hat.head.visible = true;
+        SantaHatModel.onlyHead(hat);
         this.shadowRadius = 0.0F;
     }
 
@@ -84,17 +83,17 @@ public class SantaSleighRenderer extends EntityRenderer<SantaSleigh, SantaSleigh
 
     @Override
     public void submit(State state, PoseStack poseStack, SubmitNodeCollector collector, CameraRenderState camera) {
-        int glow = LightTexture.FULL_BRIGHT;
+        int glow = LightCoordsUtil.FULL_BRIGHT;
         float age = state.ageInTicks;
 
         poseStack.pushPose();
         // A gentle bob, as if riding on the wind
         poseStack.translate(0.0, Math.sin(age / 8.0) * 0.15, 0.0);
-        poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - state.yRot));
+        poseStack.rotate(Axis.YP.rotationDegrees(180.0F - state.yRot));
         poseStack.scale(-1.0F, -1.0F, 1.0F);
         poseStack.translate(0.0F, -1.501F, 0.0F);
 
-        collector.submitModelPart(sleigh, poseStack, RenderTypes.entityCutoutNoCull(SLEIGH_TEXTURE), glow, OverlayTexture.NO_OVERLAY, null);
+        collector.submitModelPart(sleigh, poseStack, RenderTypes.entityCutout(SLEIGH_TEXTURE), glow, OverlayTexture.NO_OVERLAY, null);
 
         // The reindeer team, legs galloping
         reindeerPose.walkAnimationPos = age * 0.55F;
@@ -105,7 +104,7 @@ public class SantaSleighRenderer extends EntityRenderer<SantaSleigh, SantaSleigh
             poseStack.pushPose();
             poseStack.translate(slot[0], Math.sin((age + slot[1] * 3) / 4.0) * 0.06, slot[1]);
             poseStack.scale(0.9F, 0.9F, 0.9F);
-            collector.submitModel(reindeer, reindeerPose, poseStack, reindeer.renderType(REINDEER_TEXTURE), glow, OverlayTexture.NO_OVERLAY, 0, null);
+            collector.submitModel(reindeer, reindeerPose, poseStack, reindeer.renderType(REINDEER_TEXTURE), glow, OverlayTexture.NO_OVERLAY, 0);
             poseStack.popPose();
         }
 
@@ -115,8 +114,8 @@ public class SantaSleighRenderer extends EntityRenderer<SantaSleigh, SantaSleigh
         poseStack.pushPose();
         poseStack.translate(0.0F, -0.55F, 0.2F);
         poseStack.scale(0.95F, 0.95F, 0.95F);
-        collector.submitModel(santa, santaPose, poseStack, santa.renderType(SANTA_TEXTURE), glow, OverlayTexture.NO_OVERLAY, 0, null);
-        collector.submitModel(hat, santaPose, poseStack, hat.renderType(SantaHatModel.TEXTURE), glow, OverlayTexture.NO_OVERLAY, 0, null);
+        collector.submitModel(santa, santaPose, poseStack, santa.renderType(SANTA_TEXTURE), glow, OverlayTexture.NO_OVERLAY, 0);
+        collector.submitModel(hat, santaPose, poseStack, hat.renderType(SantaHatModel.TEXTURE), glow, OverlayTexture.NO_OVERLAY, 0);
         poseStack.popPose();
 
         poseStack.popPose();

@@ -1,16 +1,13 @@
 plugins {
     id 'multiloader-loader'
-    id 'net.fabricmc.fabric-loom-remap'
+    id 'net.fabricmc.fabric-loom'
 }
 
 dependencies {
     minecraft "com.mojang:minecraft:${minecraft_version}"
-    mappings loom.layered {
-        officialMojangMappings()
-        parchment("org.parchmentmc.data:parchment-${parchment_minecraft}:${parchment_version}@zip")
-    }
-    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
+    // 26.x is unobfuscated: no mappings, and mods are used as-is (no remapping configurations).
+    implementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
 }
 
 // ./gradlew :fabric:runDatagen writes generated data into the common project, shared by both loaders.

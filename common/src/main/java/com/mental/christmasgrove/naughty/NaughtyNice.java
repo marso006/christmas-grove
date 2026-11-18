@@ -1,5 +1,6 @@
 package com.mental.christmasgrove.naughty;
 
+import com.mental.christmasgrove.Constants;
 import com.mental.christmasgrove.util.PlayerSounds;
 import net.minecraft.core.UUIDUtil;
 import com.mental.christmasgrove.entity.Krampus;
@@ -39,7 +40,7 @@ public final class NaughtyNice extends SavedData {
 
     private static final String ID = "christmas_grove_naughty_nice";
     /** Same file format as before; since 1.21.5 saved data is described by a codec. */
-    private static final SavedDataType<NaughtyNice> TYPE = new SavedDataType<>(ID, NaughtyNice::new,
+    private static final SavedDataType<NaughtyNice> TYPE = new SavedDataType<>(Constants.id("naughty_nice"), NaughtyNice::new,
             CompoundTag.CODEC.xmap(NaughtyNice::load, NaughtyNice::toTag), DataFixTypes.SAVED_DATA_COMMAND_STORAGE);
 
     private final Map<UUID, Integer> scores = new HashMap<>();
@@ -77,12 +78,12 @@ public final class NaughtyNice extends SavedData {
 
         Component why = Component.translatable("naughty_nice.christmas_grove.reason." + reason);
         if (delta < 0) {
-            player.displayClientMessage(Component.translatable("naughty_nice.christmas_grove.naughty", why)
-                    .withStyle(ChatFormatting.RED), true);
+            player.sendOverlayMessage(Component.translatable("naughty_nice.christmas_grove.naughty", why)
+                    .withStyle(ChatFormatting.RED));
             PlayerSounds.play(player, SoundEvents.VILLAGER_NO, SoundSource.PLAYERS, 0.6F, 0.8F);
         } else {
-            player.displayClientMessage(Component.translatable("naughty_nice.christmas_grove.nice", why)
-                    .withStyle(ChatFormatting.GREEN), true);
+            player.sendOverlayMessage(Component.translatable("naughty_nice.christmas_grove.nice", why)
+                    .withStyle(ChatFormatting.GREEN));
             PlayerSounds.play(player, SoundEvents.NOTE_BLOCK_CHIME, SoundSource.PLAYERS, 0.6F, 1.6F);
         }
 

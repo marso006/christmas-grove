@@ -3,17 +3,13 @@ plugins {
     id 'net.neoforged.moddev'
 }
 
-// The common project compiles against plain (vanilla) Minecraft via NeoForm, with Mojang names + Parchment.
+// The common project compiles against plain (vanilla) Minecraft via NeoForm, with Mojang's own (unobfuscated) names.
 neoForge {
     neoFormVersion = neo_form_version
     // Automatically enable AccessTransformers if the file exists
     def at = file('src/main/resources/META-INF/accesstransformer.cfg')
     if (at.exists()) {
         accessTransformers.from(at.absolutePath)
-    }
-    parchment {
-        minecraftVersion = parchment_minecraft
-        mappingsVersion = parchment_version
     }
 }
 

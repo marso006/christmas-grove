@@ -19,7 +19,9 @@ import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
-import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
+import net.minecraft.world.level.levelgen.carver.WorldCarver;
+import net.minecraft.util.ARGB;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 /**
@@ -34,7 +36,7 @@ final class ModBiomes {
 
     static void bootstrap(BootstrapContext<Biome> context) {
         HolderGetter<PlacedFeature> placed = context.lookup(Registries.PLACED_FEATURE);
-        HolderGetter<ConfiguredWorldCarver<?>> carvers = context.lookup(Registries.CONFIGURED_CARVER);
+        HolderGetter<WorldCarver> carvers = context.lookup(Registries.CARVER);
 
         context.register(ModDimensions.GROVE_BIOME, biome(0.7F, 0.4F,
                 colours(0x9EC3F0, 0xEAF0FA, 0x6B3E26, 0x3D2214), 0.012F,
@@ -94,7 +96,7 @@ final class ModBiomes {
 
     /** Every biome: no rain (the flakes are particles), shared caves and ores, candy-coloured skies. */
     private static Biome biome(float temperature, float downfall, Colours c, float flakes, Features features) {
-        // Since 1.21.11 sky, fog, particles and ambience are environment attributes; colours are ARGB.
+        // Since 1.21.11 sky, fog, particles and ambience are environment attributes; colours are RGB vectors.
         BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder()
                 .waterColor(c.water())
                 .grassColorOverride(0xE8D5CB)
@@ -105,9 +107,9 @@ final class ModBiomes {
                 .temperature(temperature)
                 .downfall(downfall)
                 .specialEffects(effects)
-                .setAttribute(EnvironmentAttributes.SKY_COLOR, 0xFF000000 | c.sky())
-                .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xFF000000 | c.fog())
-                .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 0xFF000000 | c.waterFog())
+                .setAttribute(EnvironmentAttributes.SKY_COLOR, ARGB.vector3fFromRGB24(c.sky()))
+                .setAttribute(EnvironmentAttributes.FOG_COLOR, ARGB.vector3fFromRGB24(c.fog()))
+                .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, ARGB.vector3fFromRGB24(c.waterFog()))
                 .setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, AmbientParticle.of(ParticleTypes.WHITE_ASH, flakes))
                 .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, AmbientSounds.LEGACY_CAVE_SETTINGS)
                 .mobSpawnSettings(features.spawns.build())
@@ -115,7 +117,7 @@ final class ModBiomes {
                 .build();
     }
 
-    private static Features features(HolderGetter<PlacedFeature> placed, HolderGetter<ConfiguredWorldCarver<?>> carvers) {
+    private static Features features(HolderGetter<PlacedFeature> placed, HolderGetter<WorldCarver> carvers) {
         return new Features(placed, carvers);
     }
 
@@ -125,7 +127,7 @@ final class ModBiomes {
         private final BiomeGenerationSettings.Builder builder;
         final MobSpawnSettings.Builder spawns = new MobSpawnSettings.Builder();
 
-        Features(HolderGetter<PlacedFeature> placed, HolderGetter<ConfiguredWorldCarver<?>> carvers) {
+        Features(HolderGetter<PlacedFeature> placed, HolderGetter<WorldCarver> carvers) {
             this.placed = placed;
             this.builder = new BiomeGenerationSettings.Builder(placed, carvers);
             builder.addCarver(carvers.getOrThrow(Carvers.CAVE));
@@ -161,7 +163,7 @@ final class ModBiomes {
         }
 
         Features spawn(MobCategory category, EntityType<?> type, int weight, int min, int max) {
-            spawns.addSpawn(category, weight, new MobSpawnSettings.SpawnerData(type, min, max));
+            spawns.addSpawn(type, category, weight, UniformInt.of(min, max));
             return this;
         }
 

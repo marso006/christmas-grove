@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "christmas_grove:candy_cane_planks"
+        "recipes": "christmas_grove:candy_cane_planks"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

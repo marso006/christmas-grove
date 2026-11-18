@@ -23,17 +23,12 @@ import org.jetbrains.annotations.Nullable;
 /** A glass jar for cookies (or anything else, nine slots of it). Spills its contents when broken. */
 public class CookieJarBlock extends BaseEntityBlock {
 
-    public static final MapCodec<CookieJarBlock> CODEC = simpleCodec(CookieJarBlock::new);
     private static final VoxelShape SHAPE = Block.box(4.0, 0.0, 4.0, 12.0, 12.0, 12.0);
 
     public CookieJarBlock(Properties properties) {
         super(properties);
     }
 
-    @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return CODEC;
-    }
 
     @Override
     protected RenderShape getRenderShape(BlockState state) {

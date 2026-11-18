@@ -4,7 +4,7 @@ import com.mental.christmasgrove.Constants;
 import com.mental.christmasgrove.registry.ModBlocks;
 import com.mental.christmasgrove.registry.ModEntities;
 import com.mental.christmasgrove.registry.ModItems;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -26,7 +26,7 @@ public class ModLanguageProvider extends FabricLanguageProvider {
             "gold_lit_festive_fir_leaves", "Festive Fir Leaves with Gold Lights",
             "blue_lit_festive_fir_leaves", "Festive Fir Leaves with Blue Lights");
 
-    public ModLanguageProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+    public ModLanguageProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, "en_us", registries);
     }
 

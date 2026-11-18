@@ -1,9 +1,10 @@
 package com.mental.christmasgrove.datagen;
 
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 import com.mental.christmasgrove.registry.ModEntities;
 import com.mental.christmasgrove.registry.ModItems;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableSubProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
@@ -16,16 +17,14 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
 /** What each mob drops when killed. */
-public class ModEntityLootProvider extends SimpleFabricLootTableProvider {
+public class ModEntityLootProvider extends SimpleFabricLootTableSubProvider {
 
-    public ModEntityLootProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+    public ModEntityLootProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, LootContextParamSets.ENTITY);
     }
 
@@ -33,7 +32,7 @@ public class ModEntityLootProvider extends SimpleFabricLootTableProvider {
     public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> output) {
         output.accept(key(ModEntities.GINGERBREAD_MAN.get()), LootTable.lootTable()
                 .withPool(pool(ModItems.GINGERBREAD_COOKIE.get(), 1, 2))
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                .withPool(LootPool.lootPool().setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(ModItems.GINGERBREAD_HEART.get()))
                         .when(LootItemKilledByPlayerCondition.killedByPlayer())
                         .when(LootItemRandomChanceCondition.randomChance(0.05F))));
@@ -63,7 +62,7 @@ public class ModEntityLootProvider extends SimpleFabricLootTableProvider {
     }
 
     private static LootPool.Builder pool(ItemLike item, int min, int max) {
-        return LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                .add(LootItem.lootTableItem(item).apply(SetItemCountFunction.setCount(UniformGenerator.between(min, max))));
+        return LootPool.lootPool().setRolls(ContextIntProviders.exactly(1))
+                .add(LootItem.lootTableItem(item).apply(SetItemCountFunction.setCount(ContextIntProviders.between(min, max))));
     }
 }

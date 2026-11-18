@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "christmas_grove:sugar_cookie"
+        "recipes": "christmas_grove:sugar_cookie"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

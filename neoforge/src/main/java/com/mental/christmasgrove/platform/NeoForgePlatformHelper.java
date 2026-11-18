@@ -33,22 +33,8 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
 
     @Override
     public void registerStrippables(Map<Supplier<? extends Block>, Supplier<? extends Block>> strippables) {
-        // Blocks are not created yet (DeferredRegister), so resolve the map lazily on first use.
-        Map<Block, Block> resolved = new HashMap<>();
-        NeoForge.EVENT_BUS.addListener((BlockEvent.BlockToolModificationEvent event) -> {
-            if (event.getItemAbility() != ItemAbilities.AXE_STRIP) {
-                return;
-            }
-            if (resolved.isEmpty()) {
-                strippables.forEach((log, stripped) -> resolved.put(log.get(), stripped.get()));
-            }
-            BlockState state = event.getState();
-            Block stripped = resolved.get(state.getBlock());
-            if (stripped != null) {
-                event.setFinalState(stripped.defaultBlockState()
-                        .setValue(RotatedPillarBlock.AXIS, state.getValue(RotatedPillarBlock.AXIS)));
-            }
-        });
+        // Since 26.x axe stripping is a data-driven block transformer. On NeoForge it is declared in
+        // data/neoforge/data_maps/block/transformables.json, which NeoForge appends to vanilla's axe entry.
     }
 
     @Override

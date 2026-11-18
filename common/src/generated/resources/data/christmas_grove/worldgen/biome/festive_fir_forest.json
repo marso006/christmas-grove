@@ -8,6 +8,72 @@
         "tick_delay": 6000
       }
     },
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {},
+        "spawns_by_category": {
+          "creature": [
+            {
+              "type": "christmas_grove:reindeer",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 4,
+                "min_inclusive": 2
+              },
+              "weight": 8
+            },
+            {
+              "type": "christmas_grove:gingerbread_man",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 3,
+                "min_inclusive": 1
+              },
+              "weight": 6
+            },
+            {
+              "type": "christmas_grove:elf",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 3,
+                "min_inclusive": 1
+              },
+              "weight": 3
+            }
+          ],
+          "monster": [
+            {
+              "type": "christmas_grove:gumdrop_blob",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 3,
+                "min_inclusive": 1
+              },
+              "weight": 60
+            },
+            {
+              "type": "christmas_grove:cookie_soldier",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 2,
+                "min_inclusive": 1
+              },
+              "weight": 45
+            },
+            {
+              "type": "christmas_grove:evil_snowman",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 2,
+                "min_inclusive": 1
+              },
+              "weight": 35
+            }
+          ]
+        }
+      },
+      "modifier": "overlay"
+    },
     "minecraft:visual/ambient_particles": [
       {
         "particle": {
@@ -48,54 +114,5 @@
     ]
   ],
   "has_precipitation": false,
-  "spawn_costs": {},
-  "spawners": {
-    "ambient": [],
-    "axolotls": [],
-    "creature": [
-      {
-        "type": "christmas_grove:reindeer",
-        "maxCount": 4,
-        "minCount": 2,
-        "weight": 8
-      },
-      {
-        "type": "christmas_grove:gingerbread_man",
-        "maxCount": 3,
-        "minCount": 1,
-        "weight": 6
-      },
-      {
-        "type": "christmas_grove:elf",
-        "maxCount": 3,
-        "minCount": 1,
-        "weight": 3
-      }
-    ],
-    "misc": [],
-    "monster": [
-      {
-        "type": "christmas_grove:gumdrop_blob",
-        "maxCount": 3,
-        "minCount": 1,
-        "weight": 60
-      },
-      {
-        "type": "christmas_grove:cookie_soldier",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 45
-      },
-      {
-        "type": "christmas_grove:evil_snowman",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 35
-      }
-    ],
-    "underground_water_creature": [],
-    "water_ambient": [],
-    "water_creature": []
-  },
   "temperature": 0.3
 }

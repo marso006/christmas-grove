@@ -14,17 +14,12 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 /** The golden star on top of a Festive Fir. Glows at light level 15 and sparkles now and then. */
 public class StarBlock extends Block {
 
-    public static final MapCodec<StarBlock> CODEC = simpleCodec(StarBlock::new);
     private static final VoxelShape SHAPE = Block.box(3.0, 0.0, 3.0, 13.0, 14.0, 13.0);
 
     public StarBlock(Properties properties) {
         super(properties);
     }
 
-    @Override
-    protected MapCodec<? extends Block> codec() {
-        return CODEC;
-    }
 
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {

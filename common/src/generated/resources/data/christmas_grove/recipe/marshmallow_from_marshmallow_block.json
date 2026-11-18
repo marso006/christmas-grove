@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "group": "marshmallow",
   "ingredients": [
     "christmas_grove:marshmallow_block"

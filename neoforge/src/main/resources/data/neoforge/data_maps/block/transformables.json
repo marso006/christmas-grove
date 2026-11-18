@@ -1,0 +1,96 @@
+{
+  "values": {
+    "christmas_grove:candy_cane_log": {
+      "transformer": "minecraft:axe",
+      "transform_data": {
+        "block_state_provider": {
+          "type": "minecraft:rule_based",
+          "rules": [
+            {
+              "if_true": {
+                "type": "minecraft:matching_blocks",
+                "blocks": "christmas_grove:candy_cane_log"
+              },
+              "then": {
+                "type": "minecraft:copy_properties",
+                "source": {
+                  "id": "christmas_grove:stripped_candy_cane_log"
+                }
+              }
+            }
+          ]
+        },
+        "sound": "minecraft:item.axe.strip"
+      }
+    },
+    "christmas_grove:candy_cane_wood": {
+      "transformer": "minecraft:axe",
+      "transform_data": {
+        "block_state_provider": {
+          "type": "minecraft:rule_based",
+          "rules": [
+            {
+              "if_true": {
+                "type": "minecraft:matching_blocks",
+                "blocks": "christmas_grove:candy_cane_wood"
+              },
+              "then": {
+                "type": "minecraft:copy_properties",
+                "source": {
+                  "id": "christmas_grove:stripped_candy_cane_wood"
+                }
+              }
+            }
+          ]
+        },
+        "sound": "minecraft:item.axe.strip"
+      }
+    },
+    "christmas_grove:festive_fir_log": {
+      "transformer": "minecraft:axe",
+      "transform_data": {
+        "block_state_provider": {
+          "type": "minecraft:rule_based",
+          "rules": [
+            {
+              "if_true": {
+                "type": "minecraft:matching_blocks",
+                "blocks": "christmas_grove:festive_fir_log"
+              },
+              "then": {
+                "type": "minecraft:copy_properties",
+                "source": {
+                  "id": "christmas_grove:stripped_festive_fir_log"
+                }
+              }
+            }
+          ]
+        },
+        "sound": "minecraft:item.axe.strip"
+      }
+    },
+    "christmas_grove:festive_fir_wood": {
+      "transformer": "minecraft:axe",
+      "transform_data": {
+        "block_state_provider": {
+          "type": "minecraft:rule_based",
+          "rules": [
+            {
+              "if_true": {
+                "type": "minecraft:matching_blocks",
+                "blocks": "christmas_grove:festive_fir_wood"
+              },
+              "then": {
+                "type": "minecraft:copy_properties",
+                "source": {
+                  "id": "christmas_grove:stripped_festive_fir_wood"
+                }
+              }
+            }
+          ]
+        },
+        "sound": "minecraft:item.axe.strip"
+      }
+    }
+  }
+}

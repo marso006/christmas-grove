@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "christmas_grove:letter_to_santa"
+        "recipes": "christmas_grove:letter_to_santa"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

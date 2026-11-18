@@ -1,5 +1,6 @@
 package com.mental.christmasgrove.entity;
 
+import net.minecraft.util.Prediction;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.core.UUIDUtil;
@@ -83,11 +84,11 @@ public class SantaClaus extends PathfinderMob {
         if (!(level() instanceof ServerLevel server)) {
             return InteractionResult.SUCCESS;
         }
-        long today = server.getDayTime() / 24000L;
+        long today = server.getOverworldClockTime() / 24000L;
         Long last = lastGiftDay.get(player.getUUID());
         if (last != null && last == today) {
-            player.displayClientMessage(Component.translatable("entity.christmas_grove.santa_claus.tomorrow",
-                    player.getDisplayName()), false);
+            player.sendSystemMessage(Component.translatable("entity.christmas_grove.santa_claus.tomorrow",
+                    player.getDisplayName()));
             playSound(SoundEvents.VILLAGER_AMBIENT, 1.0F, 0.6F);
             return InteractionResult.CONSUME;
         }
@@ -98,8 +99,8 @@ public class SantaClaus extends PathfinderMob {
         if (standing == NaughtyNice.Standing.NAUGHTY) {
             // Naughty children get coal.
             giveOrDrop(player, new ItemStack(Items.COAL));
-            player.displayClientMessage(Component.translatable("entity.christmas_grove.santa_claus.naughty",
-                    player.getDisplayName()), false);
+            player.sendSystemMessage(Component.translatable("entity.christmas_grove.santa_claus.naughty",
+                    player.getDisplayName()));
             playSound(SoundEvents.VILLAGER_NO, 1.2F, 0.55F);
             return InteractionResult.CONSUME;
         }
@@ -111,8 +112,8 @@ public class SantaClaus extends PathfinderMob {
             giveOrDrop(player, new ItemStack(ModItems.SUGAR_CRYSTAL.get(), 1 + random.nextInt(3)));
         }
         String message = standing == NaughtyNice.Standing.NICE ? "nice" : isChristmas() ? "christmas" : "gift";
-        player.displayClientMessage(Component.translatable("entity.christmas_grove.santa_claus." + message,
-                player.getDisplayName()), false);
+        player.sendSystemMessage(Component.translatable("entity.christmas_grove.santa_claus." + message,
+                player.getDisplayName()));
         playSound(SoundEvents.VILLAGER_CELEBRATE, 1.2F, 0.55F);
         server.sendParticles(ParticleTypes.HAPPY_VILLAGER, getX(), getY() + 1.8, getZ(), 15, 0.5, 0.5, 0.5, 0.0);
         return InteractionResult.CONSUME;
@@ -128,7 +129,7 @@ public class SantaClaus extends PathfinderMob {
 
     private static void giveOrDrop(Player player, ItemStack stack) {
         if (!player.getInventory().add(stack)) {
-            player.drop(stack, false);
+            player.drop(stack, false, Prediction.SERVER_ONLY);
         }
     }
 

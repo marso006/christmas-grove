@@ -1,10 +1,14 @@
 package com.mental.christmasgrove.datagen;
 
+import net.minecraft.tags.BlockItemTags;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.item.Item;
+import net.minecraft.resources.ResourceKey;
 import com.mental.christmasgrove.registry.ModBlocks;
 import com.mental.christmasgrove.registry.ModItems;
 import com.mental.christmasgrove.registry.ModTags;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
@@ -12,10 +16,10 @@ import net.minecraft.tags.ItemTags;
 import java.util.concurrent.CompletableFuture;
 
 /** Item tags mostly mirror the block tags, so recipes accept our planks, logs, slabs and so on. */
-public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
+public class ModItemTagProvider extends FabricTagsProvider.ItemTagsProvider {
 
-    public ModItemTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registries,
-                              BlockTagProvider blockTags) {
+    public ModItemTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registries,
+                              FabricTagsProvider.BlockTagsProvider blockTags) {
         super(output, registries, blockTags);
     }
 
@@ -26,41 +30,46 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         }
         copy(ModTags.Blocks.SUGAR_CRYSTAL_ORES, ModTags.Items.SUGAR_CRYSTAL_ORES);
         copy(ModTags.Blocks.CINNAMON_ORES, ModTags.Items.CINNAMON_ORES);
-        copy(BlockTags.LOGS, ItemTags.LOGS);
-        copy(BlockTags.PLANKS, ItemTags.PLANKS);
-        copy(BlockTags.WOODEN_STAIRS, ItemTags.WOODEN_STAIRS);
-        copy(BlockTags.WOODEN_SLABS, ItemTags.WOODEN_SLABS);
-        copy(BlockTags.WOODEN_FENCES, ItemTags.WOODEN_FENCES);
-        copy(BlockTags.FENCE_GATES, ItemTags.FENCE_GATES);
-        copy(BlockTags.WOODEN_DOORS, ItemTags.WOODEN_DOORS);
-        copy(BlockTags.WOODEN_TRAPDOORS, ItemTags.WOODEN_TRAPDOORS);
-        copy(BlockTags.WOODEN_BUTTONS, ItemTags.WOODEN_BUTTONS);
-        copy(BlockTags.WOODEN_PRESSURE_PLATES, ItemTags.WOODEN_PRESSURE_PLATES);
-        copy(BlockTags.STAIRS, ItemTags.STAIRS);
-        copy(BlockTags.SLABS, ItemTags.SLABS);
-        copy(BlockTags.WALLS, ItemTags.WALLS);
-        copy(BlockTags.LEAVES, ItemTags.LEAVES);
-        copy(BlockTags.SAPLINGS, ItemTags.SAPLINGS);
-        copy(BlockTags.SMALL_FLOWERS, ItemTags.SMALL_FLOWERS);
-        copy(BlockTags.SAND, ItemTags.SAND);
+        copy(BlockItemTags.LOGS);
+        copy(BlockItemTags.PLANKS);
+        copy(BlockItemTags.WOODEN_STAIRS);
+        copy(BlockItemTags.WOODEN_SLABS);
+        copy(BlockItemTags.WOODEN_FENCES);
+        copy(BlockItemTags.FENCE_GATES);
+        copy(BlockItemTags.WOODEN_DOORS);
+        copy(BlockItemTags.WOODEN_TRAPDOORS);
+        copy(BlockItemTags.WOODEN_BUTTONS);
+        copy(BlockItemTags.WOODEN_PRESSURE_PLATES);
+        copy(BlockItemTags.STAIRS);
+        copy(BlockItemTags.SLABS);
+        copy(BlockItemTags.WALLS);
+        copy(BlockItemTags.LEAVES);
+        copy(BlockItemTags.SAPLINGS);
+        copy(BlockItemTags.SMALL_FLOWERS);
+        copy(BlockItemTags.SAND);
 
         // Tools and armor: these tags decide which enchantments apply
         // Repair material for the Sugar Crystal tools (ToolMaterial takes a tag since 1.21.2)
-        valueLookupBuilder(ModTags.Items.SUGAR_CRYSTAL_TOOL_MATERIALS).add(ModItems.SUGAR_CRYSTAL.get());
-        valueLookupBuilder(ItemTags.SWORDS).add(ModItems.CANDY_CANE_SWORD.get());
-        valueLookupBuilder(ItemTags.PICKAXES).add(ModItems.SUGAR_CRYSTAL_PICKAXE.get());
-        valueLookupBuilder(ItemTags.AXES).add(ModItems.SUGAR_CRYSTAL_AXE.get());
-        valueLookupBuilder(ItemTags.SHOVELS).add(ModItems.SUGAR_CRYSTAL_SHOVEL.get());
-        valueLookupBuilder(ItemTags.HOES).add(ModItems.SUGAR_CRYSTAL_HOE.get());
-        valueLookupBuilder(ItemTags.HEAD_ARMOR).add(ModItems.SANTA_HAT.get());
-        valueLookupBuilder(ItemTags.CHEST_ARMOR).add(ModItems.SANTA_COAT.get());
-        valueLookupBuilder(ItemTags.LEG_ARMOR).add(ModItems.SANTA_TROUSERS.get());
-        valueLookupBuilder(ItemTags.FOOT_ARMOR).add(ModItems.SANTA_BOOTS.get());
+        builder(ModTags.Items.SUGAR_CRYSTAL_TOOL_MATERIALS).add(key(ModItems.SUGAR_CRYSTAL.get()));
+        builder(ItemTags.SWORDS).add(key(ModItems.CANDY_CANE_SWORD.get()));
+        builder(ItemTags.PICKAXES).add(key(ModItems.SUGAR_CRYSTAL_PICKAXE.get()));
+        builder(ItemTags.AXES).add(key(ModItems.SUGAR_CRYSTAL_AXE.get()));
+        builder(ItemTags.SHOVELS).add(key(ModItems.SUGAR_CRYSTAL_SHOVEL.get()));
+        builder(ItemTags.HOES).add(key(ModItems.SUGAR_CRYSTAL_HOE.get()));
+        builder(ItemTags.HEAD_ARMOR).add(key(ModItems.SANTA_HAT.get()));
+        builder(ItemTags.CHEST_ARMOR).add(key(ModItems.SANTA_COAT.get()));
+        builder(ItemTags.LEG_ARMOR).add(key(ModItems.SANTA_TROUSERS.get()));
+        builder(ItemTags.FOOT_ARMOR).add(key(ModItems.SANTA_BOOTS.get()));
         // Wearing any Santa Suit piece stops you freezing in powder snow.
-        valueLookupBuilder(ItemTags.FREEZE_IMMUNE_WEARABLES).add(ModItems.SANTA_HAT.get(), ModItems.SANTA_COAT.get(),
-                ModItems.SANTA_TROUSERS.get(), ModItems.SANTA_BOOTS.get());
+        builder(ItemTags.FREEZE_IMMUNE_WEARABLES).add(key(ModItems.SANTA_HAT.get()), key(ModItems.SANTA_COAT.get()),
+                key(ModItems.SANTA_TROUSERS.get()), key(ModItems.SANTA_BOOTS.get()));
 
         // Foxes eat gumdrops the way they eat sweet berries.
-        valueLookupBuilder(ItemTags.FOX_FOOD).add(ModItems.GUMDROPS.get());
+        builder(ItemTags.FOX_FOOD).add(key(ModItems.GUMDROPS.get()));
+    }
+
+    /** Since 26.x tag builders take registry keys. */
+    private static ResourceKey<Item> key(ItemLike item) {
+        return item.asItem().builtInRegistryHolder().key();
     }
 }

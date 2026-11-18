@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "christmas_grove:stripped_candy_cane_wood"
+        "recipes": "christmas_grove:stripped_candy_cane_wood"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "ingredients": [
     "minecraft:paper",
     "minecraft:feather",
@@ -8,7 +7,6 @@
     "christmas_grove:candy_cane"
   ],
   "result": {
-    "count": 1,
     "id": "christmas_grove:letter_to_santa"
   }
 }

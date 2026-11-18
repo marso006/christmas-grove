@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "ingredients": [
     "minecraft:paper",
     "minecraft:paper",
@@ -8,7 +7,6 @@
     "minecraft:red_dye"
   ],
   "result": {
-    "count": 1,
     "id": "christmas_grove:red_gift_box"
   }
 }

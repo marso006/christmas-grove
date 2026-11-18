@@ -2,23 +2,21 @@
   "type": "minecraft:chest",
   "pools": [
     {
-      "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_custom_data",
+              "type": "minecraft:set_custom_data",
               "tag": "{ChristmasSurprise:1b}"
             },
             {
-              "add": false,
+              "type": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
+                "max": 2,
+                "min": 1
+              }
             }
           ],
           "name": "christmas_grove:red_gift_box",
@@ -26,19 +24,18 @@
         },
         {
           "type": "minecraft:item",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_custom_data",
+              "type": "minecraft:set_custom_data",
               "tag": "{ChristmasSurprise:1b}"
             },
             {
-              "add": false,
+              "type": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
+                "max": 2,
+                "min": 1
+              }
             }
           ],
           "name": "christmas_grove:green_gift_box",
@@ -46,19 +43,18 @@
         },
         {
           "type": "minecraft:item",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_custom_data",
+              "type": "minecraft:set_custom_data",
               "tag": "{ChristmasSurprise:1b}"
             },
             {
-              "add": false,
+              "type": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
+                "max": 2,
+                "min": 1
+              }
             }
           ],
           "name": "christmas_grove:blue_gift_box",
@@ -66,33 +62,27 @@
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 5.0,
-                "min": 2.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 5,
+              "min": 2
             }
-          ],
+          },
           "name": "christmas_grove:sugar_crystal",
           "weight": 15
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 2,
+              "min": 1
             }
-          ],
+          },
           "name": "christmas_grove:eggnog",
           "weight": 10
         },
@@ -103,45 +93,38 @@
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 3.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 3,
+              "min": 1
             }
-          ],
+          },
           "name": "christmas_grove:festive_fir_sapling",
           "weight": 8
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 2,
+              "min": 1
             }
-          ],
+          },
           "name": "minecraft:diamond",
           "weight": 4
         }
       ],
       "rolls": {
         "type": "minecraft:uniform",
-        "max": 6.0,
-        "min": 3.0
+        "max": 6,
+        "min": 3
       }
     },
     {
-      "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:item",
@@ -162,8 +145,8 @@
       ],
       "rolls": {
         "type": "minecraft:uniform",
-        "max": 1.0,
-        "min": 0.0
+        "max": 1,
+        "min": 0
       }
     }
   ]
