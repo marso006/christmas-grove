@@ -1,23 +1,24 @@
 {
-  "ambient_light": 0.0,
-  "bed_works": true,
-  "coordinate_scale": 1.0,
-  "effects": "minecraft:overworld",
-  "has_ceiling": false,
-  "has_raids": false,
+  "has_fixed_time": false,
   "has_skylight": true,
-  "height": 384,
-  "infiniburn": "#minecraft:infiniburn_overworld",
-  "logical_height": 384,
+  "has_ceiling": false,
+  "coordinate_scale": 1.0,
   "min_y": -64,
-  "monster_spawn_block_light_limit": 0,
+  "height": 384,
+  "logical_height": 384,
+  "infiniburn": "#minecraft:infiniburn_overworld",
+  "ambient_light": 0.0,
+  "skybox": "overworld",
   "monster_spawn_light_level": {
     "type": "minecraft:uniform",
-    "max_inclusive": 7,
-    "min_inclusive": 0
+    "min_inclusive": 0,
+    "max_inclusive": 7
   },
-  "natural": true,
-  "piglin_safe": false,
-  "respawn_anchor_works": false,
-  "ultrawarm": false
+  "monster_spawn_block_light_limit": 0,
+  "attributes": {
+    "minecraft:gameplay/can_start_raid": false,
+    "minecraft:visual/cloud_color": "#CCFFFFFF",
+    "minecraft:visual/cloud_height": 192.33
+  },
+  "timelines": "#minecraft:in_overworld"
 }

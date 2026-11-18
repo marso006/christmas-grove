@@ -6,7 +6,7 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Mob;
 
 /**
@@ -15,11 +15,11 @@ import net.minecraft.world.entity.Mob;
  */
 public class SimpleHumanoidRenderer<T extends Mob> extends HumanoidMobRenderer<T, HumanoidRenderState, HumanoidModel<HumanoidRenderState>> {
 
-    private final ResourceLocation texture;
+    private final Identifier texture;
     private final float scale;
 
     public SimpleHumanoidRenderer(EntityRendererProvider.Context context, ModelLayerLocation layer,
-                                  ResourceLocation texture, float scale) {
+                                  Identifier texture, float scale) {
         super(context, new HumanoidModel<>(context.bakeLayer(layer)), 0.5F * scale);
         this.texture = texture;
         this.scale = scale;
@@ -31,7 +31,7 @@ public class SimpleHumanoidRenderer<T extends Mob> extends HumanoidMobRenderer<T
     }
 
     @Override
-    public ResourceLocation getTextureLocation(HumanoidRenderState state) {
+    public Identifier getTextureLocation(HumanoidRenderState state) {
         return texture;
     }
 

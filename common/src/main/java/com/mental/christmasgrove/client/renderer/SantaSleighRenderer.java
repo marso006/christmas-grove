@@ -1,25 +1,25 @@
 package com.mental.christmasgrove.client.renderer;
 
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import com.mental.christmasgrove.Constants;
 import com.mental.christmasgrove.client.ModModelLayers;
 import com.mental.christmasgrove.client.SantaHatModel;
 import com.mental.christmasgrove.entity.SantaSleigh;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.minecraft.client.model.HorseModel;
+import net.minecraft.client.model.animal.equine.HorseModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.state.CameraRenderState;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.entity.state.EquineRenderState;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 
 /**
@@ -30,9 +30,9 @@ import net.minecraft.util.Mth;
  */
 public class SantaSleighRenderer extends EntityRenderer<SantaSleigh, SantaSleighRenderer.State> {
 
-    private static final ResourceLocation SLEIGH_TEXTURE = Constants.id("textures/entity/santa_sleigh.png");
-    private static final ResourceLocation REINDEER_TEXTURE = Constants.id("textures/entity/reindeer.png");
-    private static final ResourceLocation SANTA_TEXTURE = Constants.id("textures/entity/santa_claus.png");
+    private static final Identifier SLEIGH_TEXTURE = Constants.id("textures/entity/santa_sleigh.png");
+    private static final Identifier REINDEER_TEXTURE = Constants.id("textures/entity/reindeer.png");
+    private static final Identifier SANTA_TEXTURE = Constants.id("textures/entity/santa_claus.png");
     private static final float[][] TEAM = {{-0.55F, -2.7F}, {0.55F, -2.7F}, {-0.55F, -4.5F}, {0.55F, -4.5F}};
 
     private final ModelPart sleigh;
@@ -94,7 +94,7 @@ public class SantaSleighRenderer extends EntityRenderer<SantaSleigh, SantaSleigh
         poseStack.scale(-1.0F, -1.0F, 1.0F);
         poseStack.translate(0.0F, -1.501F, 0.0F);
 
-        collector.submitModelPart(sleigh, poseStack, RenderType.entityCutoutNoCull(SLEIGH_TEXTURE), glow, OverlayTexture.NO_OVERLAY, null);
+        collector.submitModelPart(sleigh, poseStack, RenderTypes.entityCutoutNoCull(SLEIGH_TEXTURE), glow, OverlayTexture.NO_OVERLAY, null);
 
         // The reindeer team, legs galloping
         reindeerPose.walkAnimationPos = age * 0.55F;

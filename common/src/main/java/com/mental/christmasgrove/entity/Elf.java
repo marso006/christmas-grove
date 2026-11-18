@@ -1,5 +1,6 @@
 package com.mental.christmasgrove.entity;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import com.mental.christmasgrove.naughty.NaughtyNice;
 import com.mental.christmasgrove.block.GiftBoxBlock;
@@ -26,7 +27,7 @@ import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.TradeWithPlayerGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.npc.AbstractVillager;
+import net.minecraft.world.entity.npc.villager.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -66,7 +67,7 @@ public class Elf extends AbstractVillager {
     }
 
     @Override
-    protected void updateTrades() {
+    protected void updateTrades(ServerLevel level) {
         MerchantOffers offers = getOffers();
         // Selling decorations and presents
         offers.add(sell(ModItems.SUGAR_CRYSTAL.get(), 1, ModBlocks.FESTIVE_LIGHTS.get(), 8));

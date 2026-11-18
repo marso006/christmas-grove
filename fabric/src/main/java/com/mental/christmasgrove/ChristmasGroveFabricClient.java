@@ -1,5 +1,6 @@
 package com.mental.christmasgrove;
 
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import com.mental.christmasgrove.client.ModEntityRenderers;
 import com.mental.christmasgrove.client.SantaHatModel;
 import com.mental.christmasgrove.registry.ModItems;
@@ -13,7 +14,6 @@ import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -30,7 +30,7 @@ public class ChristmasGroveFabricClient implements ClientModInitializer {
         // The Santa Hat is a real 3D hat, not a reshaped helmet.
         ArmorRenderer.register((poseStack, collector, stack, state, slot, light, wearerModel) -> {
             HumanoidModel<HumanoidRenderState> hat = SantaHatModel.armorModel();
-            collector.submitModel(hat, state, poseStack, RenderType.armorCutoutNoCull(SantaHatModel.TEXTURE), light,
+            collector.submitModel(hat, state, poseStack, RenderTypes.armorCutoutNoCull(SantaHatModel.TEXTURE), light,
                     OverlayTexture.NO_OVERLAY, state.outlineColor, null);
         }, ModItems.SANTA_HAT.get());
 

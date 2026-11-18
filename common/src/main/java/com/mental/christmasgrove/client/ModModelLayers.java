@@ -1,7 +1,7 @@
 package com.mental.christmasgrove.client;
 
 import com.mental.christmasgrove.Constants;
-import net.minecraft.client.model.AbstractEquineModel;
+import net.minecraft.client.model.animal.equine.AbstractEquineModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.PartPose;

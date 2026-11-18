@@ -11,8 +11,9 @@ import net.minecraft.data.worldgen.Carvers;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.level.biome.AmbientMoodSettings;
-import net.minecraft.world.level.biome.AmbientParticleSettings;
+import net.minecraft.world.attribute.AmbientParticle;
+import net.minecraft.world.attribute.AmbientSounds;
+import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
@@ -93,21 +94,22 @@ final class ModBiomes {
 
     /** Every biome: no rain (the flakes are particles), shared caves and ores, candy-coloured skies. */
     private static Biome biome(float temperature, float downfall, Colours c, float flakes, Features features) {
+        // Since 1.21.11 sky, fog, particles and ambience are environment attributes; colours are ARGB.
         BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder()
-                .skyColor(c.sky())
-                .fogColor(c.fog())
                 .waterColor(c.water())
-                .waterFogColor(c.waterFog())
                 .grassColorOverride(0xE8D5CB)
                 .foliageColorOverride(0xE8828E)
-                .ambientParticle(new AmbientParticleSettings(ParticleTypes.WHITE_ASH, flakes))
-                .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
                 .build();
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(false)
                 .temperature(temperature)
                 .downfall(downfall)
                 .specialEffects(effects)
+                .setAttribute(EnvironmentAttributes.SKY_COLOR, 0xFF000000 | c.sky())
+                .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xFF000000 | c.fog())
+                .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 0xFF000000 | c.waterFog())
+                .setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, AmbientParticle.of(ParticleTypes.WHITE_ASH, flakes))
+                .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, AmbientSounds.LEGACY_CAVE_SETTINGS)
                 .mobSpawnSettings(features.spawns.build())
                 .generationSettings(features.build())
                 .build();

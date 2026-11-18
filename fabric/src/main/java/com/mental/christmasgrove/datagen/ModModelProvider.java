@@ -14,7 +14,7 @@ import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.client.data.models.model.TexturedModel;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SweetBerryBushBlock;
@@ -86,7 +86,7 @@ public class ModModelProvider extends FabricModelProvider {
         blocks.createHorizontallyRotatedBlock(ModBlocks.ADVENT_CALENDAR.get(), TexturedModel.ORIENTABLE_ONLY_TOP);
         for (Supplier<Block> box : java.util.List.of(ModBlocks.RED_GIFT_BOX, ModBlocks.GREEN_GIFT_BOX, ModBlocks.BLUE_GIFT_BOX)) {
             Block block = box.get();
-            ResourceLocation model = GIFT_BOX.create(block, new TextureMapping()
+            Identifier model = GIFT_BOX.create(block, new TextureMapping()
                     .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top"))
                     .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side")), blocks.modelOutput);
             blocks.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, BlockModelGenerators.plainVariant(model)));

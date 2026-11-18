@@ -5,13 +5,13 @@ import com.mental.christmasgrove.entity.GumdropBlob;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.SlimeRenderer;
 import net.minecraft.client.renderer.entity.state.SlimeRenderState;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.monster.Slime;
 
 /** The slime renderer (translucent outer jelly, squish animation) with four gumdrop flavours. */
 public class GumdropBlobRenderer extends SlimeRenderer {
 
-    private static final ResourceLocation[] FLAVOURS = {
+    private static final Identifier[] FLAVOURS = {
             Constants.id("textures/entity/gumdrop_blob/cherry.png"),
             Constants.id("textures/entity/gumdrop_blob/lime.png"),
             Constants.id("textures/entity/gumdrop_blob/lemon.png"),
@@ -41,7 +41,7 @@ public class GumdropBlobRenderer extends SlimeRenderer {
     }
 
     @Override
-    public ResourceLocation getTextureLocation(SlimeRenderState state) {
+    public Identifier getTextureLocation(SlimeRenderState state) {
         return FLAVOURS[state instanceof State gumdrop ? gumdrop.flavour : 0];
     }
 }

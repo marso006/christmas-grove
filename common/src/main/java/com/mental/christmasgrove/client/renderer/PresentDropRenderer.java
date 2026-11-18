@@ -1,5 +1,6 @@
 package com.mental.christmasgrove.client.renderer;
 
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import com.mental.christmasgrove.Constants;
 import com.mental.christmasgrove.client.ModModelLayers;
 import com.mental.christmasgrove.entity.PresentDrop;
@@ -8,12 +9,11 @@ import com.mojang.math.Axis;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.state.CameraRenderState;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -21,7 +21,7 @@ import net.minecraft.world.level.block.state.BlockState;
 /** A gift box hanging under a candy-striped parachute, swaying as it floats down. */
 public class PresentDropRenderer extends EntityRenderer<PresentDrop, PresentDropRenderer.State> {
 
-    private static final ResourceLocation PARACHUTE_TEXTURE = Constants.id("textures/entity/present_parachute.png");
+    private static final Identifier PARACHUTE_TEXTURE = Constants.id("textures/entity/present_parachute.png");
     private final ModelPart parachute;
 
     public static class State extends EntityRenderState {
@@ -67,7 +67,7 @@ public class PresentDropRenderer extends EntityRenderer<PresentDrop, PresentDrop
 
         poseStack.scale(-1.0F, -1.0F, 1.0F);
         poseStack.translate(0.0F, -1.501F, 0.0F);
-        collector.submitModelPart(parachute, poseStack, RenderType.entityCutoutNoCull(PARACHUTE_TEXTURE), light, OverlayTexture.NO_OVERLAY, null);
+        collector.submitModelPart(parachute, poseStack, RenderTypes.entityCutoutNoCull(PARACHUTE_TEXTURE), light, OverlayTexture.NO_OVERLAY, null);
         poseStack.popPose();
         super.submit(state, poseStack, collector, camera);
     }

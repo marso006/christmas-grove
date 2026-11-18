@@ -9,7 +9,7 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 
 /**
@@ -21,7 +21,7 @@ import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
  */
 public final class SantaHatModel {
 
-    public static final ResourceLocation TEXTURE = Constants.id("textures/models/armor/santa_hat_layer_1.png");
+    public static final Identifier TEXTURE = Constants.id("textures/models/armor/santa_hat_layer_1.png");
 
     private static HumanoidModel<HumanoidRenderState> armorModel;
 

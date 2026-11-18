@@ -1,5 +1,6 @@
 package com.mental.christmasgrove.naughty;
 
+import com.mental.christmasgrove.util.PlayerSounds;
 import net.minecraft.core.UUIDUtil;
 import com.mental.christmasgrove.entity.Krampus;
 import net.minecraft.ChatFormatting;
@@ -78,11 +79,11 @@ public final class NaughtyNice extends SavedData {
         if (delta < 0) {
             player.displayClientMessage(Component.translatable("naughty_nice.christmas_grove.naughty", why)
                     .withStyle(ChatFormatting.RED), true);
-            player.playNotifySound(SoundEvents.VILLAGER_NO, SoundSource.PLAYERS, 0.6F, 0.8F);
+            PlayerSounds.play(player, SoundEvents.VILLAGER_NO, SoundSource.PLAYERS, 0.6F, 0.8F);
         } else {
             player.displayClientMessage(Component.translatable("naughty_nice.christmas_grove.nice", why)
                     .withStyle(ChatFormatting.GREEN), true);
-            player.playNotifySound(SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.PLAYERS, 0.6F, 1.6F);
+            PlayerSounds.play(player, SoundEvents.NOTE_BLOCK_CHIME, SoundSource.PLAYERS, 0.6F, 1.6F);
         }
 
         if (after <= KRAMPUS_THRESHOLD && before > KRAMPUS_THRESHOLD) {

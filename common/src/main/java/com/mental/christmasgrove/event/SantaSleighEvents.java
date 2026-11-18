@@ -1,5 +1,6 @@
 package com.mental.christmasgrove.event;
 
+import com.mental.christmasgrove.util.PlayerSounds;
 import net.minecraft.world.entity.EntitySpawnReason;
 import com.mental.christmasgrove.entity.SantaSleigh;
 import com.mental.christmasgrove.registry.ModDimensions;
@@ -80,7 +81,7 @@ public final class SantaSleighEvents {
         for (ServerPlayer nearby : level.players()) {
             if (nearby.distanceToSqr(player) < 160 * 160) {
                 nearby.sendSystemMessage(message);
-                nearby.playNotifySound(SoundEvents.NOTE_BLOCK_BELL.value(), SoundSource.NEUTRAL, 1.0F, 2.0F);
+                PlayerSounds.play(nearby, SoundEvents.NOTE_BLOCK_BELL, SoundSource.NEUTRAL, 1.0F, 2.0F);
             }
         }
     }

@@ -19,7 +19,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Difficulty;
-import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -159,10 +159,10 @@ public final class ShowcaseDirector {
     private static BlockPos find(ServerLevel level, ResourceKey<Biome> biome, BlockPos from) {
         Pair<BlockPos, Holder<Biome>> found = level.findClosestBiome3d(h -> h.is(biome), from.atY(64), 6400, 32, 64);
         if (found == null) {
-            Constants.LOG.warn("Showcase: no {} found near {}", biome.location(), from);
+            Constants.LOG.warn("Showcase: no {} found near {}", biome.identifier(), from);
         }
         BlockPos pos = found == null ? from : found.getFirst();
-        Constants.LOG.info("Showcase: {} at {}", biome.location(), pos);
+        Constants.LOG.info("Showcase: {} at {}", biome.identifier(), pos);
         // step a little into the biome so the camera sees mostly that biome
         return new BlockPos(pos.getX() + 24, 0, pos.getZ() + 24);
     }
@@ -186,11 +186,11 @@ public final class ShowcaseDirector {
                 }
             }
             if (good >= 2) {
-                Constants.LOG.info("Showcase: viewpoint for {} at {} {} {}", biome.location(), x, y, z);
+                Constants.LOG.info("Showcase: viewpoint for {} at {} {} {}", biome.identifier(), x, y, z);
                 return new BlockPos(x, y, z);
             }
         }
-        Constants.LOG.warn("Showcase: no good viewpoint for {}", biome.location());
+        Constants.LOG.warn("Showcase: no good viewpoint for {}", biome.identifier());
         return new BlockPos(start.getX(), surface(level, start.getX(), start.getZ()), start.getZ());
     }
 
@@ -244,10 +244,10 @@ public final class ShowcaseDirector {
         });
         server(server -> {
             server.setDifficulty(Difficulty.EASY, true);
-            server.getGameRules().getRule(GameRules.RULE_DAYLIGHT).set(false, server);
-            server.getGameRules().getRule(GameRules.RULE_WEATHER_CYCLE).set(false, server);
-            server.getGameRules().getRule(GameRules.RULE_DOMOBSPAWNING).set(false, server);
-            server.getGameRules().getRule(GameRules.RULE_DOMOBLOOT).set(false, server); // no loot clutter after kills
+            server.overworld().getGameRules().set(GameRules.ADVANCE_TIME, false, server);
+            server.overworld().getGameRules().set(GameRules.ADVANCE_WEATHER, false, server);
+            server.overworld().getGameRules().set(GameRules.SPAWN_MOBS, false, server);
+            server.overworld().getGameRules().set(GameRules.MOB_DROPS, false, server); // no loot clutter after kills
             player(server).setGameMode(GameType.SPECTATOR);
             camera(server, 0, 120, 0, 0, 0); // into the dimension
         });
