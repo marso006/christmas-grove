@@ -1,5 +1,7 @@
 package com.mental.christmasgrove.block.entity;
 
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.core.UUIDUtil;
 import com.mental.christmasgrove.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;
@@ -97,19 +99,19 @@ public class GiftBoxBlockEntity extends BaseContainerBlockEntity {
     // ---- Saving ----------------------------------------------------------------------------------
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.loadAdditional(tag, registries);
+    protected void loadAdditional(ValueInput tag) {
+        super.loadAdditional(tag);
         items = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(tag, items, registries);
-        surprise = !tag.contains(SURPRISE_TAG) || tag.getBooleanOr(SURPRISE_TAG, false);
+        ContainerHelper.loadAllItems(tag, items);
+        surprise = tag.getBooleanOr(SURPRISE_TAG, true);
         wrapper = tag.read(WRAPPER_TAG, UUIDUtil.CODEC).orElse(null);
         wrapperName = tag.getStringOr(WRAPPER_NAME_TAG, "");
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.saveAdditional(tag, registries);
-        ContainerHelper.saveAllItems(tag, items, registries);
+    protected void saveAdditional(ValueOutput tag) {
+        super.saveAdditional(tag);
+        ContainerHelper.saveAllItems(tag, items);
         tag.putBoolean(SURPRISE_TAG, surprise);
         if (wrapper != null) {
             tag.store(WRAPPER_TAG, UUIDUtil.CODEC, wrapper);
@@ -147,11 +149,11 @@ public class GiftBoxBlockEntity extends BaseContainerBlockEntity {
     }
 
     @Override
-    public void removeComponentsFromTag(CompoundTag tag) {
+    public void removeComponentsFromTag(ValueOutput tag) {
         super.removeComponentsFromTag(tag);
-        tag.remove("Items");
-        tag.remove(SURPRISE_TAG);
-        tag.remove(WRAPPER_TAG);
-        tag.remove(WRAPPER_NAME_TAG);
+        tag.discard("Items");
+        tag.discard(SURPRISE_TAG);
+        tag.discard(WRAPPER_TAG);
+        tag.discard(WRAPPER_NAME_TAG);
     }
 }

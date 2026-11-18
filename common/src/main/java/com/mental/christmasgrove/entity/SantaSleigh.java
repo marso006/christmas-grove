@@ -1,5 +1,7 @@
 package com.mental.christmasgrove.entity;
 
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntitySpawnReason;
 import com.mental.christmasgrove.naughty.NaughtyNice;
@@ -143,16 +145,17 @@ public class SantaSleigh extends Entity {
     }
 
     @Override
-    protected void readAdditionalSaveData(CompoundTag tag) {
+    protected void readAdditionalSaveData(ValueInput tag) {
         life = tag.getIntOr("Life", 0);
         drops = tag.getIntOr("Drops", 0);
-        if (tag.contains("DirX")) {
-            launch(new Vec3(tag.getDoubleOr("DirX", 0.0), 0, tag.getDoubleOr("DirZ", 0.0)));
+        double dirX = tag.getDoubleOr("DirX", Double.NaN);
+        if (!Double.isNaN(dirX)) {
+            launch(new Vec3(dirX, 0, tag.getDoubleOr("DirZ", 0.0)));
         }
     }
 
     @Override
-    protected void addAdditionalSaveData(CompoundTag tag) {
+    protected void addAdditionalSaveData(ValueOutput tag) {
         tag.putInt("Life", life);
         tag.putInt("Drops", drops);
         tag.putDouble("DirX", getDeltaMovement().x);

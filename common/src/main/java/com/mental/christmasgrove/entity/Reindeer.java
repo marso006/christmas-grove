@@ -1,5 +1,7 @@
 package com.mental.christmasgrove.entity;
 
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.server.level.ServerPlayer;
 import com.mental.christmasgrove.naughty.NaughtyNice;
@@ -99,13 +101,13 @@ public class Reindeer extends AbstractHorse {
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag tag) {
+    protected void addAdditionalSaveData(ValueOutput tag) {
         super.addAdditionalSaveData(tag);
         tag.putBoolean("SleighBells", hasSleighBells());
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag tag) {
+    protected void readAdditionalSaveData(ValueInput tag) {
         super.readAdditionalSaveData(tag);
         entityData.set(SLEIGH_BELLS, tag.getBooleanOr("SleighBells", false));
     }

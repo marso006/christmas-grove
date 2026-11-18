@@ -57,7 +57,7 @@ public final class SantaSleighEvents {
 
     /** Starts a sleigh far from the player, heading on a path that passes just beside them. */
     public static void flyOver(ServerPlayer player, boolean fromLetter) {
-        ServerLevel level = player.serverLevel();
+        ServerLevel level = player.level();
         SantaSleigh sleigh = ModEntities.SANTA_SLEIGH.get().create(level, EntitySpawnReason.MOB_SUMMONED);
         if (sleigh == null) {
             return;

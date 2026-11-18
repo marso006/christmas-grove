@@ -1,5 +1,7 @@
 package com.mental.christmasgrove.entity;
 
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.level.storage.ValueInput;
 import com.mental.christmasgrove.naughty.NaughtyNice;
 import com.mental.christmasgrove.registry.ModEntities;
 import net.minecraft.ChatFormatting;
@@ -83,7 +85,7 @@ public class Krampus extends Monster {
 
     /** Brings Krampus to a player: a dozen blocks away, on the surface, already hunting them. */
     public static void summonFor(ServerPlayer player, boolean rungBell) {
-        ServerLevel level = player.serverLevel();
+        ServerLevel level = player.level();
         if (level.getDifficulty() == Difficulty.PEACEFUL) {
             player.displayClientMessage(Component.translatable("entity.christmas_grove.krampus.peaceful"), true);
             return;
@@ -183,7 +185,7 @@ public class Krampus extends Monster {
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag tag) {
+    protected void readAdditionalSaveData(ValueInput tag) {
         super.readAdditionalSaveData(tag);
         calledMinions = tag.getBooleanOr("CalledMinions", false);
         if (hasCustomName()) {
@@ -192,7 +194,7 @@ public class Krampus extends Monster {
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag tag) {
+    protected void addAdditionalSaveData(ValueOutput tag) {
         super.addAdditionalSaveData(tag);
         tag.putBoolean("CalledMinions", calledMinions);
     }

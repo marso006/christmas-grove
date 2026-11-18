@@ -50,7 +50,7 @@ public final class NaughtyNice extends SavedData {
     // ---- Public API ----------------------------------------------------------------------------
 
     public static int score(ServerPlayer player) {
-        return get(player.server).scores.getOrDefault(player.getUUID(), 0);
+        return get(player.level().getServer()).scores.getOrDefault(player.getUUID(), 0);
     }
 
     public static Standing standing(int score) {
@@ -68,7 +68,7 @@ public final class NaughtyNice extends SavedData {
         if (delta == 0 || player.isCreative() || player.isSpectator()) {
             return;
         }
-        NaughtyNice data = get(player.server);
+        NaughtyNice data = get(player.level().getServer());
         int before = data.scores.getOrDefault(player.getUUID(), 0);
         int after = Mth.clamp(before + delta, MIN, MAX);
         data.scores.put(player.getUUID(), after);
@@ -92,7 +92,7 @@ public final class NaughtyNice extends SavedData {
 
     /** Wipes the slate clean (after defeating Krampus). */
     public static void reset(ServerPlayer player) {
-        NaughtyNice data = get(player.server);
+        NaughtyNice data = get(player.level().getServer());
         data.scores.put(player.getUUID(), 0);
         data.setDirty();
     }

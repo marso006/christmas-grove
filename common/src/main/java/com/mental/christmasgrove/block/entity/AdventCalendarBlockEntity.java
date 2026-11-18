@@ -1,5 +1,7 @@
 package com.mental.christmasgrove.block.entity;
 
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.core.UUIDUtil;
 import com.mental.christmasgrove.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;
@@ -43,12 +45,11 @@ public class AdventCalendarBlockEntity extends BlockEntity {
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.loadAdditional(tag, registries);
+    protected void loadAdditional(ValueInput tag) {
+        super.loadAdditional(tag);
         year = tag.getIntOr("Year", 0);
         opened.clear();
-        for (Tag t : tag.getListOrEmpty("Opened")) {
-            CompoundTag entry = (CompoundTag) t;
+        for (ValueInput entry : tag.childrenListOrEmpty("Opened")) {
             BitSet doors = new BitSet(26);
             for (int day : entry.getIntArray("Days").orElse(new int[0])) {
                 doors.set(day);
@@ -58,16 +59,14 @@ public class AdventCalendarBlockEntity extends BlockEntity {
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.saveAdditional(tag, registries);
+    protected void saveAdditional(ValueOutput tag) {
+        super.saveAdditional(tag);
         tag.putInt("Year", year);
-        ListTag list = new ListTag();
+        ValueOutput.ValueOutputList list = tag.childrenList("Opened");
         opened.forEach((uuid, doors) -> {
-            CompoundTag entry = new CompoundTag();
+            ValueOutput entry = list.addChild();
             entry.store("Player", UUIDUtil.CODEC, uuid);
-            entry.put("Days", new IntArrayTag(doors.stream().toArray()));
-            list.add(entry);
+            entry.putIntArray("Days", doors.stream().toArray());
         });
-        tag.put("Opened", list);
     }
 }

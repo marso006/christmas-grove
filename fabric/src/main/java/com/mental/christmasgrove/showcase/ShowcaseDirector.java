@@ -129,7 +129,7 @@ public final class ShowcaseDirector {
 
     private void shot(String name) {
         steps.add((mc, t) -> {
-            Screenshot.grab(mc.gameDirectory, name + ".png", mc.getMainRenderTarget(),
+            Screenshot.grab(mc.gameDirectory, name + ".png", mc.getMainRenderTarget(), 1,
                     message -> Constants.LOG.info("Showcase: {}", message.getString()));
             return true;
         });

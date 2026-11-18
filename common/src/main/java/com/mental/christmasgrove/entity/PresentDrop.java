@@ -1,5 +1,7 @@
 package com.mental.christmasgrove.entity;
 
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.damagesource.DamageSource;
 import com.mental.christmasgrove.block.GiftBoxBlock;
 import com.mental.christmasgrove.registry.ModBlocks;
@@ -100,12 +102,12 @@ public class PresentDrop extends Entity {
     }
 
     @Override
-    protected void readAdditionalSaveData(CompoundTag tag) {
+    protected void readAdditionalSaveData(ValueInput tag) {
         setColour(tag.getIntOr("Colour", 0));
     }
 
     @Override
-    protected void addAdditionalSaveData(CompoundTag tag) {
+    protected void addAdditionalSaveData(ValueOutput tag) {
         tag.putInt("Colour", colour());
     }
 }
