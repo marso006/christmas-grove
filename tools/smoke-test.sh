@@ -32,6 +32,7 @@ commands=(
 
 (
   for _ in $(seq 1 180); do grep -qE 'Done \(|Exception|FAILURE|BUILD FAILED' "$log" && break; sleep 2; done
+  sleep 5   # some loader betas reject console commands sent the instant the server reports Done
   for c in "${commands[@]}"; do
     if [[ "$c" == @wait* ]]; then sleep "${c#@wait }"; else echo "$c"; sleep 3; fi
   done

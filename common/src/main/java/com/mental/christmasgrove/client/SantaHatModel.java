@@ -61,6 +61,9 @@ public final class SantaHatModel {
     public static HumanoidModel<HumanoidRenderState> armorModel() {
         if (armorModel == null) {
             armorModel = new HumanoidModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(ModModelLayers.SANTA_HAT));
+            // Only the head part carries the hat. The model is posed from the wearer's render state when drawn.
+            armorModel.setAllVisible(false);
+            armorModel.head.visible = true;
         }
         return armorModel;
     }

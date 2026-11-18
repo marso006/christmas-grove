@@ -43,15 +43,9 @@ public final class ChristmasGroveNeoForgeClient {
         // The Santa Hat is a real 3D hat; NeoForge copies the head pose and uses the hat material's texture.
         event.registerItem(new IClientItemExtensions() {
             @Override
-            @SuppressWarnings({"unchecked", "rawtypes"})
             public Model getHumanoidArmorModel(ItemStack stack, EquipmentClientInfo.LayerType layer, Model original) {
-                HumanoidModel<HumanoidRenderState> hat = SantaHatModel.armorModel();
-                if (original instanceof HumanoidModel wearer) {
-                    wearer.copyPropertiesTo(hat); // follow the wearer's head
-                }
-                hat.setAllVisible(false);
-                hat.head.visible = true;
-                return hat;
+                // Pre-hidden except the head; posed from the wearer's render state when drawn.
+                return SantaHatModel.armorModel();
             }
         }, ModItems.SANTA_HAT.get());
     }

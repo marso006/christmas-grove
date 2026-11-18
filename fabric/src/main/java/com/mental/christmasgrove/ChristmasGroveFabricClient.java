@@ -8,6 +8,7 @@ import com.mental.christmasgrove.showcase.ShowcaseDirector;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -27,12 +28,10 @@ public class ChristmasGroveFabricClient implements ClientModInitializer {
         ModBlocks.translucentBlocks().forEach(block -> BlockRenderLayerMap.putBlock(block.get(), ChunkSectionLayer.TRANSLUCENT));
 
         // The Santa Hat is a real 3D hat, not a reshaped helmet.
-        ArmorRenderer.register((poseStack, buffers, stack, state, slot, light, wearerModel) -> {
+        ArmorRenderer.register((poseStack, collector, stack, state, slot, light, wearerModel) -> {
             HumanoidModel<HumanoidRenderState> hat = SantaHatModel.armorModel();
-            wearerModel.copyPropertiesTo(hat);
-            hat.setAllVisible(false);
-            hat.head.visible = true;
-            ArmorRenderer.renderPart(poseStack, buffers, light, stack, hat, SantaHatModel.TEXTURE);
+            collector.submitModel(hat, state, poseStack, RenderType.armorCutoutNoCull(SantaHatModel.TEXTURE), light,
+                    OverlayTexture.NO_OVERLAY, state.outlineColor, null);
         }, ModItems.SANTA_HAT.get());
 
         ModEntityRenderers.registerLayers((layer, definition) -> EntityModelLayerRegistry.registerModelLayer(layer, definition::get));

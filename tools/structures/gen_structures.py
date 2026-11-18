@@ -19,7 +19,7 @@ import nbt  # noqa: E402
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "common/src/main/resources/data/christmas_grove"
 NS = "christmas_grove"
-DATA_VERSION = 4440  # Minecraft 1.21.8
+DATA_VERSION = 4556  # Minecraft 1.21.10
 
 G = lambda name: f"{NS}:{name}"
 M = lambda name: f"minecraft:{name}"

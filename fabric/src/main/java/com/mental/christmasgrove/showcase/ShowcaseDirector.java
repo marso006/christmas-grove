@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.Screenshot;
 import net.minecraft.network.chat.Component;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.gui.screens.BackupConfirmScreen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -69,7 +70,7 @@ public final class ShowcaseDirector {
             for (var child : screen.children()) {
                 if (child instanceof Button button
                         && button.getMessage().equals(Component.translatable("selectWorld.backupJoinSkipButton"))) {
-                    button.onPress();
+                    button.onPress(new KeyEvent(257, 0, 0)); // as if Enter were pressed
                     return;
                 }
             }

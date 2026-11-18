@@ -30,6 +30,6 @@ public class FabricEntityHelper implements IEntityHelper {
 
     @Override
     public Item createSpawnEgg(Supplier<? extends EntityType<? extends Mob>> type, Item.Properties properties) {
-        return new SpawnEggItem(type.get(), properties);
+        return new SpawnEggItem(properties.spawnEgg(type.get()));
     }
 }

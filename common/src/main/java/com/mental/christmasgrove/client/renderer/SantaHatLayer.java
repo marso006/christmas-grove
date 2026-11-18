@@ -5,7 +5,7 @@ import com.mental.christmasgrove.client.SantaHatModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.EntityModelSet;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
@@ -18,13 +18,13 @@ public class SantaHatLayer extends RenderLayer<HumanoidRenderState, HumanoidMode
     public SantaHatLayer(RenderLayerParent<HumanoidRenderState, HumanoidModel<HumanoidRenderState>> parent, EntityModelSet models) {
         super(parent);
         this.hat = new HumanoidModel<>(models.bakeLayer(ModModelLayers.SANTA_HAT));
+        // Only the head carries the hat; the model is posed from the same render state as the wearer.
+        hat.setAllVisible(false);
+        hat.head.visible = true;
     }
 
     @Override
-    public void render(PoseStack poseStack, MultiBufferSource buffers, int light, HumanoidRenderState state, float yRot, float xRot) {
-        getParentModel().copyPropertiesTo(hat);
-        hat.setAllVisible(false);
-        hat.head.visible = true;
-        renderColoredCutoutModel(hat, SantaHatModel.TEXTURE, poseStack, buffers, light, state, -1);
+    public void submit(PoseStack poseStack, SubmitNodeCollector collector, int light, HumanoidRenderState state, float yRot, float xRot) {
+        renderColoredCutoutModel(hat, SantaHatModel.TEXTURE, poseStack, collector, light, state, -1, state.outlineColor);
     }
 }

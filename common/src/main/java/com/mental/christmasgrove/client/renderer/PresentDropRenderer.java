@@ -5,9 +5,9 @@ import com.mental.christmasgrove.client.ModModelLayers;
 import com.mental.christmasgrove.entity.PresentDrop;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -48,8 +48,9 @@ public class PresentDropRenderer extends EntityRenderer<PresentDrop, PresentDrop
     }
 
     @Override
-    public void render(State state, PoseStack poseStack, MultiBufferSource buffers, int light) {
+    public void submit(State state, PoseStack poseStack, SubmitNodeCollector collector, CameraRenderState camera) {
         float age = state.ageInTicks;
+        int light = state.lightCoords;
         poseStack.pushPose();
         poseStack.mulPose(Axis.YP.rotationDegrees(state.yRot));
         // Swing like a pendulum hanging from the canopy
@@ -61,13 +62,13 @@ public class PresentDropRenderer extends EntityRenderer<PresentDrop, PresentDrop
         poseStack.pushPose();
         poseStack.scale(0.75F, 0.75F, 0.75F);
         poseStack.translate(-0.5, 0.0, -0.5);
-        Minecraft.getInstance().getBlockRenderer().renderSingleBlock(state.box, poseStack, buffers, light, OverlayTexture.NO_OVERLAY);
+        collector.submitBlock(poseStack, state.box, light, OverlayTexture.NO_OVERLAY, state.outlineColor);
         poseStack.popPose();
 
         poseStack.scale(-1.0F, -1.0F, 1.0F);
         poseStack.translate(0.0F, -1.501F, 0.0F);
-        parachute.render(poseStack, buffers.getBuffer(RenderType.entityCutoutNoCull(PARACHUTE_TEXTURE)), light, OverlayTexture.NO_OVERLAY);
+        collector.submitModelPart(parachute, poseStack, RenderType.entityCutoutNoCull(PARACHUTE_TEXTURE), light, OverlayTexture.NO_OVERLAY, null);
         poseStack.popPose();
-        super.render(state, poseStack, buffers, light);
+        super.submit(state, poseStack, collector, camera);
     }
 }

@@ -111,7 +111,7 @@ public class GiftBoxBlock extends BaseEntityBlock {
                     box.wrapperName()), true);
             return;
         }
-        box.setWrapper(player.getUUID(), player.getGameProfile().getName());
+        box.setWrapper(player.getUUID(), player.getGameProfile().name());
         player.openMenu(box);
     }
 

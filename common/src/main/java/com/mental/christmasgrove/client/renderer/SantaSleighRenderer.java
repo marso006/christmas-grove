@@ -10,7 +10,8 @@ import net.minecraft.client.model.HorseModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.LightTexture;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -45,12 +46,28 @@ public class SantaSleighRenderer extends EntityRenderer<SantaSleigh, SantaSleigh
         public float yRot;
     }
 
+    /** Santa's body, posed sitting, with his right arm waving (models are posed when the frame is drawn). */
+    private static final class WavingSantaModel extends HumanoidModel<HumanoidRenderState> {
+        WavingSantaModel(ModelPart root) {
+            super(root);
+        }
+
+        @Override
+        public void setupAnim(HumanoidRenderState state) {
+            super.setupAnim(state);
+            rightArm.xRot = -2.6F + Mth.sin(state.ageInTicks / 3.0F) * 0.25F;
+            rightArm.zRot = 0.3F;
+        }
+    }
+
     public SantaSleighRenderer(EntityRendererProvider.Context context) {
         super(context);
         this.sleigh = context.bakeLayer(ModModelLayers.SANTA_SLEIGH);
         this.reindeer = new HorseModel(context.bakeLayer(ModModelLayers.REINDEER));
-        this.santa = new HumanoidModel<>(context.bakeLayer(ModModelLayers.SANTA_CLAUS));
+        this.santa = new WavingSantaModel(context.bakeLayer(ModModelLayers.SANTA_CLAUS));
         this.hat = new HumanoidModel<>(context.bakeLayer(ModModelLayers.SANTA_HAT));
+        hat.setAllVisible(false);
+        hat.head.visible = true;
         this.shadowRadius = 0.0F;
     }
 
@@ -66,7 +83,7 @@ public class SantaSleighRenderer extends EntityRenderer<SantaSleigh, SantaSleigh
     }
 
     @Override
-    public void render(State state, PoseStack poseStack, MultiBufferSource buffers, int light) {
+    public void submit(State state, PoseStack poseStack, SubmitNodeCollector collector, CameraRenderState camera) {
         int glow = LightTexture.FULL_BRIGHT;
         float age = state.ageInTicks;
 
@@ -77,39 +94,32 @@ public class SantaSleighRenderer extends EntityRenderer<SantaSleigh, SantaSleigh
         poseStack.scale(-1.0F, -1.0F, 1.0F);
         poseStack.translate(0.0F, -1.501F, 0.0F);
 
-        sleigh.render(poseStack, buffers.getBuffer(RenderType.entityCutoutNoCull(SLEIGH_TEXTURE)), glow, OverlayTexture.NO_OVERLAY);
+        collector.submitModelPart(sleigh, poseStack, RenderType.entityCutoutNoCull(SLEIGH_TEXTURE), glow, OverlayTexture.NO_OVERLAY, null);
 
         // The reindeer team, legs galloping
         reindeerPose.walkAnimationPos = age * 0.55F;
         reindeerPose.walkAnimationSpeed = 1.0F;
         reindeerPose.ageInTicks = age;
         reindeerPose.xRot = -5.0F;
-        reindeer.setupAnim(reindeerPose);
         for (float[] slot : TEAM) {
             poseStack.pushPose();
             poseStack.translate(slot[0], Math.sin((age + slot[1] * 3) / 4.0) * 0.06, slot[1]);
             poseStack.scale(0.9F, 0.9F, 0.9F);
-            reindeer.renderToBuffer(poseStack, buffers.getBuffer(reindeer.renderType(REINDEER_TEXTURE)), glow, OverlayTexture.NO_OVERLAY);
+            collector.submitModel(reindeer, reindeerPose, poseStack, reindeer.renderType(REINDEER_TEXTURE), glow, OverlayTexture.NO_OVERLAY, 0, null);
             poseStack.popPose();
         }
 
         // Santa on the seat, one arm waving
         santaPose.isPassenger = true;
         santaPose.ageInTicks = age;
-        santa.setupAnim(santaPose);
-        santa.rightArm.xRot = -2.6F + Mth.sin(age / 3.0F) * 0.25F;
-        santa.rightArm.zRot = 0.3F;
         poseStack.pushPose();
         poseStack.translate(0.0F, -0.55F, 0.2F);
         poseStack.scale(0.95F, 0.95F, 0.95F);
-        santa.renderToBuffer(poseStack, buffers.getBuffer(santa.renderType(SANTA_TEXTURE)), glow, OverlayTexture.NO_OVERLAY);
-        santa.copyPropertiesTo(hat);
-        hat.setAllVisible(false);
-        hat.head.visible = true;
-        hat.renderToBuffer(poseStack, buffers.getBuffer(hat.renderType(SantaHatModel.TEXTURE)), glow, OverlayTexture.NO_OVERLAY);
+        collector.submitModel(santa, santaPose, poseStack, santa.renderType(SANTA_TEXTURE), glow, OverlayTexture.NO_OVERLAY, 0, null);
+        collector.submitModel(hat, santaPose, poseStack, hat.renderType(SantaHatModel.TEXTURE), glow, OverlayTexture.NO_OVERLAY, 0, null);
         poseStack.popPose();
 
         poseStack.popPose();
-        super.render(state, poseStack, buffers, light);
+        super.submit(state, poseStack, collector, camera);
     }
 }

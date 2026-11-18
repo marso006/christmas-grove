@@ -142,14 +142,14 @@ public final class ModBlocks {
 
     /** Strings of coloured bulbs, hung on walls like a ladder. */
     public static final Supplier<Block> FESTIVE_LIGHTS = cutout(register("festive_lights", FestiveWallDecorBlock::new,
-            () -> Properties.of().mapColor(MapColor.COLOR_RED).noCollission().strength(0.2F).sound(SoundType.GLASS)
+            () -> Properties.of().mapColor(MapColor.COLOR_RED).noCollision().strength(0.2F).sound(SoundType.GLASS)
                     .lightLevel(state -> 12).pushReaction(PushReaction.DESTROY)));
     public static final Supplier<Block> WREATH = cutout(register("wreath", FestiveWallDecorBlock::new,
-            () -> Properties.of().mapColor(MapColor.COLOR_GREEN).noCollission().strength(0.2F).sound(SoundType.AZALEA_LEAVES)
+            () -> Properties.of().mapColor(MapColor.COLOR_GREEN).noCollision().strength(0.2F).sound(SoundType.AZALEA_LEAVES)
                     .pushReaction(PushReaction.DESTROY)));
     /** Grows on top of Festive Firs. Brightest light in the mod. */
     public static final Supplier<Block> CHRISTMAS_STAR = cutout(register("christmas_star", StarBlock::new,
-            () -> Properties.of().mapColor(MapColor.GOLD).noCollission().instabreak().sound(SoundType.AMETHYST_CLUSTER)
+            () -> Properties.of().mapColor(MapColor.GOLD).noCollision().instabreak().sound(SoundType.AMETHYST_CLUSTER)
                     .lightLevel(state -> 15).pushReaction(PushReaction.DESTROY)));
 
     public static final Supplier<Block> RED_GIFT_BOX = cutout(register("red_gift_box", GiftBoxBlock::new, () -> giftBox(MapColor.COLOR_RED)));

@@ -39,9 +39,12 @@ public class GumdropBushBlock extends SweetBerryBushBlock {
         return new ItemStack(ModItems.GUMDROPS.get());
     }
 
-    @Override
+    // Soft candy: no thorns, no slowdown. Both signatures are declared (without @Override) so this one
+    // source overrides the berry bush on 1.21.9, which lacks the "intersects" flag, and on 1.21.10.
+    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effects, boolean intersects) {
+    }
+
     protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effects) {
-        // Soft candy: no thorns, no slowdown.
     }
 
     @Override
