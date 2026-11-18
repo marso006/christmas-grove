@@ -23,7 +23,9 @@ import net.minecraft.world.item.equipment.ArmorType;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -39,6 +41,8 @@ public final class ModItems {
     private static final List<Supplier<? extends Item>> FLAT = new ArrayList<>();
     /** Spawn eggs, which use the vanilla spawn egg model. */
     private static final List<Supplier<? extends Item>> SPAWN_EGGS = new ArrayList<>();
+    /** Background and highlight colours per egg; since 1.21.4 they are tints in the item model. */
+    private static final Map<Supplier<? extends Item>, int[]> SPAWN_EGG_COLOURS = new HashMap<>();
     /** Tools and weapons, which use the "handheld" item model (held diagonally). */
     private static final List<Supplier<? extends Item>> HANDHELD = new ArrayList<>();
 
@@ -134,8 +138,9 @@ public final class ModItems {
     }
 
     private static Supplier<Item> spawnEgg(String entity, Supplier<? extends EntityType<? extends Mob>> type, int background, int highlight) {
-        Supplier<Item> egg = registerRaw(entity + "_spawn_egg", p -> Services.ENTITIES.createSpawnEgg(type, background, highlight, p));
+        Supplier<Item> egg = registerRaw(entity + "_spawn_egg", p -> Services.ENTITIES.createSpawnEgg(type, p));
         SPAWN_EGGS.add(egg);
+        SPAWN_EGG_COLOURS.put(egg, new int[]{background, highlight});
         return egg;
     }
 
@@ -168,6 +173,11 @@ public final class ModItems {
 
     public static List<Supplier<? extends Item>> spawnEggs() {
         return Collections.unmodifiableList(SPAWN_EGGS);
+    }
+
+    /** {background, highlight} colours of a spawn egg from {@link #spawnEggs()}. */
+    public static int[] spawnEggColours(Supplier<? extends Item> egg) {
+        return SPAWN_EGG_COLOURS.get(egg);
     }
 
     /** Tools and weapons that get the handheld item model from {@code textures/item/<name>.png}. */

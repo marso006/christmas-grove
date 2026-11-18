@@ -4,16 +4,17 @@ import com.mental.christmasgrove.Constants;
 import com.mental.christmasgrove.registry.ModBlocks;
 import com.mental.christmasgrove.registry.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
+import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.BlockFamily;
-import net.minecraft.data.models.BlockModelGenerators;
-import net.minecraft.data.models.ItemModelGenerators;
-import net.minecraft.data.models.model.ModelLocationUtils;
-import net.minecraft.data.models.model.ModelTemplate;
-import net.minecraft.data.models.model.ModelTemplates;
-import net.minecraft.data.models.model.TextureMapping;
-import net.minecraft.data.models.model.TextureSlot;
-import net.minecraft.data.models.model.TexturedModel;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.model.ItemModelUtils;
+import net.minecraft.client.data.models.model.ModelLocationUtils;
+import net.minecraft.client.data.models.model.ModelTemplate;
+import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.TextureMapping;
+import net.minecraft.client.data.models.model.TextureSlot;
+import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -55,7 +56,7 @@ public class ModModelProvider extends FabricModelProvider {
             blocks.woodProvider(wood.log().get()).logWithHorizontal(wood.log().get()).wood(wood.wood().get());
             blocks.woodProvider(wood.strippedLog().get()).logWithHorizontal(wood.strippedLog().get()).wood(wood.strippedWood().get());
             blocks.createTrivialBlock(wood.leaves().get(), TexturedModel.LEAVES);
-            blocks.createCrossBlockWithDefaultItem(wood.sapling().get(), BlockModelGenerators.TintState.NOT_TINTED);
+            blocks.createCrossBlockWithDefaultItem(wood.sapling().get(), BlockModelGenerators.PlantType.NOT_TINTED);
         }
         for (BlockFamily family : ModFamilies.wood()) {
             blocks.family(family.getBaseBlock()).generateFor(family);
@@ -67,9 +68,9 @@ public class ModModelProvider extends FabricModelProvider {
         // Plants
         for (Supplier<Block> plant : java.util.List.of(ModBlocks.LOLLIPOP_FLOWER, ModBlocks.POINSETTIA, ModBlocks.HOLLY,
                 ModBlocks.SUGAR_GRASS, ModBlocks.CHRISTMAS_STAR)) {
-            blocks.createCrossBlockWithDefaultItem(plant.get(), BlockModelGenerators.TintState.NOT_TINTED);
+            blocks.createCrossBlockWithDefaultItem(plant.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         }
-        blocks.createCrossBlock(ModBlocks.GUMDROP_BUSH.get(), BlockModelGenerators.TintState.NOT_TINTED,
+        blocks.createCrossBlock(ModBlocks.GUMDROP_BUSH.get(), BlockModelGenerators.PlantType.NOT_TINTED,
                 SweetBerryBushBlock.AGE, 0, 1, 2, 3);
 
         // Ores
@@ -80,7 +81,7 @@ public class ModModelProvider extends FabricModelProvider {
         // Decor. Wall decorations use hand-written ladder-style models; their items are flat sprites.
         for (Supplier<Block> decor : java.util.List.of(ModBlocks.FESTIVE_LIGHTS, ModBlocks.WREATH)) {
             blocks.createNonTemplateHorizontalBlock(decor.get());
-            blocks.createSimpleFlatItemModel(decor.get());
+            blocks.registerSimpleFlatItemModel(decor.get()); // flat sprite from the block texture
         }
         blocks.createNonTemplateModelBlock(ModBlocks.COOKIE_JAR.get());      // hand-written jar model
         blocks.createHorizontallyRotatedBlock(ModBlocks.ADVENT_CALENDAR.get(), TexturedModel.ORIENTABLE_ONLY_TOP);
@@ -98,13 +99,16 @@ public class ModModelProvider extends FabricModelProvider {
         // Block items get a model pointing at their block model automatically.
         for (Supplier<? extends Item> item : ModItems.flatItems()) {
             if (item == ModItems.GUMDROPS) {
-                continue; // the bush's createCrossBlock already writes the flat model for its item
+                continue; // the bush's createCrossBlock already writes the flat model and definition for its item
             }
             items.generateFlatItem(item.get(), ModelTemplates.FLAT_ITEM);
         }
-        ModelTemplate spawnEgg = new ModelTemplate(Optional.of(ResourceLocation.withDefaultNamespace("item/template_spawn_egg")), Optional.empty());
+        // Spawn eggs: vanilla's template tinted with the egg's two colours (since 1.21.4 the tint lives here)
+        ResourceLocation spawnEgg = ModelLocationUtils.decorateItemModelLocation("template_spawn_egg");
         for (Supplier<? extends Item> egg : ModItems.spawnEggs()) {
-            spawnEgg.create(ModelLocationUtils.getModelLocation(egg.get()), new TextureMapping(), items.output);
+            int[] colours = ModItems.spawnEggColours(egg);
+            items.itemModelOutput.accept(egg.get(), ItemModelUtils.tintedModel(spawnEgg,
+                    ItemModelUtils.constantTint(colours[0]), ItemModelUtils.constantTint(colours[1])));
         }
         for (Supplier<? extends Item> tool : ModItems.handheldItems()) {
             items.generateFlatItem(tool.get(), ModelTemplates.FLAT_HANDHELD_ITEM);

@@ -1,7 +1,10 @@
 package com.mental.christmasgrove.registry;
 
 import com.mental.christmasgrove.Constants;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.item.equipment.EquipmentAsset;
+import net.minecraft.world.item.equipment.EquipmentAssets;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.equipment.ArmorType;
@@ -17,12 +20,17 @@ import java.util.Map;
 public final class ModArmorMaterials {
 
     public static final ArmorMaterial SANTA_SUIT = new ArmorMaterial(20, defense(2, 5, 6, 2), 22,
-            SoundEvents.ARMOR_EQUIP_LEATHER, 0.5F, 0.0F, ItemTags.WOOL, Constants.id("santa_suit"));
+            SoundEvents.ARMOR_EQUIP_LEATHER, 0.5F, 0.0F, ItemTags.WOOL, asset("santa_suit"));
     /** Same stats as the suit, but its own model: the 3D hat (see SantaHatModel). */
     public static final ArmorMaterial SANTA_HAT = new ArmorMaterial(20, defense(2, 5, 6, 2), 22,
-            SoundEvents.ARMOR_EQUIP_LEATHER, 0.5F, 0.0F, ItemTags.WOOL, Constants.id("santa_hat"));
+            SoundEvents.ARMOR_EQUIP_LEATHER, 0.5F, 0.0F, ItemTags.WOOL, asset("santa_hat"));
 
     private ModArmorMaterials() {
+    }
+
+    /** Equipment asset ids point at assets/christmas_grove/equipment/<name>.json (since 1.21.4). */
+    private static ResourceKey<EquipmentAsset> asset(String name) {
+        return ResourceKey.create(EquipmentAssets.ROOT_ID, Constants.id(name));
     }
 
     private static Map<ArmorType, Integer> defense(int boots, int leggings, int chestplate, int helmet) {

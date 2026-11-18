@@ -22,5 +22,5 @@ public interface IEntityHelper {
                                                 Heightmap.Types heightmap, SpawnPlacements.SpawnPredicate<T> predicate);
 
     /** A spawn egg. NeoForge needs a deferred egg because items register before entity types there. */
-    Item createSpawnEgg(Supplier<? extends EntityType<? extends Mob>> type, int background, int highlight, Item.Properties properties);
+    Item createSpawnEgg(Supplier<? extends EntityType<? extends Mob>> type, Item.Properties properties);
 }

@@ -16,7 +16,8 @@ public class ReindeerRenderer extends AbstractHorseRenderer<Reindeer, EquineRend
 
     public ReindeerRenderer(EntityRendererProvider.Context context) {
         super(context, new HorseModel(context.bakeLayer(ModModelLayers.REINDEER)),
-                new HorseModel(context.bakeLayer(ModModelLayers.REINDEER)), 0.95F);
+                new HorseModel(context.bakeLayer(ModModelLayers.REINDEER)));
+        this.shadowRadius = 0.95F;
     }
 
     @Override

@@ -7,6 +7,9 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Screenshot;
+import net.minecraft.network.chat.Component;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.screens.BackupConfirmScreen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -61,6 +64,16 @@ public final class ShowcaseDirector {
     }
 
     private void tick(Minecraft mc) {
+        // Vanilla flags any world with an extra dimension as "experimental" and asks before loading it.
+        if (mc.screen instanceof BackupConfirmScreen screen) {
+            for (var child : screen.children()) {
+                if (child instanceof Button button
+                        && button.getMessage().equals(Component.translatable("selectWorld.backupJoinSkipButton"))) {
+                    button.onPress();
+                    return;
+                }
+            }
+        }
         if (mc.level == null || mc.player == null || mc.getSingleplayerServer() == null || mc.screen != null && joinedTicks < 5) {
             return;
         }

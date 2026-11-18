@@ -34,7 +34,7 @@ public class GumdropBushBlock extends SweetBerryBushBlock {
     }
 
     @Override
-    public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
+    protected ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData) {
         return new ItemStack(ModItems.GUMDROPS.get());
     }
 

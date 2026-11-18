@@ -7,7 +7,7 @@ import com.mental.christmasgrove.registry.ModBlocks;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
-import net.minecraft.world.item.equipment.EquipmentModel;
+import net.minecraft.client.resources.model.EquipmentClientInfo;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -43,7 +43,7 @@ public final class ChristmasGroveNeoForgeClient {
         event.registerItem(new IClientItemExtensions() {
             @Override
             @SuppressWarnings({"unchecked", "rawtypes"})
-            public Model getHumanoidArmorModel(ItemStack stack, EquipmentModel.LayerType layer, Model original) {
+            public Model getHumanoidArmorModel(ItemStack stack, EquipmentClientInfo.LayerType layer, Model original) {
                 HumanoidModel<HumanoidRenderState> hat = SantaHatModel.armorModel();
                 if (original instanceof HumanoidModel wearer) {
                     wearer.copyPropertiesTo(hat); // follow the wearer's head

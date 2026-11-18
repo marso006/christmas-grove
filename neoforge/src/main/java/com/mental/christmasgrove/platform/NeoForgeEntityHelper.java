@@ -40,9 +40,8 @@ public class NeoForgeEntityHelper implements IEntityHelper {
     }
 
     @Override
-    public Item createSpawnEgg(Supplier<? extends EntityType<? extends Mob>> type, int background, int highlight, Item.Properties properties) {
-        // Since NeoForge 21.2 entity types are registered before items, so the type already exists here.
-        return new SpawnEggItem(type.get(), background, highlight, properties);
+    public Item createSpawnEgg(Supplier<? extends EntityType<? extends Mob>> type, Item.Properties properties) {
+        return new SpawnEggItem(type.get(), properties);
     }
 
     public static void onAttributes(EntityAttributeCreationEvent event) {

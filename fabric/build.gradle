@@ -18,6 +18,8 @@ fabricApi {
     configureDataGeneration {
         outputDirectory = project(':common').file('src/generated/resources')
         addToResources = false
+        // Since 1.21.4 model datagen is client-side; a client datagen run covers both models and data.
+        client = true
     }
 }
 
