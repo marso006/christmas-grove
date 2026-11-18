@@ -45,6 +45,8 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         copy(BlockTags.SAND, ItemTags.SAND);
 
         // Tools and armor: these tags decide which enchantments apply
+        // Repair material for the Sugar Crystal tools (ToolMaterial takes a tag since 1.21.2)
+        getOrCreateTagBuilder(ModTags.Items.SUGAR_CRYSTAL_TOOL_MATERIALS).add(ModItems.SUGAR_CRYSTAL.get());
         getOrCreateTagBuilder(ItemTags.SWORDS).add(ModItems.CANDY_CANE_SWORD.get());
         getOrCreateTagBuilder(ItemTags.PICKAXES).add(ModItems.SUGAR_CRYSTAL_PICKAXE.get());
         getOrCreateTagBuilder(ItemTags.AXES).add(ModItems.SUGAR_CRYSTAL_AXE.get());
